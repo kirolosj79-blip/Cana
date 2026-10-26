@@ -1,0 +1,345 @@
+/* ============================================================
+   CANA DESIGN TOKENS — "Connecting Hearts in Christ"
+   Warm, romantic-but-respectful, spiritual, premium palette:
+   deep warm brown ink, muted rose/burgundy accent, soft gold for
+   trust/verification, warm cream/ivory surfaces. Token variable
+   names (ink/wine/gold/parchment) are kept from the prior brand
+   pass so every component in the app inherits the new palette
+   without a full rename.
+   ============================================================ */
+
+@import 'tailwindcss';
+
+@theme {
+  /* ---- Color: Ink (warm deep brown — primary text & dark surfaces) ---- */
+  --color-ink-50: #F9F3EC;
+  --color-ink-100: #F0E3D6;
+  --color-ink-200: #E2CDBA;
+  --color-ink-300: #CBA98F;
+  --color-ink-400: #B4876A;
+  --color-ink-500: #96654A;
+  --color-ink-600: #7A4F3A;
+  --color-ink-700: #5C3A2A;
+  --color-ink-800: #4A2B1F;
+  --color-ink-900: #3A2118;
+  --color-ink-950: #2B1810;
+
+  /* ---- Color: Wine (muted rose / burgundy — romantic accent) ---- */
+  --color-wine-50: #FBF0F1;
+  --color-wine-100: #F4DEE0;
+  --color-wine-200: #E6BFC2;
+  --color-wine-300: #D0949A;
+  --color-wine-400: #B66E77;
+  --color-wine-500: #9C4A55;
+  --color-wine-600: #83323F;
+  --color-wine-700: #6B2635;
+  --color-wine-800: #551E2A;
+  --color-wine-900: #3F1620;
+
+  /* ---- Color: Gold (spiritual seal / trust accent — use sparingly) ---- */
+  --color-gold-50: #FBF7EC;
+  --color-gold-100: #F5EACB;
+  --color-gold-200: #E8D18A;
+  --color-gold-300: #D9B94E;
+  --color-gold-400: #C9A227;
+  --color-gold-500: #A9821B;
+  --color-gold-600: #8A6816;
+  --color-gold-700: #6B4F11;
+
+  /* ---- Fixed ink shades — deliberately NOT overridden by dark mode.
+     Used only as text on top of accent surfaces (gold buttons/chips) that
+     themselves don't change between themes, so the text sitting on them
+     must stay fixed too, or it goes invisible in dark mode when regular
+     ink-900/950 flips to a light color. ---- */
+  --color-inkfixed-900: #3A2118;
+  --color-inkfixed-950: #2B1810;
+
+  /* ---- Color: Parchment (warm cream / ivory surfaces) ---- */
+  --color-parchment-0: #FFFFFF;
+  --color-parchment-50: #FFFFFF;
+  --color-parchment-100: #F5F5F5;
+  --color-parchment-200: #EBEBEB;
+
+  /* ---- Color: Slate (warm neutral text) ---- */
+  --color-slate-400: #A08D7D;
+  --color-slate-500: #8A7563;
+  --color-slate-600: #6E5B4B;
+  --color-slate-700: #52412F;
+
+  /* ---- Semantic ---- */
+  --color-success-500: #2E8B57;
+  --color-success-100: #DDF0E4;
+  --color-warning-500: #B8860B;
+  --color-warning-100: #F6EBD0;
+  --color-danger-500: #B23A3A;
+  --color-danger-700: #7A1F1F;
+  --color-danger-100: #F5DEDE;
+  --color-info-500: #96654A;
+  --color-info-100: #F0E3D6;
+
+  /* ---- Typography ---- */
+  --font-display: 'Fraunces', 'Noto Naskh Arabic', serif;
+  --font-sans: 'Cairo', 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --font-arabic: 'Cairo', 'Noto Naskh Arabic', sans-serif;
+
+  /* ---- Radius ---- */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-full: 999px;
+
+  /* ---- Shadow (soft, warm-tinted, not generic black) ---- */
+  --shadow-soft-sm: 0 1px 2px rgba(18, 32, 58, 0.06), 0 1px 1px rgba(18, 32, 58, 0.04);
+  --shadow-soft-md: 0 6px 20px -4px rgba(18, 32, 58, 0.12), 0 2px 6px -2px rgba(18, 32, 58, 0.08);
+  --shadow-soft-lg: 0 20px 45px -12px rgba(18, 32, 58, 0.22), 0 8px 16px -8px rgba(18, 32, 58, 0.12);
+  --shadow-gold-glow: 0 0 0 1px rgba(201, 162, 39, 0.35), 0 8px 24px -6px rgba(201, 162, 39, 0.35);
+
+  /* ---- Primary CTA button — theme-reactive on purpose (unlike the
+     fixed gold/inkfixed tokens elsewhere): light mode uses a dark navy
+     button per the reference design, dark mode keeps the gold button
+     that was already correct. Light-mode default lives here; overridden
+     in html.dark below. ---- */
+  --color-cta-bg: #0C1D3A;
+  --color-cta-text: #FFFFFF;
+
+  /* Dedicated pair for elements that must read navy-on-white in light mode
+     and white-on-navy in dark mode specifically (not the everyday ink/
+     parchment text scale, which uses brown rather than navy in light
+     mode) — used by the encouragement card so it never renders "backward"
+     (a light card with dark text) in dark mode. */
+  --color-emphasis-text: #0C1D3A;
+
+  /* Photo-background overlay — TWO zones, each fully opaque enough on its
+     own (never a weak/transparent spot anywhere): a darker navy zone at
+     the very top (where the white hero title/step-counter text sits, and
+     needs a dark backdrop to read against), transitioning quickly to a
+     heavily-opaque zone for the rest of the page (where dark-text cards
+     live, and need a light backdrop). The transition itself is short —
+     most of the scrollable page sits solidly in one zone or the other,
+     never in a faded, low-contrast middle. */
+  --color-photo-overlay-header: rgba(12, 29, 58, 0.55);
+  --color-photo-overlay: rgba(255, 255, 255, 0.4);
+
+  /* Ambient hearts backdrop opacity — theme-reactive so they stay clearly
+     visible against both a light cream background and a dark navy one,
+     rather than one fixed opacity that only reads well on one of the two. */
+  --heart-opacity-gold: 0.4;
+  --heart-opacity-wine: 0.32;
+
+  /* ---- Selected-option accent (radio/checkbox chips) — theme-reactive
+     for the same reason as the CTA button: light mode uses a navy
+     outline/accent (per the reference design) instead of the previous
+     gold/beige fill, while dark mode keeps its already-correct gold
+     highlight untouched. Selected background stays a near-white tint in
+     light mode (an outline style, not a filled one) rather than a solid
+     color, matching the reference. ---- */
+  --color-selected-border: #0C1D3A;
+  --color-selected-bg: #F3F5F9;
+  --color-selected-text: #0C1D3A;
+  --color-selected-icon-bg: #0C1D3A;
+  --color-selected-icon-text: #FFFFFF;
+}
+
+:root {
+  color-scheme: light;
+}
+
+html.dark {
+  color-scheme: dark;
+
+  /* ---- Dark mode: navy palette (per explicit reference — #0C1D3A base),
+     replacing the earlier warm-brown dark theme. Same architecture as
+     before: "ink" tokens map to light text/accent tones, "parchment"
+     tokens map to the dark navy surfaces, so the whole app inherits this
+     from one override block. ---- */
+  --color-ink-50: #1B3559;
+  --color-ink-100: #24406B;
+  --color-ink-200: #2E4E80;
+  --color-ink-300: #4A6690;
+  --color-ink-400: #8296B8;
+  --color-ink-500: #A8B8D0;
+  --color-ink-600: #C7D2E3;
+  --color-ink-700: #DCE3EF;
+  --color-ink-800: #EEF1F8;
+  --color-ink-900: #FFFFFF;
+  --color-ink-950: #FFFFFF;
+
+  --color-parchment-0: #142B4F;
+  --color-parchment-50: #0C1D3A;
+  --color-parchment-100: #1B3559;
+  --color-parchment-200: #24406B;
+
+  --color-cta-bg: #C9A227;
+  --color-cta-text: #2B1810;
+
+  --color-emphasis-text: #FFFFFF;
+
+  --color-photo-overlay-header: rgba(12, 29, 58, 0.55);
+  --color-photo-overlay: rgba(12, 29, 58, 0.4);
+
+  --heart-opacity-gold: 0.6;
+  --heart-opacity-wine: 0.5;
+
+  --color-selected-border: #C9A227;
+  --color-selected-bg: #FBF7EC;
+  --color-selected-text: #3A2118;
+  --color-selected-icon-bg: #C9A227;
+  --color-selected-icon-text: #2B1810;
+
+  --shadow-soft-sm: 0 1px 2px rgba(0, 0, 0, 0.28), 0 1px 1px rgba(0, 0, 0, 0.2);
+  --shadow-soft-md: 0 6px 20px -4px rgba(0, 0, 0, 0.45), 0 2px 6px -2px rgba(0, 0, 0, 0.32);
+  --shadow-soft-lg: 0 20px 45px -12px rgba(0, 0, 0, 0.6), 0 8px 16px -8px rgba(0, 0, 0, 0.4);
+}
+
+@layer base {
+  /* Hint/instruction text shown below a field (phone format hints, OTP
+     instructions, upload hints, "choose up to 3" notes, the safety
+     declaration paragraph, etc.) — unchanged in light mode, but in dark
+     mode specifically it becomes bold white instead of the muted
+     secondary tone, since that tone reads as barely visible against the
+     dark navy + photo background behind it. One shared class instead of
+     touching each of these individually across the app. */
+  .field-hint {
+    color: var(--color-ink-400);
+  }
+  html.dark .field-hint {
+    color: #FFFFFF;
+    font-weight: 700;
+  }
+  html.dark .declaration-text {
+    color: #FFFFFF;
+    font-weight: 700;
+  }
+
+  /* Text that sits DIRECTLY on the photo background (not inside a solid
+     card) — e.g. the intro line under a step's photo hero, or the OTP
+     resend row. `.field-hint`'s muted brown-ish tone works fine on a
+     white card in light mode, but reads poorly against the varied photo
+     underneath it directly. This is bold + high-contrast in BOTH themes:
+     dark navy in light mode, white in dark mode — same treatment as the
+     CTA button, not just dark mode like `.field-hint`. */
+  .on-photo-text {
+    color: var(--color-emphasis-text);
+    font-weight: 700;
+  }
+
+  * {
+    border-color: var(--color-ink-100);
+  }
+
+  /* Safari/WebKit-specific: flex and grid *items* default to
+     `min-width: auto`, which lets their content's intrinsic width push
+     past the container instead of wrapping — this is enforced far more
+     aggressively by real WebKit (iPhone Safari) than by Chromium, so it
+     never reproduces in Chrome DevTools' "iPhone" device emulation (which
+     still renders with the Chrome engine, not real WebKit) even though
+     it's very real on an actual iPhone. This resets that default across
+     every element so text always wraps/shrinks within its box instead of
+     spilling past it — the single highest-leverage fix for this entire
+     class of "only breaks on a real iPhone" alignment bug. */
+  *,
+  *::before,
+  *::after {
+    min-width: 0;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    font-size: 106.25%; /* modest, app-wide bump (16px -> 17px base) so every rem-based text size grows slightly */
+    overflow-x: hidden;
+    overscroll-behavior-x: none;
+    width: 100%;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--color-parchment-50);
+    color: var(--color-ink-900);
+    overflow-x: hidden;
+    overscroll-behavior-x: none;
+    width: 100%;
+    position: relative;
+    /* Deliberately NOT using max-width: 100vw here — the `vw` unit is
+       calculated from the layout viewport, which iOS Safari can size
+       inconsistently with the actual visible viewport when its toolbars
+       are showing/hiding, which can itself introduce the very
+       misalignment this rule was meant to prevent. Percentage width is
+       always relative to the real rendered parent box, with no viewport
+       ambiguity, so it's the reliable choice here. */
+    touch-action: pan-y;
+  }
+
+  /* Belt-and-suspenders: no single element anywhere is ever allowed to
+     force the page wider than the viewport and create a horizontal
+     scrollbar — whatever the cause (a rogue rotation, an unwrapped long
+     word, a fixed-width child), this clips it rather than letting the
+     whole app scroll sideways. */
+  #root {
+    overflow-x: hidden;
+    width: 100%;
+  }
+
+  html[dir='rtl'] body,
+  html[lang='ar'] body {
+    font-family: var(--font-arabic);
+  }
+
+  ::selection {
+    background: var(--color-gold-200);
+    color: var(--color-ink-900);
+  }
+
+  /* Visible keyboard focus everywhere */
+  :focus-visible {
+    outline: 2px solid var(--color-gold-400);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer utilities {
+  .glass {
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+  }
+
+  html.dark .glass {
+    background: rgba(12, 29, 58, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* ---- Browser autofill override ----
+   Chrome/Safari paint their own light-yellow background on autofilled
+   inputs (email, etc.) via an internal stylesheet that normal
+   background-color can't override — only this box-shadow trick can. Left
+   unhandled, our dark-mode text color (light, meant for dark surfaces)
+   renders on top of that light autofill background and becomes invisible.
+   Force both the fill and the text color explicitly regardless of theme. */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0px 1000px var(--color-parchment-0) inset;
+  box-shadow: 0 0 0px 1000px var(--color-parchment-0) inset;
+  -webkit-text-fill-color: var(--color-ink-900);
+  caret-color: var(--color-ink-900);
+  transition: background-color 9999s ease-in-out 0s;
+}
