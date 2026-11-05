@@ -5,6 +5,12 @@
 2. Paste the entire contents of `schema.sql` (in this folder) and click **Run**
 3. This creates every table, the uniqueness rules (no duplicate phone/email — enforced by the database itself, not just app code), Row Level Security policies, and the three storage buckets (verification documents, payment proofs, profile photos)
 
+## 1b) Run the journey tables (after schema.sql)
+Same place: **SQL Editor** → **New query** → paste the entire contents of `journey.sql` → **Run**.
+It adds: chat messages (realtime), introduction progress, contact exchange (simultaneous reveal), reports, blocks, feedback, welcome-back tracking, and three atomic actions (`end_introduction`, `block_and_conclude`, `complete_introduction`).
+It also fixes a privacy issue in the first schema: signed-in members could read every column of every profile. After `journey.sql`, members only see safe fields through the `public_profiles` view.
+Both files are safe to re-run.
+
 ## 2) Enable phone authentication (real OTP)
 1. **Authentication** → **Sign In / Providers** → enable **Phone**
 2. Pick an SMS/WhatsApp provider (Twilio is the most common) and enter its credentials — this is what actually sends the OTP code to a real phone
@@ -25,5 +31,12 @@ Run in the SQL Editor:
 update public.profiles set role = 'admin' where phone = '+201xxxxxxxxx';
 ```
 
-## What this schema does NOT do yet
-This is the database layer only — the React app's Zustand stores still run entirely in `localStorage` and haven't been rewired to actually read/write Supabase yet. That's the next phase: replacing each store's actions (registration draft, payment requests, connection requests, notifications, etc.) with real Supabase queries using `@supabase/supabase-js`, plus swapping the mock phone-auth screens for Supabase's real phone OTP flow. Let me know when you're ready for that and I'll start wiring it in, store by store.
+## What is wired to Supabase so far (phase 1)
+Only active when `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` are set; otherwise the app keeps running on its local mock flow.
+- **Login / OTP:** real phone OTP (`signInWithOtp` / `verifyOtp`). Test numbers from the dashboard work here too.
+- **Session:** `RequireAuth` signs the member out locally if the Supabase session is gone.
+- **Registration:** on the last step the full draft is saved to the member's `profiles` row and `is_onboarded` is set. A duplicate email is rejected by the database and shown as an error. Duplicate phone can't happen: the same number is the same account.
+- Photos/documents are NOT uploaded yet (local blob URLs are skipped when saving) — Storage upload is next.
+
+## Not wired yet
+Payment requests, connection requests, chat, notifications, complaints, matching (needs the `public_profiles` view), admin review. These still use localStorage.

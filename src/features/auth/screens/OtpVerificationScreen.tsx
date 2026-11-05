@@ -1,3 +1,4 @@
+import { supabase } from '@/services/supabase'
 import { useState, useRef, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { Button } from '@/shared/components/ui/Button'
@@ -43,18 +44,44 @@ export function OtpVerificationScreen() {
     if (e.key === 'Backspace' && !digits[i] && i > 0) refs.current[i - 1]?.focus()
   }
 
-  const resend = () => {
+  const resend = async () => {
+    if (supabase) {
+      const { error } = await supabase.auth.signInWithOtp({ phone })
+      if (error) {
+        show(t('Could not resend the code. Try again shortly.', 'مقدرناش نبعت الكود تاني. حاول بعد شوية.'), 'error')
+        return
+      }
+    }
     setSecondsLeft(RESEND_SECONDS)
     setDigits(['', '', '', '', '', ''])
     show(t('Code resent', 'اتبعت الكود تاني'), 'info')
   }
 
-  const verify = () => {
+  const verify = async () => {
     if (attempts >= MAX_ATTEMPTS) {
       show(t('Too many attempts — please request a new code.', 'حاولت كتير، اطلب كود جديد.'), 'error')
       return
     }
     setLoading(true)
+    if (supabase) {
+      setAttempts((a) => a + 1)
+      const { data, error } = await supabase.auth.verifyOtp({ phone, token: digits.join(''), type: 'sms' })
+      if (error || !data.user) {
+        setLoading(false)
+        setDigits(['', '', '', '', '', ''])
+        refs.current[0]?.focus()
+        show(t('That code is not correct or has expired.', 'الكود غلط أو انتهت مدته.'), 'error')
+        return
+      }
+      const { data: row } = await supabase.from('profiles').select('is_onboarded').eq('id', data.user.id).maybeSingle()
+      const onboarded = Boolean(row?.is_onboarded)
+      markPhoneVerified(phone)
+      loginWithPhone(phone, { authId: data.user.id, isOnboarded: onboarded })
+      show(t('Verified!', 'اتوثق بنجاح!'), 'success')
+      navigate(onboarded ? '/app/home' : '/registration-intro')
+      setLoading(false)
+      return
+    }
     setTimeout(() => {
       setAttempts((a) => a + 1)
       markPhoneVerified(phone)

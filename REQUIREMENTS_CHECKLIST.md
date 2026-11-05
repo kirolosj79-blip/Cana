@@ -1486,3 +1486,5 @@ Confirmed the list was never actually sorted (it was just in the order originall
 - Introduction Complete uses the supplied "United in Christ" logo (public/images/united-in-christ.png, cropped from the docx).
 - Welcome-back gate after 10+ days away (also ?welcomeback=1): relationship? → through CANA? → feedback form; else feedback offer; else continue. Choices only.
 - Matching: exact age calc, two-way age/country check, passed/blocked users never resurface.
+- supabase/journey.sql added (validated on a throwaway Postgres 16 with Supabase stubs); src/services/supabase.ts client (inactive until env vars set); README updated.
+- Supabase phase 1: real OTP login (PhoneAuth/Otp screens), RequireAuth session check, profileSync.saveRegistration on last step.

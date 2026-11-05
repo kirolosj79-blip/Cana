@@ -1,3 +1,5 @@
+import { supabase } from '@/services/supabase'
+import { useToast } from '@/shared/components/feedback/Toast'
 import { useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { Phone } from 'lucide-react'
@@ -16,6 +18,7 @@ const countries = [
 ]
 
 export function PhoneAuthScreen() {
+  const { show } = useToast()
   const navigate = useNavigate()
   const location = useLocation()
   const { t } = useLanguage()
@@ -26,14 +29,23 @@ export function PhoneAuthScreen() {
   const dialCode = countryDialCode(country) || '+'
   const valid = isValidPhoneForCountry(country, phone)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!valid) return
+    const full = `${dialCode}${phone.replace(/\D/g, '')}`
     setLoading(true)
-    setTimeout(() => {
-      navigate('/otp-verification', { state: { phone: `${dialCode}${phone.replace(/\D/g, '')}` } })
-      setLoading(false)
-    }, 500)
+    // Real OTP when Supabase is configured; otherwise the prototype's mock flow.
+    if (supabase) {
+      const { error } = await supabase.auth.signInWithOtp({ phone: full })
+            if (error) {
+        console.error('[Supabase OTP]', error)
+        setLoading(false)
+        show(`${t('Could not send the code.', 'مقدرناش نبعت الكود.')} (${error.message})`, 'error')
+        return
+      }
+    }
+    navigate('/otp-verification', { state: { phone: full } })
+    setLoading(false)
   }
 
   return (

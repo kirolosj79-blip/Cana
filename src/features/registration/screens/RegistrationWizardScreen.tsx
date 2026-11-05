@@ -1,3 +1,4 @@
+import { saveRegistration } from '@/services/profileSync'
 import { useNavigate } from 'react-router-dom'
 import { WizardShell } from '@/features/registration/components/WizardShell'
 import { REGISTRATION_STEPS, useRegistrationStore } from '@/store/registration.store'
@@ -51,7 +52,7 @@ export function RegistrationWizardScreen() {
   const isLast = currentStepIndex === REGISTRATION_STEPS.length - 1
   const stepValid = isStepValid(step.key, draft)
 
-  const handleNext = () => {
+  const handleNext = async () => {
     markStepComplete(step.key)
 
     // Came here from an "edit" link on Review — save this one page, then go straight back.
@@ -73,6 +74,16 @@ export function RegistrationWizardScreen() {
           'error'
         )
         setStep(firstMissing === -1 ? 0 : firstMissing)
+        return
+      }
+      const saved = await saveRegistration(draft)
+      if (!saved.ok) {
+        show(
+          saved.reason === 'duplicate_email'
+            ? t('This email is already registered with another account.', 'الإيميل ده مسجّل بحساب تاني.')
+            : t('Could not save your profile. Please check your connection and try again.', 'مقدرناش نحفظ ملفك. اتأكد من الاتصال وحاول تاني.'),
+          'error'
+        )
         return
       }
       celebrate('confetti')

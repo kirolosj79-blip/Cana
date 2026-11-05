@@ -12,7 +12,7 @@ interface AuthState {
    *  no real backend here, so this list is the prototype's stand-in for "this
    *  number already has an account." */
   knownPhones: string[]
-  loginWithPhone: (phone: string) => void
+  loginWithPhone: (phone: string, opts?: { authId?: string; isOnboarded?: boolean }) => void
   completeOnboarding: () => void
   logout: () => void
   markPhoneVerified: (phone: string) => void
@@ -29,9 +29,9 @@ export const useAuthStore = create<AuthState>()(
       verifiedPhone: false,
       verifiedPhoneNumber: null,
       knownPhones: [],
-      loginWithPhone: (phone) =>
+      loginWithPhone: (phone, opts) =>
         set((s) => ({
-          user: { id: 'me', phone, email: s.user?.email, isOnboarded: get().isKnownPhone(phone) },
+          user: { id: 'me', authId: opts?.authId, phone, email: s.user?.email, isOnboarded: opts?.isOnboarded ?? get().isKnownPhone(phone) },
           isAuthenticated: true,
         })),
       completeOnboarding: () =>

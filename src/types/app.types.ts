@@ -2,6 +2,8 @@ export type Language = 'en' | 'ar'
 
 export interface AuthUser {
   id: string
+  /** Real Supabase auth user id (set once signed in through Supabase). */
+  authId?: string
   email?: string
   phone: string
   isOnboarded: boolean
