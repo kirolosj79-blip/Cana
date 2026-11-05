@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
 import { BottomNav } from './BottomNav'
+import { WelcomeBackGate } from '@/shared/components/feedback/WelcomeBackGate'
 import { HeartsBackdrop } from '@/shared/components/ui/HeartsBackdrop'
 
 export function AppShell() {
@@ -19,6 +20,7 @@ export function AppShell() {
       <div className="mx-auto max-w-md min-h-screen bg-transparent pb-24 relative z-10">
         <Outlet />
       </div>
+      <WelcomeBackGate />
       <BottomNav />
     </div>
   )

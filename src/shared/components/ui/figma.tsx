@@ -83,7 +83,7 @@ export function CenterDialog({
               </button>
             )}
             {icon && <div className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-full bg-gold-100 text-gold-700 ring-4 ring-gold-50">{icon}</div>}
-            <h3 className="font-display text-xl font-semibold text-ink-900 leading-snug">{title}</h3>
+            <h3 className="text-xl font-bold tracking-tight text-ink-900 leading-snug">{title}</h3>
             {pill && (
               <span className="mt-2 inline-flex rounded-full bg-gold-100 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-gold-700">{pill}</span>
             )}

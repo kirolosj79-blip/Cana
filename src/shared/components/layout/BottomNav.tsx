@@ -11,12 +11,18 @@ const items = [
   { to: '/app/profile', icon: User, en: 'Profile', ar: 'ملفي' },
 ]
 
-export function BottomNav() {
+export function BottomNav({ disabled = false }: { disabled?: boolean }) {
   const { t } = useLanguage()
   return (
     <nav className="fixed bottom-0 left-0 right-0 z-40 border-t border-ink-100 bg-parchment-0/90 backdrop-blur-lg pb-[env(safe-area-inset-bottom)]">
       <div className="mx-auto flex max-w-md items-stretch justify-between px-2">
-        {items.map((item) => (
+        {items.map((item) =>
+          disabled ? (
+            <div key={item.to} aria-disabled className="flex flex-1 cursor-not-allowed flex-col items-center gap-1 py-2.5 text-[11px] font-medium text-ink-300 opacity-70">
+              <item.icon size={22} strokeWidth={1.8} />
+              {t(item.en, item.ar)}
+            </div>
+          ) : (
           <NavLink
             key={item.to}
             to={item.to}
@@ -34,7 +40,8 @@ export function BottomNav() {
               </>
             )}
           </NavLink>
-        ))}
+          )
+        )}
       </div>
     </nav>
   )

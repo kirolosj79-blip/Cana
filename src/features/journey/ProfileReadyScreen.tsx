@@ -1,6 +1,7 @@
+import { BottomNav } from '@/shared/components/layout/BottomNav'
 import { useNavigate } from 'react-router-dom'
 import { ShieldCheck, Heart, Info, Users, UserCheck, Clock, Search, ChevronRight, ChevronLeft } from 'lucide-react'
-import { TopBar } from '@/shared/components/layout/TopBar'
+import { FigmaHeader } from '@/shared/components/layout/FigmaHeader'
 import { Button } from '@/shared/components/ui/Button'
 import { FCard, IconTile } from '@/shared/components/ui/figma'
 import { useLanguage } from '@/core/hooks/useLanguage'
@@ -12,14 +13,14 @@ export function ProfileReadyScreen() {
   const Arrow = isRtl ? ChevronLeft : ChevronRight
   return (
     <div className="min-h-screen bg-parchment-50">
-      <div className="mx-auto max-w-md pb-10">
-        <TopBar showLogo />
+      <div className="mx-auto max-w-md pb-28">
+        <FigmaHeader />
         <div className="space-y-4 px-5 pt-4">
           <FCard className="p-5">
             <div className="flex items-start gap-3">
               <IconTile icon={ShieldCheck} tint="green" size={46} />
               <div>
-                <h1 className="font-display text-xl font-semibold leading-snug text-ink-900">{t('Your Marriage Profile Is Ready', 'ملف الجواز بتاعك جاهز')}</h1>
+                <h1 className="font-bold tracking-tight text-xl font-semibold leading-snug text-ink-900">{t('Your Marriage Profile Is Ready', 'ملف الجواز بتاعك جاهز')}</h1>
                 <p className="mt-0.5 text-xs text-ink-500">{t('Approved, authenticated & verified for covenant introductions.', 'معتمد وموثّق ومتحقق منه لتعارفات الارتباط.')}</p>
               </div>
             </div>
@@ -72,12 +73,13 @@ export function ProfileReadyScreen() {
             </div>
           </FCard>
 
-          <Button variant="gold" size="lg" className="w-full" onClick={() => navigate('/app/home')}>
+          <Button variant="gold" size="lg" className="!rounded-[14px] w-full" onClick={() => navigate('/app/home')}>
             <Search size={16} className="text-gold-300" /> {t('Find My Future Spouse', 'دوّر على شريك حياتي')} <Arrow size={16} />
           </Button>
           <p className="text-center text-[11px] text-ink-500">{t('Personalized covenant matchmaking adhering to your preferences', 'ترشيح مخصّص للارتباط يحترم تفضيلاتك')}</p>
         </div>
       </div>
+      <BottomNav />
     </div>
   )
 }

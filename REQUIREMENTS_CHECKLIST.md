@@ -1476,3 +1476,13 @@ Confirmed the list was never actually sorted (it was just in the order originall
 - Previous Introduction Feedback (2 parts, 10 questions, Other text fields).
 - Bottom nav now Home / Discover / Connections / Messages / Profile. Journey state: src/store/journey.store.ts.
 - Splash redesigned to Figma 'Onboarding 5' (arch+cross logo, CANA wordmark, gold tagline).
+
+## Round — Figma-whiteness, disabled tabs, outside-CANA flow, welcome-back
+- Light tokens now match Figma: page #FAF7F2, cards #FFFFFF, navy ink text, cool-grey borders (brown ink removed). Dark mode untouched.
+- Figma header (bell · CANA · globe) on journey screens + Home + Profile; titles bold sans; buttons rounded-14.
+- Bottom tabs: disabled (non-clickable) on Congratulations, Safety First, Contact Policy; enabled from Profile Ready onward.
+- Home: "Sacred Pacing & Intentionality" card (daily batch, no infinite scrolling).
+- Chat: after "I Understand & Agree" the member waits; other side's response = Continue (→ contact share) / Not Yet (back to chat) / End (chat closes, feedback, then find a new introduction). Prototype buttons simulate their reply.
+- Introduction Complete uses the supplied "United in Christ" logo (public/images/united-in-christ.png, cropped from the docx).
+- Welcome-back gate after 10+ days away (also ?welcomeback=1): relationship? → through CANA? → feedback form; else feedback offer; else continue. Choices only.
+- Matching: exact age calc, two-way age/country check, passed/blocked users never resurface.

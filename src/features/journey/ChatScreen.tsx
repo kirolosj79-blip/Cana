@@ -36,7 +36,7 @@ export function ChatScreen() {
   const msgs = j.messages[id] ?? []
   const [text, setText] = useState('')
   const [menu, setMenu] = useState(false)
-  const [dlg, setDlg] = useState<null | 'report' | 'block' | 'confirm' | 'safety' | 'partner'>(null)
+  const [dlg, setDlg] = useState<null | 'report' | 'block' | 'confirm' | 'safety' | 'partner' | 'ended'>(null)
   const [reason, setReason] = useState<string[]>([])
   const [note, setNote] = useState('')
   const endRef = useRef<HTMLDivElement>(null)
@@ -64,6 +64,12 @@ export function ChatScreen() {
   if (!j.guidelinesAcceptedFor.includes(id)) return <Navigate to={`/app/guidelines/${id}`} replace />
 
   const name = other.personal.firstName
+  const waiting = j.readyOutside.includes(id)
+  const notYet = () => {
+    j.unmarkReadyOutside(id)
+    j.send(id, 'them', t(`I'm not ready yet — let's keep getting to know each other first.`, 'لسه مش جاهز — خلينا نكمل نتعرف على بعض الأول.'))
+    show(t(`${name} isn't ready yet. You're back in the chat.`, `${name} لسه مش جاهز. رجعت للمحادثة.`), 'info')
+  }
 
   const send = () => {
     const v = text.trim()
@@ -126,7 +132,20 @@ export function ChatScreen() {
         </div>
       </header>
 
-      <div className="flex items-center gap-2 border-b border-ink-100 bg-gold-50 px-4 py-2.5">
+      {waiting && (
+        <div className="space-y-2 border-b border-ink-100 bg-gold-50 px-4 py-3">
+          <p className="flex items-center gap-2 text-xs font-semibold text-ink-900">
+            <Hourglass size={14} className="text-gold-700" /> {t(`Waiting for ${name} to respond…`, `في انتظار رد ${name}…`)}
+          </p>
+          <p className="text-[11px] text-ink-500">{t('Prototype: choose how they respond', 'نسخة تجريبية: اختار رد الطرف التاني')}</p>
+          <div className="grid grid-cols-3 gap-2">
+            <button onClick={() => navigate(`/app/contact-share/${id}`)} className="rounded-lg bg-[#0C1D3A] py-2 text-[11px] font-semibold text-white">{t('Continue', 'موافق')}</button>
+            <button onClick={notYet} className="rounded-lg bg-parchment-200 py-2 text-[11px] font-semibold text-ink-800">{t('Not Yet', 'مش دلوقتي')}</button>
+            <button onClick={() => setDlg('ended')} className="rounded-lg bg-danger-100 py-2 text-[11px] font-semibold text-danger-700">{t('End', 'إنهاء')}</button>
+          </div>
+        </div>
+      )}
+      <div className={cn('flex items-center gap-2 border-b border-ink-100 bg-gold-50 px-4 py-2.5', waiting && 'hidden')}>
         <Handshake size={16} className="text-gold-700" />
         <div className="min-w-0 flex-1">
           <p className="text-[9px] font-bold uppercase tracking-wider text-gold-700">{t('Sacred Milestone', 'محطة مقدسة')}</p>
@@ -183,7 +202,7 @@ export function ChatScreen() {
       {/* Report Concern */}
       <CenterDialog open={dlg === 'report'} onClose={() => setDlg(null)} icon={<ShieldCheck size={24} />} title={t('Report Concern', 'بلّغ عن مشكلة')} pill={t('Confidential Pastoral Review', 'مراجعة رعوية سرّية')}
         actions={<>
-          <Button variant="gold" size="lg" className="w-full" disabled={reason.length === 0} onClick={() => { j.report(id, reason.join(','), note); setDlg(null); setReason([]); setNote(''); show(t('Report sent confidentially', 'البلاغ اتبعت بسرّية'), 'success') }}>{t('Report', 'ابعت البلاغ')}</Button>
+          <Button variant="gold" size="lg" className="!rounded-[14px] w-full" disabled={reason.length === 0} onClick={() => { j.report(id, reason.join(','), note); setDlg(null); setReason([]); setNote(''); show(t('Report sent confidentially', 'البلاغ اتبعت بسرّية'), 'success') }}>{t('Report', 'ابعت البلاغ')}</Button>
           <SoftButton onClick={() => setDlg(null)}>{t('Cancel', 'إلغاء')}</SoftButton>
         </>}>
         <p>{t('Help us keep CANA safe and honoring. Please select a reason for reporting this member.', 'ساعدنا نحافظ على CANA آمن ومُكرِم. اختار سبب الإبلاغ عن العضو ده.')}</p>
@@ -219,7 +238,7 @@ export function ChatScreen() {
       {/* Continue outside CANA — confirm */}
       <CenterDialog open={dlg === 'confirm'} onClose={() => setDlg(null)} icon={<Handshake size={24} />} title={t('Are you ready to continue getting to know each other outside CANA?', 'جاهز تكمّلوا تتعرفوا على بعض برّه CANA؟')}
         actions={<>
-          <Button variant="gold" size="lg" className="w-full" onClick={() => setDlg('safety')}>{t('Yes, I’m ready to continue outside CANA', 'أيوه، جاهز أكمّل برّه CANA')}</Button>
+          <Button variant="gold" size="lg" className="!rounded-[14px] w-full" onClick={() => setDlg('safety')}>{t('Yes, I’m ready to continue outside CANA', 'أيوه، جاهز أكمّل برّه CANA')}</Button>
           <SoftButton onClick={() => setDlg(null)}>{t('No', 'لأ')}</SoftButton>
         </>}>
         <p>{t('This means you may exchange contact information and continue your communication through WhatsApp, email, phone, or in person. CANA will no longer be part of your private communication once you leave the platform.', 'ده معناه إنك ممكن تتبادلوا بيانات التواصل وتكمّلوا عن طريق واتساب أو إيميل أو تليفون أو وجهًا لوجه. CANA مش هيبقى جزء من تواصلكم الخاص أول ما تسيبوا المنصة.')}</p>
@@ -227,19 +246,23 @@ export function ChatScreen() {
 
       {/* Safety reminder */}
       <CenterDialog open={dlg === 'safety'} icon={<ShieldCheck size={24} />} title={t('Safety Reminder', 'تذكير بالسلامة')}
-        actions={<Button variant="gold" size="lg" className="w-full" onClick={() => {
+        actions={<Button variant="gold" size="lg" className="!rounded-[14px] w-full" onClick={() => {
           setDlg(null)
           j.markReadyOutside(id)
-          show(t(`Waiting for ${name} to confirm…`, `في انتظار تأكيد ${name}…`), 'info')
-          setTimeout(() => navigate(`/app/contact-share/${id}`), 2600)
         }}>{t('I Understand & Agree', 'فهمت وأوافق')}</Button>}>
         <p>{t('For your privacy and safety, please keep communication within CANA until both of you agree to continue outside the platform.', 'لخصوصيتك وسلامتك، خلّي التواصل جوّه CANA لحد ما الاتنين توافقوا تكمّلوا برّه المنصة.')}</p>
+      </CenterDialog>
+
+      {/* Other person ended the introduction */}
+      <CenterDialog open={dlg === 'ended'} icon={<Ban size={24} />} title={t('Introduction ended', 'التعارف انتهى')}
+        actions={<Button variant="gold" size="lg" className="!rounded-[14px] w-full" onClick={() => { setDlg(null); endIntro() }}>{t('Continue', 'كمّل')}</Button>}>
+        <p>{t(`${name} has chosen to end this introduction. The chat is now closed. You can look for a new introduction after sharing a short feedback.`, `${name} اختار ينهي التعارف ده. المحادثة اتقفلت. تقدر تدوّر على تعارف جديد بعد ما تشاركنا ملاحظات سريعة.`)}</p>
       </CenterDialog>
 
       {/* Partner is ready */}
       <CenterDialog open={dlg === 'partner'} icon={<Hourglass size={24} />} title={t('Take your time', 'خد وقتك')}
         actions={<>
-          <Button variant="gold" size="lg" className="w-full" onClick={goOutside}>{t('Continue Outside CANA', 'كمّل برّه CANA')}</Button>
+          <Button variant="gold" size="lg" className="!rounded-[14px] w-full" onClick={goOutside}>{t('Continue Outside CANA', 'كمّل برّه CANA')}</Button>
           <SoftButton onClick={() => setDlg(null)}>{t('Not Yet', 'مش دلوقتي')}</SoftButton>
           <SoftButton tone="redText" onClick={endIntro}>{t('End This Introduction', 'أنهِ التعارف ده')}</SoftButton>
         </>}>

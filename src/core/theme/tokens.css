@@ -12,17 +12,17 @@
 
 @theme {
   /* ---- Color: Ink (warm deep brown — primary text & dark surfaces) ---- */
-  --color-ink-50: #F9F3EC;
-  --color-ink-100: #F0E3D6;
-  --color-ink-200: #E2CDBA;
-  --color-ink-300: #CBA98F;
-  --color-ink-400: #B4876A;
-  --color-ink-500: #96654A;
-  --color-ink-600: #7A4F3A;
-  --color-ink-700: #5C3A2A;
-  --color-ink-800: #4A2B1F;
-  --color-ink-900: #3A2118;
-  --color-ink-950: #2B1810;
+  --color-ink-50: #F5F6F9;
+  --color-ink-100: #ECEAE4;
+  --color-ink-200: #D8DAE1;
+  --color-ink-300: #B2B8C6;
+  --color-ink-400: #8790A3;
+  --color-ink-500: #5F6A80;
+  --color-ink-600: #4A556B;
+  --color-ink-700: #333F57;
+  --color-ink-800: #1D2A46;
+  --color-ink-900: #0C1D3A;
+  --color-ink-950: #0A1630;
 
   /* ---- Color: Wine (muted rose / burgundy — romantic accent) ---- */
   --color-wine-50: #FBF0F1;
@@ -51,14 +51,14 @@
      themselves don't change between themes, so the text sitting on them
      must stay fixed too, or it goes invisible in dark mode when regular
      ink-900/950 flips to a light color. ---- */
-  --color-inkfixed-900: #3A2118;
-  --color-inkfixed-950: #2B1810;
+  --color-inkfixed-900: #0C1D3A;
+  --color-inkfixed-950: #0A1630;
 
   /* ---- Color: Parchment (warm cream / ivory surfaces) ---- */
   --color-parchment-0: #FFFFFF;
-  --color-parchment-50: #FFFFFF;
-  --color-parchment-100: #F5F5F5;
-  --color-parchment-200: #EBEBEB;
+  --color-parchment-50: #FAF7F2;
+  --color-parchment-100: #F4F0E9;
+  --color-parchment-200: #EDE6DB;
 
   /* ---- Color: Slate (warm neutral text) ---- */
   --color-slate-400: #A08D7D;

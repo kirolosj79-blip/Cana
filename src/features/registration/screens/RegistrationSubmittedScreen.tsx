@@ -1,8 +1,9 @@
+import { BottomNav } from '@/shared/components/layout/BottomNav'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { Check, ChevronRight, ChevronLeft, Clock, Heart, Target, Lock, Church } from 'lucide-react'
-import { TopBar } from '@/shared/components/layout/TopBar'
+import { FigmaHeader } from '@/shared/components/layout/FigmaHeader'
 import { Button } from '@/shared/components/ui/Button'
 import { FCard, IconTile, CenterDialog } from '@/shared/components/ui/figma'
 import { useLanguage } from '@/core/hooks/useLanguage'
@@ -43,19 +44,19 @@ export function RegistrationSubmittedScreen() {
 
   return (
     <div className="min-h-screen bg-parchment-50">
-      <div className="mx-auto max-w-md pb-10">
-        <TopBar showLogo hideNotifications={false} />
+      <div className="mx-auto max-w-md pb-28">
+        <FigmaHeader />
         <div className="px-5 pt-4 space-y-4">
           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
             <FCard className="py-6 text-center">
-              <h1 className="font-display text-[28px] font-semibold text-ink-900">{t('Congratulations!', 'مبروك!')}</h1>
-              <p className="mt-1 font-display text-base italic text-gold-700">{t('Your Marriage Profile Is Ready', 'ملف الجواز بتاعك جاهز')}</p>
+              <h1 className="font-bold tracking-tight text-[28px] font-semibold text-ink-900">{t('Congratulations!', 'مبروك!')}</h1>
+              <p className="mt-1 font-normal text-base italic text-gold-700">{t('Your Marriage Profile Is Ready', 'ملف الجواز بتاعك جاهز')}</p>
             </FCard>
           </motion.div>
 
           <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
             <FCard className="px-5 py-6">
-              <h2 className="text-center font-display text-xl font-semibold leading-snug text-ink-900">
+              <h2 className="text-center font-bold tracking-tight text-xl font-semibold leading-snug text-ink-900">
                 {t('Thank you for completing your CANA profile.', 'شكرًا إنك كمّلت ملفك في CANA.')}
               </h2>
               <p className="mt-3 text-center text-[13px] leading-relaxed text-ink-500">
@@ -75,7 +76,7 @@ export function RegistrationSubmittedScreen() {
                   </div>
                 ))}
               </div>
-              <Button variant="gold" size="lg" className="mt-6 w-full" onClick={() => setOpen(true)}>
+              <Button variant="gold" size="lg" className="!rounded-[14px] mt-6 w-full" onClick={() => setOpen(true)}>
                 {t('Submit For Verification', 'ابعت للتوثيق')} <Arrow size={16} />
               </Button>
               <p className="mt-3 flex items-center justify-center gap-1.5 text-[11px] text-ink-500">
@@ -93,7 +94,7 @@ export function RegistrationSubmittedScreen() {
         title={t('Awaiting Verification', 'في انتظار التوثيق')}
         actions={
           <>
-            <Button variant="gold" size="lg" className="w-full" onClick={done}>
+            <Button variant="gold" size="lg" className="!rounded-[14px] w-full" onClick={done}>
               <Check size={16} /> {t('Understood & Got It', 'تمام، فهمت')}
             </Button>
             <button onClick={() => navigate('/app/settings/verification')} className="mx-auto flex items-center gap-1 pt-1 text-xs font-bold text-wine-700">
@@ -118,6 +119,7 @@ export function RegistrationSubmittedScreen() {
           </div>
         </FCard>
       </CenterDialog>
+      <BottomNav disabled />
     </div>
   )
 }

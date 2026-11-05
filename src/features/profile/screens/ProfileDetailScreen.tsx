@@ -11,7 +11,7 @@ import { useRequestsStore } from '@/store/requests.store'
 import { useJourneyStore } from '@/store/journey.store'
 import { useToast } from '@/shared/components/feedback/Toast'
 import { PageContainer } from '@/shared/components/layout/PageContainer'
-import { TopBar } from '@/shared/components/layout/TopBar'
+import { FigmaHeader } from '@/shared/components/layout/FigmaHeader'
 import { useLanguage } from '@/core/hooks/useLanguage'
 import { useCelebration } from '@/shared/components/feedback/Celebration'
 import { usePaymentStore } from '@/store/payment.store'
@@ -90,7 +90,7 @@ export function ProfileDetailScreen() {
 
   return (
     <div className="pb-44">
-      <TopBar showLogo />
+      <FigmaHeader />
       <div className="space-y-4 px-5 pt-3">
         <div className="relative overflow-hidden rounded-[26px]">
           <img src={p.profilePhotoUrl} alt="" className="aspect-[4/5] w-full bg-ink-100 object-cover" />
@@ -103,7 +103,7 @@ export function ProfileDetailScreen() {
           </button>
           <div className="absolute inset-x-4 bottom-4 flex items-end justify-between text-white">
             <div>
-              <h1 className="font-display text-[26px] font-semibold leading-tight">{p.firstName}, {age}</h1>
+              <h1 className="font-bold tracking-tight text-[26px] font-semibold leading-tight">{p.firstName}, {age}</h1>
               <p className="text-sm opacity-90">{candidate.church.churchName}</p>
               <p className="flex items-center gap-1 text-sm opacity-90"><MapPin size={12} /> {p.cityState}</p>
             </div>
@@ -157,7 +157,7 @@ export function ProfileDetailScreen() {
               <Button
                 variant="outline"
                 size="lg"
-                className="flex-1 !px-3 text-sm"
+                className="!rounded-[14px] flex-1 !px-3 text-sm"
                 onClick={() => {
                   pass(candidate.id)
                   show(t('Removed from your matches', 'اتشال من ترشيحاتك'), 'info')
@@ -166,7 +166,7 @@ export function ProfileDetailScreen() {
               >
                 {t('Not the Right Match', 'مش مناسب ليا')}
               </Button>
-              <Button variant="gold" size="lg" className="flex-1 !px-3 text-sm" onClick={interested}>
+              <Button variant="gold" size="lg" className="!rounded-[14px] flex-1 !px-3 text-sm" onClick={interested}>
                 {t('Interested in an Introduction', 'مهتم بتعارف')}
               </Button>
             </>
@@ -177,7 +177,7 @@ export function ProfileDetailScreen() {
             </Button>
           )}
           {status === 'accepted' && (
-            <Button variant="gold" size="lg" className="flex-1" onClick={() => navigate(guidelinesDone.includes(candidate.id) ? `/app/chat/${candidate.id}` : `/app/guidelines/${candidate.id}`)}>
+            <Button variant="gold" size="lg" className="!rounded-[14px] flex-1" onClick={() => navigate(guidelinesDone.includes(candidate.id) ? `/app/chat/${candidate.id}` : `/app/guidelines/${candidate.id}`)}>
               {t('Start Chatting', 'ابدأ المحادثة')}
             </Button>
           )}

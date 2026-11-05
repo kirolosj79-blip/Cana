@@ -1,10 +1,9 @@
 import { useNavigate } from 'react-router-dom'
 import { Star, Lock, Quote } from 'lucide-react'
-import { TopBar } from '@/shared/components/layout/TopBar'
+import { FigmaHeader } from '@/shared/components/layout/FigmaHeader'
 import { Button } from '@/shared/components/ui/Button'
 import { FCard } from '@/shared/components/ui/figma'
 import { useLanguage } from '@/core/hooks/useLanguage'
-import { BrandMark } from '@/shared/components/ui/BrandMark'
 
 /** Figma: "Introduction Complete". */
 export function IntroCompleteScreen() {
@@ -12,12 +11,12 @@ export function IntroCompleteScreen() {
   const navigate = useNavigate()
   return (
     <div className="pb-10">
-      <TopBar showLogo />
+      <FigmaHeader />
       <div className="space-y-4 px-5 pt-5 text-center">
         <span className="inline-flex items-center gap-1 rounded-full bg-gold-100 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-gold-700"><Star size={10} /> {t('CANA Covenant Blessing', 'بركة عهد CANA')}</span>
-        <h1 className="font-display text-[28px] font-semibold text-ink-900">{t('Introduction Complete', 'التعارف اكتمل')}</h1>
+        <h1 className="font-bold tracking-tight text-[28px] font-semibold text-ink-900">{t('Introduction Complete', 'التعارف اكتمل')}</h1>
         <p className="text-sm text-ink-500">{t('Your introduction through CANA is now complete.', 'تعارفك من خلال CANA اكتمل.')}</p>
-        <div className="mx-auto flex h-28 w-28 items-center justify-center rounded-full bg-parchment-100 text-wine-700 ring-8 ring-gold-50"><BrandMark size={54} /></div>
+        <img src="/images/united-in-christ.png" alt="United in Christ" className="mx-auto h-28 w-auto" />
         <p className="text-[13px] text-ink-500">{t('We pray that this next step will be a meaningful one for both of you.', 'بنصلّي إن الخطوة الجاية تكون ذات معنى للاتنين.')}</p>
 
         <FCard className="text-start">
@@ -30,11 +29,11 @@ export function IntroCompleteScreen() {
 
         <FCard tone="warm" className="relative text-start">
           <Quote size={14} className="text-gold-700" />
-          <p className="mt-1 font-display text-[15px] italic leading-snug text-ink-800">{t('“Above all, put on love, which binds everything together in perfect harmony.”', '"وَعَلَى جَمِيعِ هذِهِ ٱلْبَسُوا ٱلْمَحَبَّةَ ٱلَّتِي هِيَ رِبَاطُ ٱلْكَمَالِ."')}</p>
+          <p className="mt-1 font-normal text-[15px] italic leading-snug text-ink-800">{t('“Above all, put on love, which binds everything together in perfect harmony.”', '"وَعَلَى جَمِيعِ هذِهِ ٱلْبَسُوا ٱلْمَحَبَّةَ ٱلَّتِي هِيَ رِبَاطُ ٱلْكَمَالِ."')}</p>
           <p className="mt-2 text-[10px] font-bold uppercase tracking-wider text-gold-700">— {t('Colossians 3:14', 'كولوسي 3: 14')}</p>
         </FCard>
 
-        <Button variant="gold" size="lg" className="w-full" onClick={() => navigate('/app/home')}>{t('Done', 'تم')}</Button>
+        <Button variant="gold" size="lg" className="!rounded-[14px] w-full" onClick={() => navigate('/app/home')}>{t('Done', 'تم')}</Button>
       </div>
     </div>
   )

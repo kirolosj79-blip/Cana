@@ -23,6 +23,8 @@ interface JourneyState {
   blocked: string[]
   reports: { userId: string; reason: string; note: string; at: string }[]
   /** Which intro still needs the "Previous Introduction Feedback" form. */
+  lastActiveAt: string | null
+  touch: () => void
   feedbackOwed: boolean
   feedbackAnswers: Record<string, string>
   setSubmittedSeen: () => void
@@ -31,6 +33,7 @@ interface JourneyState {
   acceptGuidelines: (id: string) => void
   send: (id: string, from: 'me' | 'them', text: string) => void
   markReadyOutside: (id: string) => void
+  unmarkReadyOutside: (id: string) => void
   complete: (id: string) => void
   block: (id: string) => void
   report: (userId: string, reason: string, note: string) => void
@@ -52,6 +55,8 @@ export const useJourneyStore = create<JourneyState>()(
       completed: [],
       blocked: [],
       reports: [],
+      lastActiveAt: null,
+      touch: () => set({ lastActiveAt: new Date().toISOString() }),
       feedbackOwed: false,
       feedbackAnswers: {},
       setSubmittedSeen: () => set({ submittedSeen: true }),
@@ -60,6 +65,7 @@ export const useJourneyStore = create<JourneyState>()(
       acceptGuidelines: (id) => set((s) => ({ guidelinesAcceptedFor: [...new Set([...s.guidelinesAcceptedFor, id])] })),
       send: (id, from, text) => set((s) => ({ messages: { ...s.messages, [id]: [...(s.messages[id] ?? []), mk(from, text)] } })),
       markReadyOutside: (id) => set((s) => ({ readyOutside: [...new Set([...s.readyOutside, id])] })),
+      unmarkReadyOutside: (id) => set((s) => ({ readyOutside: s.readyOutside.filter((x) => x !== id) })),
       complete: (id) => set((s) => ({ completed: [...new Set([...s.completed, id])] })),
       block: (id) => set((s) => ({ blocked: [...new Set([...s.blocked, id])], feedbackOwed: true })),
       report: (userId, reason, note) => set((s) => ({ reports: [...s.reports, { userId, reason, note, at: new Date().toISOString() }] })),

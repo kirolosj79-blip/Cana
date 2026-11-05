@@ -1,9 +1,11 @@
 import type { UserProfile } from '@/types/profile.types'
 import { useRegistrationStore } from '@/store/registration.store'
 
-function age(dob: string) {
-  return new Date().getFullYear() - new Date(dob).getFullYear()
-}
+import { calculateAge } from '@/shared/utils/age'
+import { useMatchesStore } from '@/store/matches.store'
+import { useJourneyStore } from '@/store/journey.store'
+
+const age = calculateAge
 
 /**
  * Mandatory filters — a candidate must pass every one of these to appear
@@ -17,6 +19,10 @@ export function passesMandatoryFilters(candidate: UserProfile): boolean {
   if (!myGender) return false
   if (candidate.personal.gender === myGender) return false
 
+  // Never resurface someone the member passed on or blocked.
+  if (useMatchesStore.getState().passedIds.includes(candidate.id)) return false
+  if (useJourneyStore.getState().blocked.includes(candidate.id)) return false
+
   // Profile verification & church-recommendation approval must both be granted
   // before a member becomes visible to others.
   if (candidate.verification.identity !== 'verified') return false
@@ -28,6 +34,20 @@ export function passesMandatoryFilters(candidate: UserProfile): boolean {
   if (prefs.ageRangeMax && candidateAge > prefs.ageRangeMax) return false
 
   if (prefs.countryPreference?.length && !prefs.countryPreference.includes(candidate.personal.countryOfResidence)) return false
+
+  // Two-way check: the candidate's own age range and country preference must
+  // also accept this member, otherwise one side would be introduced to
+  // someone who already said "not for me".
+  const myDob = draft.personal.dateOfBirth
+  if (myDob) {
+    const myAge = age(myDob)
+    const theirs = candidate.compatibilityPreferences
+    if (theirs?.ageRangeMin && myAge < theirs.ageRangeMin) return false
+    if (theirs?.ageRangeMax && myAge > theirs.ageRangeMax) return false
+  }
+  const myCountry = draft.personal.countryOfResidence
+  const theirCountries = candidate.compatibilityPreferences?.countryPreference
+  if (myCountry && theirCountries?.length && !theirCountries.includes(myCountry)) return false
 
   return true
 }

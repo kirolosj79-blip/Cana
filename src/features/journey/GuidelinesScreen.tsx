@@ -43,7 +43,7 @@ export function GuidelinesScreen() {
               <ShieldCheck size={11} /> {t('Mutual Introduction Confirmed', 'التعارف المتبادل اتأكد')}
             </span>
           </div>
-          <h1 className="mt-4 font-display text-[28px] font-semibold leading-tight text-ink-900">{t('Before You Start Chatting', 'قبل ما تبدأ المحادثة')}</h1>
+          <h1 className="mt-4 font-bold tracking-tight text-[28px] font-semibold leading-tight text-ink-900">{t('Before You Start Chatting', 'قبل ما تبدأ المحادثة')}</h1>
           <p className="mx-auto mt-2 max-w-xs text-[13px] leading-relaxed text-ink-500">
             {t(
               'You have both accepted this introduction. CANA provides a protected sanctuary to discern marriage in purity, reverence, and spiritual peace.',
@@ -60,7 +60,7 @@ export function GuidelinesScreen() {
             <IconTile icon={Sparkles} tint="gold" size={34} />
             <div>
               <p className="text-[10px] font-bold uppercase tracking-wider text-gold-700">{t('Pillar 01', 'الركن 01')}</p>
-              <p className="font-display text-lg font-semibold text-ink-900">{t('Respect & Authenticity', 'الاحترام والأصالة')}</p>
+              <p className="font-bold tracking-tight text-lg font-semibold text-ink-900">{t('Respect & Authenticity', 'الاحترام والأصالة')}</p>
             </div>
           </div>
           <Item n={1} title={t('Kindness & Purity', 'اللطف والنقاء')} body={t('Treat each other with kindness, dignity, and honor. Offensive, inappropriate, or sexually explicit content has zero place in this dialogue.', 'عامِلوا بعض بلطف وكرامة واحترام. أي محتوى مسيء أو غير لائق أو جنسي مالوش أي مكان في الحوار ده.')} />
@@ -74,7 +74,7 @@ export function GuidelinesScreen() {
             <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/10"><ShieldCheck size={18} /></span>
             <div>
               <p className="text-[10px] font-bold uppercase tracking-wider text-white/60">{t('Pillar 02 • Protected Zone', 'الركن 02 • منطقة محمية')}</p>
-              <p className="font-display text-lg font-semibold">{t('Privacy & Contact Safety', 'الخصوصية وأمان التواصل')}</p>
+              <p className="font-bold tracking-tight text-lg font-semibold">{t('Privacy & Contact Safety', 'الخصوصية وأمان التواصل')}</p>
             </div>
           </div>
           <div className="mt-4 space-y-4">
@@ -89,7 +89,7 @@ export function GuidelinesScreen() {
             <IconTile icon={Hourglass} tint="gold" size={34} />
             <div>
               <p className="text-[10px] font-bold uppercase tracking-wider text-gold-700">{t('Pillar 03', 'الركن 03')}</p>
-              <p className="font-display text-lg font-semibold text-ink-900">{t('Discernment & Peace', 'التمييز والسلام')}</p>
+              <p className="font-bold tracking-tight text-lg font-semibold text-ink-900">{t('Discernment & Peace', 'التمييز والسلام')}</p>
             </div>
           </div>
           <Item n={7} title={t('Unhurried Pace', 'من غير استعجال')} body={t('There is no rush. Take time to prayerfully listen, share aspirations, and discover common ground without societal hurry.', 'مفيش استعجال. خد وقتك تسمع بصلاة وتشارك طموحاتك وتكتشف المشترك بعيد عن ضغط المجتمع.')} />
@@ -100,7 +100,7 @@ export function GuidelinesScreen() {
         <FCard tone="warm" className="text-center">
           <Church size={16} className="mx-auto text-gold-700" />
           <p className="mt-1 text-[10px] font-bold uppercase tracking-wider text-gold-700">{t('A Final Thought', 'خاطرة أخيرة')}</p>
-          <p className="mt-2 font-display text-lg italic leading-snug text-ink-900">
+          <p className="mt-2 font-normal text-lg italic leading-snug text-ink-900">
             {t('“May this introduction be a meaningful step toward the future God has prepared for you.”', '"ليكن هذا التعارف خطوة ذات معنى نحو المستقبل الذي أعدّه الله لك."')}
           </p>
           <p className="mt-2 text-xs text-ink-500">{t('Take your time, be genuine, and treat each other with reverence. What happens next is between the two of you and God.', 'خدوا وقتكم، كونوا حقيقيين، وعامِلوا بعض بوقار. اللي هيحصل بعد كده بينكم وبين ربنا.')}</p>
@@ -114,7 +114,7 @@ export function GuidelinesScreen() {
         <Button
           variant="gold"
           size="lg"
-          className="w-full"
+          className="!rounded-[14px] w-full"
           disabled={!agreed}
           onClick={() => {
             accept(id)

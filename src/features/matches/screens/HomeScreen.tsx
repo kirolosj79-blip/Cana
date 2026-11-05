@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Clock, AlertCircle, ChevronRight } from 'lucide-react'
 import { motion } from 'framer-motion'
-import { TopBar } from '@/shared/components/layout/TopBar'
+import { FigmaHeader } from '@/shared/components/layout/FigmaHeader'
 import { Button } from '@/shared/components/ui/Button'
 import { useRegistrationStore } from '@/store/registration.store'
 import { useAdminReviewStore } from '@/store/adminReview.store'
@@ -12,7 +12,7 @@ import { useJourneyStore } from '@/store/journey.store'
 import { useLanguage } from '@/core/hooks/useLanguage'
 import { MatchCard } from '@/features/matches/components/MatchCard'
 import { getDiscoverList } from '@/store/matches.store'
-import { Search, SlidersHorizontal, BookOpen, Check, ShieldCheck } from 'lucide-react'
+import { Search, SlidersHorizontal, BookOpen, Check, ShieldCheck, Hourglass } from 'lucide-react'
 import { cn } from '@/shared/utils/cn'
 
 export function HomeScreen() {
@@ -38,11 +38,11 @@ export function HomeScreen() {
 
   return (
     <div>
-      <TopBar showLogo />
+      <FigmaHeader />
       <div className="px-5 pt-2 pb-6 space-y-6">
         {!approved && (
         <div>
-          <h1 className="font-display text-xl font-medium text-ink-900">
+          <h1 className="font-bold tracking-tight text-xl font-medium text-ink-900">
             {t('Hello', 'أهلًا')}، {firstName || t('friend', 'صديقي')} 👋
           </h1>
           <p className="text-sm text-ink-500">{t("Let's find God's best for you.", 'يلا نلاقي أفضل اختيار ليك ❤️')}</p>
@@ -58,7 +58,7 @@ export function HomeScreen() {
             <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-gold-400/20 text-gold-600">
               <Clock size={30} />
             </span>
-            <p className="font-display text-3xl font-semibold text-gold-700">
+            <p className="font-bold tracking-tight text-3xl font-semibold text-gold-700">
               {paymentPending ? t('Payment Pending', 'الدفع قيد المراجعة') : t('Membership Required', 'محتاج تفعّل عضويتك')}
             </p>
             <p className="text-sm text-gold-700 max-w-xs mx-auto">
@@ -91,7 +91,7 @@ export function HomeScreen() {
             >
               {status === 'needs_action' ? <AlertCircle size={30} /> : <Clock size={30} />}
             </span>
-            <p className={status === 'needs_action' ? 'font-display text-3xl font-semibold text-warning-500' : 'font-display text-3xl font-semibold text-info-500'}>
+            <p className={status === 'needs_action' ? 'font-bold tracking-tight text-3xl font-semibold text-warning-500' : 'font-bold tracking-tight text-3xl font-semibold text-info-500'}>
               {status === 'needs_action' ? t('Action Needed', 'محتاجين إجراء') : t('Pending', 'قيد المراجعة')}
             </p>
             <p className={status === 'needs_action' ? 'text-sm text-warning-500 max-w-xs mx-auto' : 'text-sm text-info-500 max-w-xs mx-auto'}>
@@ -122,7 +122,7 @@ export function HomeScreen() {
           <>
             <div>
               <p className="text-sm text-ink-500">{t('Good evening', 'مساء الخير')}، {firstName || t('friend', 'صديقي')}</p>
-              <h2 className="font-display text-[26px] font-semibold text-ink-900">{t('Your Daily Discernment', 'تمييزك اليومي')}</h2>
+              <h2 className="font-bold tracking-tight text-[26px] font-semibold text-ink-900">{t('Your Daily Discernment', 'تمييزك اليومي')}</h2>
               <span className="mt-2 inline-flex rounded-full bg-gold-100 px-4 py-1.5 text-[11px] font-bold uppercase tracking-wider text-gold-700">
                 {t(`${list.length} Curated Matches`, `${list.length} ترشيحات مختارة`)}
               </span>
@@ -177,6 +177,18 @@ export function HomeScreen() {
               <MatchCard key={c.id} candidate={c} />
             ))}
             {list.length === 0 && <p className="col-span-2 py-6 text-center text-xs text-ink-400">{t('No matches found.', 'مفيش ترشيحات.')}</p>}
+          </div>
+        )}
+
+        {approved && (
+          <div className="space-y-3">
+            <div className="rounded-[22px] bg-parchment-200 px-5 py-6 text-center">
+              <Hourglass size={20} className="mx-auto text-gold-700" />
+              <p className="mt-2 text-sm font-bold text-ink-900">{t('Sacred Pacing & Intentionality', 'إيقاع مقدّس ونية واضحة')}</p>
+              <p className="mt-1.5 text-xs leading-relaxed text-ink-500">
+                {t('Curated daily batch refreshes at 6:00 AM EET. No infinite scrolling — discerning in prayer, patience, and mutual respect.', 'الترشيحات اليومية بتتجدد الساعة 6:00 صباحًا بتوقيت القاهرة. مفيش سكرول لا نهائي — تمييز بصلاة وصبر واحترام متبادل.')}
+              </p>
+            </div>
           </div>
         )}
 

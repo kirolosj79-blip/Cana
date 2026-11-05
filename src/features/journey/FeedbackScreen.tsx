@@ -97,14 +97,14 @@ export function FeedbackScreen() {
     <div className="pb-10">
       <header className="flex items-center justify-between px-5 pt-4">
         <button onClick={() => (part === 2 ? setPart(1) : navigate(-1))} className="text-ink-700" aria-label="Back"><Back size={20} /></button>
-        <p className="text-center font-display text-base tracking-[0.3em] text-ink-900">+ CANA</p>
+        <p className="text-center font-bold tracking-tight text-base tracking-[0.3em] text-ink-900">+ CANA</p>
         <span className="w-5" />
       </header>
       <div className="space-y-4 px-5 pt-4">
         <span className="inline-flex items-center gap-1.5 rounded-full bg-gold-100 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-gold-700">
           <ShieldAlert size={11} /> {part === 1 ? t('Private feedback • Step 1 of 2', 'ملاحظات خاصة • خطوة 1 من 2') : t('Safety & Community Standards • Step 2 of 2', 'السلامة ومعايير المجتمع • خطوة 2 من 2')}
         </span>
-        <h1 className="font-display text-[26px] font-semibold leading-tight text-ink-900">{t('Previous Introduction Feedback', 'ملاحظات عن التعارف السابق')}</h1>
+        <h1 className="font-bold tracking-tight text-[26px] font-semibold leading-tight text-ink-900">{t('Previous Introduction Feedback', 'ملاحظات عن التعارف السابق')}</h1>
         <p className="-mt-2 text-sm text-ink-500">{t('Help us cultivate thoughtful, grace-centered pairings.', 'ساعدنا نبني ترشيحات مدروسة ومبنية على النعمة.')}</p>
         <div>
           <div className="h-1.5 overflow-hidden rounded-full bg-parchment-200"><div className="h-full rounded-full bg-[#0C1D3A] transition-all" style={{ width: part === 1 ? '50%' : '100%' }} /></div>
@@ -157,14 +157,14 @@ export function FeedbackScreen() {
 
         {part === 1 ? (
           <>
-            <Button variant="gold" size="lg" className="w-full" disabled={!ok} onClick={() => { setPart(2); window.scrollTo(0, 0) }}>
+            <Button variant="gold" size="lg" className="!rounded-[14px] w-full" disabled={!ok} onClick={() => { setPart(2); window.scrollTo(0, 0) }}>
               {t('Continue to Part 2', 'كمّل للجزء 2')} <Next size={15} />
             </Button>
             <p className="text-center text-[11px] text-ink-400">{t('Part 2 covers remaining safety verification & final notes', 'الجزء 2 بيغطي التحقق من السلامة والملاحظات الأخيرة')}</p>
           </>
         ) : (
           <>
-            <Button variant="gold" size="lg" className="w-full" disabled={!ok} onClick={finish}>
+            <Button variant="gold" size="lg" className="!rounded-[14px] w-full" disabled={!ok} onClick={finish}>
               {t('Submit & Complete', 'ابعت وأنهِ')} <Check size={15} className="text-success-500" />
             </Button>
             <button onClick={() => { setPart(1); window.scrollTo(0, 0) }} className="mx-auto flex items-center gap-1 text-[11px] text-ink-500"><Back size={12} /> {t('Back to Part 1', 'ارجع للجزء 1')}</button>

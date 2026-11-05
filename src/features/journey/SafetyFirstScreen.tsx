@@ -1,7 +1,8 @@
+import { BottomNav } from '@/shared/components/layout/BottomNav'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Check, ShieldCheck, ImageOff, BanknoteX, Landmark, Clock, TriangleAlert } from 'lucide-react'
-import { TopBar } from '@/shared/components/layout/TopBar'
+import { FigmaHeader } from '@/shared/components/layout/FigmaHeader'
 import { Button } from '@/shared/components/ui/Button'
 import { FCard, IconTile, PageHeading, Eyebrow, CheckRow } from '@/shared/components/ui/figma'
 import { useLanguage } from '@/core/hooks/useLanguage'
@@ -34,8 +35,8 @@ export function SafetyFirstScreen() {
 
   return (
     <div className="min-h-screen bg-parchment-50">
-      <div className="mx-auto max-w-md pb-10">
-        <TopBar showLogo />
+      <div className="mx-auto max-w-md pb-28">
+        <FigmaHeader />
         <PageHeading
           title={t('Your Safety Comes First', 'سلامتك أولًا')}
           subtitle={t('Protect Your Privacy and Stay Safe During the Early Stages of Getting to Know Someone', 'احمِ خصوصيتك وخلّيك آمن في أول مراحل التعارف')}
@@ -71,7 +72,7 @@ export function SafetyFirstScreen() {
           <Button
             variant="gold"
             size="lg"
-            className="w-full"
+            className="!rounded-[14px] w-full"
             disabled={!agreed}
             onClick={() => {
               accept()
@@ -82,6 +83,7 @@ export function SafetyFirstScreen() {
           </Button>
         </div>
       </div>
+      <BottomNav disabled />
     </div>
   )
 }

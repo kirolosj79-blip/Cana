@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { MessageSquare, Phone, Mail, AtSign, Check, BadgeCheck, Lock, Hash } from 'lucide-react'
-import { TopBar } from '@/shared/components/layout/TopBar'
+import { FigmaHeader } from '@/shared/components/layout/FigmaHeader'
 import { Button } from '@/shared/components/ui/Button'
 import { FCard, IconTile } from '@/shared/components/ui/figma'
 import { findCandidate } from '@/services/mock/candidates.mock'
@@ -34,9 +34,9 @@ export function ContactShareScreen() {
 
   return (
     <div className="pb-10">
-      <TopBar showLogo />
+      <FigmaHeader />
       <div className="space-y-3 px-5 pt-3">
-        <h1 className="font-display text-[26px] font-semibold text-ink-900">{t('Contact Exchange Policy', 'سياسة تبادل بيانات التواصل')}</h1>
+        <h1 className="font-bold tracking-tight text-[26px] font-semibold text-ink-900">{t('Contact Exchange Policy', 'سياسة تبادل بيانات التواصل')}</h1>
         <p className="text-sm text-ink-500">{t(`Select which details you would like to share with ${other?.personal.firstName ?? ''}.`, `اختار البيانات اللي عايز تشاركها مع ${other?.personal.firstName ?? ''}.`)}</p>
 
         <FCard className="flex items-center gap-3 !p-3">
@@ -48,7 +48,7 @@ export function ContactShareScreen() {
           <Chip>{t('Simultaneous reveal', 'كشف متزامن')}</Chip>
         </FCard>
 
-        <p className="pt-2 font-display text-base font-semibold tracking-wide text-ink-700">{t('Communication Channels', 'قنوات التواصل')}</p>
+        <p className="pt-2 font-bold tracking-tight text-base font-semibold tracking-wide text-ink-700">{t('Communication Channels', 'قنوات التواصل')}</p>
 
         <button onClick={() => toggle('whatsapp')} className="w-full text-start">
           <FCard className={cn('space-y-3', sel.whatsapp && '!border-success-500/50')}>
@@ -108,7 +108,7 @@ export function ContactShareScreen() {
         </FCard>
 
         <p className="flex items-center justify-center gap-1.5 pt-1 text-[11px] text-ink-500"><Lock size={11} /> {t(`Encrypted covenant • Only shared with ${other?.personal.firstName ?? ''}`, `عهد مشفّر • بيتشارك مع ${other?.personal.firstName ?? ''} بس`)}</p>
-        <Button variant="gold" size="lg" className="w-full" disabled={!anySelected} onClick={() => { complete(id); navigate(`/app/intro-complete/${id}`, { replace: true }) }}>
+        <Button variant="gold" size="lg" className="!rounded-[14px] w-full" disabled={!anySelected} onClick={() => { complete(id); navigate(`/app/intro-complete/${id}`, { replace: true }) }}>
           {t('Share Contact Details', 'شارك بيانات التواصل')}
         </Button>
         <div className="flex justify-center gap-4 text-[11px] font-semibold text-gold-700">
