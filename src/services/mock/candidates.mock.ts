@@ -1,5 +1,6 @@
 import type { UserProfile } from '@/types/profile.types'
 
+const PHOTOS: Record<string, string> = { c4: '/images/people/m1.jpg', c2: '/images/people/m2.jpg', c5: '/images/people/m3.jpg', c8: '/images/people/m4.jpg', c6: '/images/people/m2.jpg', c10: '/images/people/m1.jpg' }
 const AVATAR = (seed: string) => `https://api.dicebear.com/9.x/notionists/svg?seed=${seed}&backgroundColor=f6f1e8,eee6d5`
 
 interface CandidateSeed {
@@ -54,8 +55,8 @@ export const mockCandidates: UserProfile[] = seeds.map((s) => ({
     cityState: s.city,
     nationality: [s.country === 'egypt' ? 'Egyptian' : 'American'],
     languagesSpoken: ['Arabic', 'English'],
-    profilePhotoUrl: AVATAR(s.id),
-    galleryPhotoUrls: Array.from({ length: Math.min(s.photos, 6) }, (_, i) => AVATAR(`${s.id}-${i}`)),
+    profilePhotoUrl: PHOTOS[s.id] ?? AVATAR(s.id),
+    galleryPhotoUrls: PHOTOS[s.id] ? [PHOTOS[s.id]] : Array.from({ length: Math.min(s.photos, 6) }, (_, i) => AVATAR(`${s.id}-${i}`)),
     governmentIdUploaded: s.identityVerified,
     bio: s.bio,
   },

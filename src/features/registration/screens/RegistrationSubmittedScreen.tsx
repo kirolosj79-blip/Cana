@@ -7,7 +7,7 @@ import { FigmaHeader } from '@/shared/components/layout/FigmaHeader'
 import { Button } from '@/shared/components/ui/Button'
 import { FCard, IconTile, CenterDialog } from '@/shared/components/ui/figma'
 import { useLanguage } from '@/core/hooks/useLanguage'
-import { useJourneyStore } from '@/store/journey.store'
+import { nextJourneyStep, useJourneyStore } from '@/store/journey.store'
 
 /** Figma: "Congratulations! Your Marriage Profile Is Ready" → "Awaiting Verification" dialog. */
 export function RegistrationSubmittedScreen() {
@@ -39,7 +39,7 @@ export function RegistrationSubmittedScreen() {
   const done = () => {
     setSubmittedSeen()
     setOpen(false)
-    navigate(safetyAccepted ? '/app/home' : '/safety-first')
+    navigate(nextJourneyStep())
   }
 
   return (

@@ -47,6 +47,7 @@ export function Switch({ checked, onChange, id }: { checked: boolean; onChange: 
     <button
       id={id}
       type="button"
+      dir="ltr"
       role="switch"
       aria-checked={checked}
       onClick={() => onChange(!checked)}
@@ -57,7 +58,7 @@ export function Switch({ checked, onChange, id }: { checked: boolean; onChange: 
     >
       <span
         className={cn(
-          'absolute top-1 h-5 w-5 rounded-full bg-white shadow transition-transform',
+          'absolute left-0 top-1 h-5 w-5 rounded-full bg-white shadow transition-transform',
           checked ? 'translate-x-6' : 'translate-x-1'
         )}
       />

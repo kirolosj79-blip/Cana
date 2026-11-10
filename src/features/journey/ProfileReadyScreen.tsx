@@ -4,6 +4,7 @@ import { ShieldCheck, Heart, Info, Users, UserCheck, Clock, Search, ChevronRight
 import { FigmaHeader } from '@/shared/components/layout/FigmaHeader'
 import { Button } from '@/shared/components/ui/Button'
 import { FCard, IconTile } from '@/shared/components/ui/figma'
+import { useJourneyStore } from '@/store/journey.store'
 import { useLanguage } from '@/core/hooks/useLanguage'
 
 /** Figma: "Your Marriage Profile Is Ready" (approved) with "Find My Future Spouse". */
@@ -73,7 +74,7 @@ export function ProfileReadyScreen() {
             </div>
           </FCard>
 
-          <Button variant="gold" size="lg" className="!rounded-[14px] w-full" onClick={() => navigate('/app/home')}>
+          <Button variant="gold" size="lg" className="!rounded-[14px] w-full" onClick={() => { useJourneyStore.getState().setApprovalSeen(); navigate('/app/home') }}>
             <Search size={16} className="text-gold-300" /> {t('Find My Future Spouse', 'دوّر على شريك حياتي')} <Arrow size={16} />
           </Button>
           <p className="text-center text-[11px] text-ink-500">{t('Personalized covenant matchmaking adhering to your preferences', 'ترشيح مخصّص للارتباط يحترم تفضيلاتك')}</p>

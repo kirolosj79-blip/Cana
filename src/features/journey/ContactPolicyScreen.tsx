@@ -70,7 +70,7 @@ export function ContactPolicyScreen() {
             disabled={!agreed}
             onClick={() => {
               accept()
-              navigate('/profile-ready')
+              navigate('/app/home')
             }}
           >
             {t("I've Read & Understood", 'قرأت وفهمت')} <Check size={16} className="text-success-500" />

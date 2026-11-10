@@ -43,6 +43,8 @@ import { ChatScreen } from '@/features/journey/ChatScreen'
 import { ContactShareScreen } from '@/features/journey/ContactShareScreen'
 import { IntroCompleteScreen } from '@/features/journey/IntroCompleteScreen'
 import { FeedbackScreen } from '@/features/journey/FeedbackScreen'
+import { PreApprovalOnly, ApprovalWelcomeOnly } from '@/features/journey/RouteGuards'
+import { ProfileStatusScreen } from '@/features/journey/ProfileStatusScreens'
 import { MessagesScreen } from '@/features/journey/MessagesScreen'
 
 import { RequireAuth } from './RequireAuth'
@@ -69,11 +71,11 @@ export const router = createBrowserRouter([
       { path: '/registration-intro', element: <RegistrationIntroScreen /> },
       { path: '/registration', element: <RegistrationWizardScreen /> },
       { path: '/registration-checklist', element: <RegistrationChecklistScreen /> },
-      { path: '/registration-submitted', element: <RegistrationSubmittedScreen /> },
-      { path: '/safety-first', element: <SafetyFirstScreen /> },
-      { path: '/contact-policy', element: <ContactPolicyScreen /> },
-      { path: '/profile-ready', element: <ProfileReadyScreen /> },
-      { path: '/profile-pending', element: <RegistrationSubmittedScreen /> },
+      { path: '/registration-submitted', element: <PreApprovalOnly><RegistrationSubmittedScreen /></PreApprovalOnly> },
+      { path: '/safety-first', element: <PreApprovalOnly><SafetyFirstScreen /></PreApprovalOnly> },
+      { path: '/contact-policy', element: <PreApprovalOnly><ContactPolicyScreen /></PreApprovalOnly> },
+      { path: '/profile-ready', element: <ApprovalWelcomeOnly><ProfileReadyScreen /></ApprovalWelcomeOnly> },
+      { path: '/profile-pending', element: <PreApprovalOnly><RegistrationSubmittedScreen /></PreApprovalOnly> },
       { path: '/payment/subscription', element: <SubscriptionPaymentScreen /> },
       { path: '/payment/success', element: <PaymentSuccessScreen /> },
       { path: '/payment/failed', element: <PaymentFailedScreen /> },
@@ -90,6 +92,7 @@ export const router = createBrowserRouter([
           { path: 'profile/edit', element: <EditProfileScreen /> },
           { path: 'profile/preview', element: <ProfilePreviewScreen /> },
           { path: 'profile/:id', element: <ProfileDetailScreen /> },
+          { path: 'status/:kind', element: <ProfileStatusScreen /> },
           { path: 'messages', element: <MessagesScreen /> },
           { path: 'guidelines/:id', element: <GuidelinesScreen /> },
           { path: 'chat/:id', element: <ChatScreen /> },

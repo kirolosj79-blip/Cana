@@ -12,6 +12,9 @@ interface JourneyState {
   /** The member has seen the "Congratulations / Awaiting verification" step. */
   submittedSeen: boolean
   safetyAccepted: boolean
+  /** The member has seen the post-approval "profile is ready" welcome — never shown the pre-approval pages again. */
+  approvalSeen: boolean
+  setApprovalSeen: () => void
   contactPolicyAccepted: boolean
   /** Chat guidelines are accepted once per introduction. */
   guidelinesAcceptedFor: string[]
@@ -26,6 +29,9 @@ interface JourneyState {
   lastActiveAt: string | null
   touch: () => void
   feedbackOwed: boolean
+  /** Account state shown by the 5 Figma status screens. */
+  accountStatus: 'active' | 'suspended' | 'closed'
+  reactivate: () => void
   feedbackAnswers: Record<string, string>
   setSubmittedSeen: () => void
   acceptSafety: () => void
@@ -48,6 +54,8 @@ export const useJourneyStore = create<JourneyState>()(
     (set) => ({
       submittedSeen: false,
       safetyAccepted: false,
+      approvalSeen: false,
+      setApprovalSeen: () => set({ approvalSeen: true }),
       contactPolicyAccepted: false,
       guidelinesAcceptedFor: [],
       messages: {},
@@ -58,6 +66,8 @@ export const useJourneyStore = create<JourneyState>()(
       lastActiveAt: null,
       touch: () => set({ lastActiveAt: new Date().toISOString() }),
       feedbackOwed: false,
+      accountStatus: 'active',
+      reactivate: () => set({ accountStatus: 'active' }),
       feedbackAnswers: {},
       setSubmittedSeen: () => set({ submittedSeen: true }),
       acceptSafety: () => set({ safetyAccepted: true }),
@@ -66,12 +76,22 @@ export const useJourneyStore = create<JourneyState>()(
       send: (id, from, text) => set((s) => ({ messages: { ...s.messages, [id]: [...(s.messages[id] ?? []), mk(from, text)] } })),
       markReadyOutside: (id) => set((s) => ({ readyOutside: [...new Set([...s.readyOutside, id])] })),
       unmarkReadyOutside: (id) => set((s) => ({ readyOutside: s.readyOutside.filter((x) => x !== id) })),
-      complete: (id) => set((s) => ({ completed: [...new Set([...s.completed, id])] })),
+      complete: (id) => set((s) => ({ completed: [...new Set([...s.completed, id])], accountStatus: 'closed' })),
       block: (id) => set((s) => ({ blocked: [...new Set([...s.blocked, id])], feedbackOwed: true })),
       report: (userId, reason, note) => set((s) => ({ reports: [...s.reports, { userId, reason, note, at: new Date().toISOString() }] })),
       oweFeedback: () => set({ feedbackOwed: true }),
-      saveFeedback: (answers) => set({ feedbackAnswers: answers, feedbackOwed: false }),
+      saveFeedback: (answers) => set({ feedbackAnswers: answers, feedbackOwed: false, accountStatus: 'active' }),
     }),
     { name: 'cana-journey' }
   )
 )
+
+/** Where the post-registration journey should send the member next. */
+export function nextJourneyStep(): string {
+  const j = useJourneyStore.getState()
+  if (j.approvalSeen) return '/app/home'
+  if (!j.submittedSeen) return '/registration-submitted'
+  if (!j.safetyAccepted) return '/safety-first'
+  if (!j.contactPolicyAccepted) return '/contact-policy'
+  return '/app/home'
+}

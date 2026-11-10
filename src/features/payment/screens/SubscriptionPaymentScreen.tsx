@@ -1,4 +1,4 @@
-import { useJourneyStore } from '@/store/journey.store'
+import { nextJourneyStep } from '@/store/journey.store'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Copy, ShieldCheck, Clock, CheckCircle2, XCircle, ExternalLink } from 'lucide-react'
@@ -91,7 +91,7 @@ export function SubscriptionPaymentScreen() {
               {method === 'paypal' || latest.method === 'paypal' ? 'PayPal' : 'InstaPay'} · {t('Pending', 'قيد الانتظار')}
             </Badge>
           </div>
-          <Button variant="gold" size="lg" className="w-full" onClick={() => navigate(useJourneyStore.getState().safetyAccepted ? '/app/home' : '/registration-submitted')}>
+          <Button variant="gold" size="lg" className="w-full" onClick={() => navigate(nextJourneyStep())}>
             {t('Track Request Status — Continue to App', 'متابعة حالة الطلب — كمّل للتطبيق')}
           </Button>
         </div>

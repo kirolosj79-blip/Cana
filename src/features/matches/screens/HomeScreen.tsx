@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { Clock, AlertCircle, ChevronRight } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { FigmaHeader } from '@/shared/components/layout/FigmaHeader'
@@ -12,7 +12,9 @@ import { useJourneyStore } from '@/store/journey.store'
 import { useLanguage } from '@/core/hooks/useLanguage'
 import { MatchCard } from '@/features/matches/components/MatchCard'
 import { getDiscoverList } from '@/store/matches.store'
-import { Search, SlidersHorizontal, BookOpen, Check, ShieldCheck, Hourglass } from 'lucide-react'
+import { Search, SlidersHorizontal, BookOpen, Check, ShieldCheck, Hourglass, ShieldHalf, Heart } from 'lucide-react'
+import { ProfileStatusCard } from '@/features/journey/ProfileStatusScreens'
+import { FCard, IconTile } from '@/shared/components/ui/figma'
 import { cn } from '@/shared/utils/cn'
 
 export function HomeScreen() {
@@ -23,6 +25,9 @@ export function HomeScreen() {
   const [chips, setChips] = useState<string[]>([])
 
   const blockedIds = useJourneyStore((s) => s.blocked)
+  const account = useJourneyStore((s) => s.accountStatus)
+  const reviews = useAdminReviewStore((s) => s.reviews)
+  const [params] = useSearchParams()
   const status = useAdminReviewStore((s) => s.overallStatus())
   const profileApproved = status === 'approved'
   const isPaidMember = usePaymentStore((s) => s.isPaidMember)
@@ -35,6 +40,54 @@ export function HomeScreen() {
     .filter((c) => (chips.includes('church') ? c.verification.church === 'verified' : true))
     .filter((c) => !query.trim() || `${c.personal.displayName} ${c.personal.cityState} ${c.employment.occupation}`.toLowerCase().includes(query.trim().toLowerCase()))
     .slice(0, 4)
+
+  const hasRejected = reviews.some((r) => r.state === 'rejected')
+  const hasInfo = reviews.some((r) => r.state === 'needs_more_documents')
+  const statusKind = account === 'suspended' ? 'suspended' : account === 'closed' ? 'closed' : hasRejected ? 'rejected' : hasInfo ? 'info' : !profileApproved ? 'review' : paymentPending ? 'paymentPending' : paymentNotStarted ? 'payment' : null
+  if (statusKind) {
+    return (
+      <div>
+        <FigmaHeader />
+        <div className="px-5"><ProfileStatusCard kind={statusKind} /></div>
+      </div>
+    )
+  }
+
+  const noMatches = approved && (params.get('nomatches') === '1' || getDiscoverList().filter((c) => !blockedIds.includes(c.id)).length === 0)
+  if (noMatches) {
+    const items = [
+      { icon: Clock, en: 'Search in progress', ar: 'البحث جارٍ', be: "At the moment, we haven't found a suitable match that aligns with your preferences.", ba: 'دلوقتي لسه ملقيناش ترشيح مناسب يتماشى مع تفضيلاتك.' },
+      { icon: ShieldHalf, en: 'Active monitoring', ar: 'متابعة مستمرة', be: "Please be assured that we'll notify you as soon as someone who meets your criteria becomes available.", ba: 'اطمّن، هنبلّغك أول ما يتوفر حد يناسب معاييرك.' },
+      { icon: Heart, en: 'Our prayer for you', ar: 'صلاتنا من أجلك', be: 'Thank you for your patience and trust in CANA. We pray that the right introduction comes at the right time.', ba: 'شكرًا لصبرك وثقتك في CANA. بنصلّي إن التعارف المناسب ييجي في الوقت المناسب.' },
+    ]
+    return (
+      <div>
+        <FigmaHeader />
+        <div className="space-y-4 px-5 pb-6 pt-2">
+          <div className="flex items-start gap-3 rounded-2xl bg-[#0C1D3A] px-4 py-3 text-white">
+            <BookOpen size={16} className="mt-0.5 shrink-0 text-gold-300" />
+            <div>
+              <p className="text-[10px] font-bold uppercase tracking-wider text-white/80">{t('1 Corinthians 13:4', '1 كورنثوس 13: 4')}</p>
+              <p className="mt-0.5 text-[13px] italic">{t('Love is patient, love is kind.', 'الْمَحَبَّةُ تَتَأَنَّى وَتَرْفُقُ.')}</p>
+            </div>
+          </div>
+          <div>
+            <p className="text-xs text-ink-500">{t('Good evening', 'مساء الخير')}، {firstName || t('friend', 'صديقي')}</p>
+            <h1 className="text-[22px] font-bold tracking-tight text-ink-900">{t('Your Perfect Match Takes Time', 'الشريك المناسب يحتاج وقت')}</h1>
+          </div>
+          {items.map((i) => (
+            <FCard key={i.en} className="flex items-start gap-3">
+              <IconTile icon={i.icon} tint="navy" size={34} />
+              <div>
+                <p className="text-sm font-bold text-ink-900">{t(i.en, i.ar)}</p>
+                <p className="mt-0.5 text-xs leading-relaxed text-ink-500">{t(i.be, i.ba)}</p>
+              </div>
+            </FCard>
+          ))}
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div>

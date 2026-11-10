@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import { Star, Lock, Quote } from 'lucide-react'
+import { Lock, Quote } from 'lucide-react'
 import { FigmaHeader } from '@/shared/components/layout/FigmaHeader'
 import { Button } from '@/shared/components/ui/Button'
 import { FCard } from '@/shared/components/ui/figma'
@@ -13,7 +13,6 @@ export function IntroCompleteScreen() {
     <div className="pb-10">
       <FigmaHeader />
       <div className="space-y-4 px-5 pt-5 text-center">
-        <span className="inline-flex items-center gap-1 rounded-full bg-gold-100 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-gold-700"><Star size={10} /> {t('CANA Covenant Blessing', 'بركة عهد CANA')}</span>
         <h1 className="font-bold tracking-tight text-[28px] font-semibold text-ink-900">{t('Introduction Complete', 'التعارف اكتمل')}</h1>
         <p className="text-sm text-ink-500">{t('Your introduction through CANA is now complete.', 'تعارفك من خلال CANA اكتمل.')}</p>
         <img src="/images/united-in-christ.png" alt="United in Christ" className="mx-auto h-28 w-auto" />
@@ -24,7 +23,7 @@ export function IntroCompleteScreen() {
             <p className="flex items-center gap-2 text-sm font-bold text-ink-900"><Lock size={14} className="text-ink-400" /> {t('Account Status', 'حالة الحساب')}</p>
             <span className="rounded-md bg-gold-100 px-2 py-0.5 text-[10px] font-bold text-gold-700">{t('Profiles Paused', 'الملفات متوقفة')}</span>
           </div>
-          <p className="mt-2 text-xs leading-relaxed text-ink-500">{t('Your profiles are now hidden from matching. You can return and reactivate at any time.', 'ملفاتك دلوقتي مخفية من الترشيح. تقدر ترجع وتفعّل في أي وقت.')}</p>
+          <p className="mt-2 text-xs leading-relaxed text-ink-500">{t('Your CANA profiles will be temporarily closed, and you will no longer participate in new introductions. You are always welcome to return to CANA in the future if you wish to reactivate your account.', 'ملفاتك في CANA هتتقفل مؤقتًا ومش هتشارك في تعارفات جديدة. مرحّب بيك ترجع لـ CANA في أي وقت لو عايز تفعّل حسابك.')}</p>
         </FCard>
 
         <FCard tone="warm" className="relative text-start">

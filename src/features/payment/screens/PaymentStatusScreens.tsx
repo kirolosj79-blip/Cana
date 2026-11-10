@@ -1,4 +1,4 @@
-import { useJourneyStore } from '@/store/journey.store'
+import { nextJourneyStep } from '@/store/journey.store'
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { CheckCircle2, XCircle, RotateCcw } from 'lucide-react'
@@ -23,7 +23,7 @@ export function PaymentSuccessScreen() {
         <h1 className="font-display text-2xl font-medium text-ink-900">{t('Payment successful', 'الدفع تم بنجاح')}</h1>
         <p className="text-sm text-ink-500 mt-2 max-w-xs mx-auto">{t('Your membership is now active. Welcome to the Cana community.', 'عضويتك بقت فعّالة. أهلًا بيك في مجتمع Cana ❤️')}</p>
       </div>
-      <Button variant="gold" size="lg" className="w-full mt-4" onClick={() => navigate(useJourneyStore.getState().safetyAccepted ? '/app/home' : '/registration-submitted')}>
+      <Button variant="gold" size="lg" className="w-full mt-4" onClick={() => navigate(nextJourneyStep())}>
         {t('Go to Home', 'روح للرئيسية')}
       </Button>
     </PageContainer>

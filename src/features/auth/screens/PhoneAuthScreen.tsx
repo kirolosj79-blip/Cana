@@ -37,7 +37,7 @@ export function PhoneAuthScreen() {
     // Real OTP when Supabase is configured; otherwise the prototype's mock flow.
     if (supabase) {
       const { error } = await supabase.auth.signInWithOtp({ phone: full })
-            if (error) {
+      if (error) {
         console.error('[Supabase OTP]', error)
         setLoading(false)
         show(`${t('Could not send the code.', 'مقدرناش نبعت الكود.')} (${error.message})`, 'error')

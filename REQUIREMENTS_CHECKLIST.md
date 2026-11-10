@@ -1488,3 +1488,23 @@ Confirmed the list was never actually sorted (it was just in the order originall
 - Matching: exact age calc, two-way age/country check, passed/blocked users never resurface.
 - supabase/journey.sql added (validated on a throwaway Postgres 16 with Supabase stubs); src/services/supabase.ts client (inactive until env vars set); README updated.
 - Supabase phase 1: real OTP login (PhoneAuth/Otp screens), RequireAuth session check, profileSync.saveRegistration on last step.
+
+## Round: New Figma set (First Step / Start chatting / sender+recipient / 5 Status / No matches / Feedback)
+- [x] 5 Status screens (Suspended, Temporarily Closed, Rejected, Approved, Additional Info) — `ProfileStatusScreens.tsx`, preview at `/app/status/:kind`, wired into Home (rejected/needs-docs/closed/suspended)
+- [x] Closed state after intro completes; Reactivate → feedback (if owed) → active
+- [x] "Your Perfect Match Takes Time" no-matches Home (auto when list empty, preview `/app/home?nomatches=1`)
+- [x] Chat: sender "Ready for the next step?" → Safety Reminder (checkbox) → waiting; recipient "{Name} wants to take the next step!"; "It's Okay to Take Your Time" (Back to chat / Cancel)
+- [x] Report a Concern (reason chips + attach proof) and Block This Member copy matched
+- [x] Introduction Complete copy matched (badge removed)
+- [x] Bottom nav: 5 tabs (Home, Discover, Connections, Messages, Profile) everywhere — confirmed by user
+
+## Round: Home states + dark mode
+- [x] Home no longer shows old "Hello / Payment Pending / Recommended matches" cards: review, payment, payment-pending now use the Figma status card
+- [x] Dark mode: readable red/gold text and danger surfaces; status buttons use gold CTA in dark
+- [ ] Real people photos for matches (needs exported images from Figma)
+
+## Round: approval flow, photos, toggles
+- [x] Profile Visibility switch knob fixed (was sliding outside the pill)
+- [x] 4 real man photos (public/images/people/m1–m4) used for male candidates (list, cards, profile)
+- [x] After admin approval + payment: Congratulations / Safety / Contact Policy never shown again; one-time "Profile is ready" welcome then Home (`approvalSeen`, `nextJourneyStep()`, route guards)
+- [ ] Female candidates still use cartoon avatars (no photos supplied)
