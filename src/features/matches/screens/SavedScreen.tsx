@@ -2,13 +2,13 @@ import { TopBar } from '@/shared/components/layout/TopBar'
 import { CandidateCard } from '@/features/matches/components/CandidateCard'
 import { EmptyState } from '@/shared/components/feedback/StateScreens'
 import { useMatchesStore } from '@/store/matches.store'
-import { mockCandidates } from '@/services/mock/candidates.mock'
+import { getMockCandidates } from '@/services/mock/candidates.mock'
 import { Heart } from 'lucide-react'
 import { useLanguage } from '@/core/hooks/useLanguage'
 
 export function SavedScreen() {
   const savedIds = useMatchesStore((s) => s.savedIds)
-  const saved = mockCandidates.filter((c) => savedIds.includes(c.id))
+  const saved = getMockCandidates().filter((c) => savedIds.includes(c.id))
   const { t } = useLanguage()
 
   return (

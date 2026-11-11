@@ -130,7 +130,7 @@ export function ProfileDetailScreen() {
             <Fact icon={MapPin} label={t('Location', 'المكان')} value={p.cityState} />
             <Fact icon={Church} label={t('Denomination', 'الطائفة')} value={t('Coptic Orthodox', 'قبطي أرثوذكسي')} />
             <Fact icon={GraduationCap} label={t('Education', 'التعليم')} value={edu ? t(edu.en, edu.ar) : '—'} />
-            <Fact icon={Ruler} label={t('Height', 'الطول')} value={p.heightCm ? `${p.heightCm} cm` : '—'} />
+            <Fact icon={Ruler} label={t('Height', 'الطول')} value={p.heightCm ? t(`${p.heightCm} cm`, `${p.heightCm} سم`) : '—'} />
             <Fact icon={Briefcase} label={t('Occupation', 'الوظيفة')} value={candidate.employment.occupation} />
             <Fact icon={HeartHandshake} label={t('Marital Status', 'الحالة الاجتماعية')} value={candidate.eligibility.everMarried ? t('Previously Married', 'اتجوز قبل كده') : t('Never Married', 'عمره ما اتجوز')} />
             <Fact icon={Globe} label={t('Nationality', 'الجنسية')} value={p.nationality?.[0] ?? '—'} />

@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
-import { mockCandidates } from '@/services/mock/candidates.mock'
+import { getMockCandidates } from '@/services/mock/candidates.mock'
 import { getRankedMatches } from '@/services/matching/compatibility'
 
 interface MatchesState {
@@ -36,5 +36,5 @@ export const useMatchesStore = create<MatchesState>()(
  * history, education, smoking, alcohol, financial stability). See
  * services/matching/compatibility.ts for the full engine.
  */
-export const getDailyMatches = () => getRankedMatches(mockCandidates).slice(0, 3)
-export const getDiscoverList = () => getRankedMatches(mockCandidates)
+export const getDailyMatches = () => getRankedMatches(getMockCandidates()).slice(0, 3)
+export const getDiscoverList = () => getRankedMatches(getMockCandidates())

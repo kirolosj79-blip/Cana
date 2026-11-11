@@ -38,7 +38,7 @@ const initial: ConnectionRequest[] = [
   // A ready-to-try incoming request so the connect → accept → WhatsApp flow
   // is visible immediately without needing to send one manually first.
   { id: 'r1', fromUserId: 'c2', toUserId: 'me', status: 'pending', createdAt: daysAgo(0, 4) },
-  { id: 'r4', fromUserId: 'c6', toUserId: 'me', status: 'rejected', createdAt: daysAgo(10), respondedAt: daysAgo(9) },
+  { id: 'r4', fromUserId: 'c8', toUserId: 'me', status: 'rejected', createdAt: daysAgo(10), respondedAt: daysAgo(9) },
 ]
 
 export const useRequestsStore = create<RequestsState>()(

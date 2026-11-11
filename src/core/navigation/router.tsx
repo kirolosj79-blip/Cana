@@ -1,4 +1,5 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom'
+import { RootLayout } from '@/shared/components/layout/QuickToggles'
 
 import { SplashScreen } from '@/features/auth/screens/SplashScreen'
 import { OnboardingCarouselScreen } from '@/features/auth/screens/OnboardingCarouselScreen'
@@ -57,6 +58,7 @@ function RouteError() {
 }
 
 export const router = createBrowserRouter([
+  { element: <RootLayout />, children: [
   { path: '/', element: <SplashScreen /> },
   { path: '/onboarding', element: <OnboardingCarouselScreen /> },
   { path: '/welcome', element: <WelcomeScreen /> },
@@ -116,4 +118,5 @@ export const router = createBrowserRouter([
   },
 
   { path: '*', element: <RouteError /> },
+  ] },
 ])

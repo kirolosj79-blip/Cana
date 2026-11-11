@@ -14,8 +14,8 @@ export function PrivacyPolicyScreen() {
           <h1 className="font-display text-xl font-medium text-ink-900">
             {isAr ? 'CANA LLC — سياسة الخصوصية' : 'CANA LLC — Privacy Policy'}
           </h1>
-          <p className="text-xs text-ink-400 mt-1">{isAr ? `تاريخ السريان: ${PRIVACY_POLICY_EFFECTIVE_DATE}` : `Effective Date: ${PRIVACY_POLICY_EFFECTIVE_DATE}`}</p>
-          <p className="text-xs text-ink-400">{isAr ? `آخر تحديث: ${PRIVACY_POLICY_UPDATED_DATE}` : `Last Updated: ${PRIVACY_POLICY_UPDATED_DATE}`}</p>
+          <p className="text-xs text-ink-400 mt-1">{isAr ? "تاريخ السريان: ٢٢ أغسطس ٢٠٢٦" : `Effective Date: ${PRIVACY_POLICY_EFFECTIVE_DATE}`}</p>
+          <p className="text-xs text-ink-400">{isAr ? `آخر تحديث: ٢٢ أغسطس ٢٠٢٦` : `Last Updated: ${PRIVACY_POLICY_UPDATED_DATE}`}</p>
         </div>
 
         {PRIVACY_POLICY_SECTIONS.map((section) => (

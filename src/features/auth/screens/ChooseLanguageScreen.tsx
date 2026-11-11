@@ -27,12 +27,12 @@ export function ChooseLanguageScreen() {
               onClick={() => setLanguage(opt.code)}
               className={cn(
                 'w-full flex items-center justify-between rounded-[var(--radius-md)] border px-5 py-4 transition-colors',
-                language === opt.code ? 'border-gold-400 bg-gold-50' : 'border-ink-200 bg-parchment-0'
+                language === opt.code ? 'border-gold-400 bg-parchment-100' : 'border-ink-200 bg-parchment-0'
               )}
             >
-              <div className="text-left">
-                <div className={cn('font-display text-lg', language === opt.code ? 'text-inkfixed-900' : 'text-ink-900')}>{opt.label}</div>
-                <div className={cn('text-xs', language === opt.code ? 'text-inkfixed-900/70' : 'text-ink-500')}>{opt.sub}</div>
+              <div className="text-start">
+                <div className={cn('font-display text-lg', 'text-ink-900')}>{opt.label}</div>
+                <div className={cn('text-xs', 'text-ink-500')}>{opt.sub}</div>
               </div>
               {language === opt.code && (
                 <span className="flex h-6 w-6 items-center justify-center rounded-full bg-gold-400 text-inkfixed-950">

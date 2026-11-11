@@ -15,10 +15,10 @@ export function BottomNav({ disabled = false }: { disabled?: boolean }) {
   const { t } = useLanguage()
   return (
     <nav className="fixed bottom-0 left-0 right-0 z-40 border-t border-ink-100 bg-parchment-0/90 backdrop-blur-lg pb-[env(safe-area-inset-bottom)]">
-      <div className="mx-auto flex max-w-md items-stretch justify-between px-2">
+      <div className="mx-auto flex max-w-md items-stretch justify-between px-1">
         {items.map((item) =>
           disabled ? (
-            <div key={item.to} aria-disabled className="flex flex-1 cursor-not-allowed flex-col items-center gap-1 py-2.5 text-[11px] font-medium text-ink-300 opacity-70">
+            <div key={item.to} aria-disabled className="flex flex-1 cursor-not-allowed flex-col items-center gap-1 py-2 text-[11px] font-medium text-ink-300 opacity-70">
               <item.icon size={22} strokeWidth={1.8} />
               {t(item.en, item.ar)}
             </div>
@@ -28,7 +28,7 @@ export function BottomNav({ disabled = false }: { disabled?: boolean }) {
             to={item.to}
             className={({ isActive }) =>
               cn(
-                'flex flex-1 flex-col items-center gap-1 py-2.5 text-[11px] font-medium transition-colors',
+                'flex flex-1 flex-col items-center gap-1 py-2 text-[11px] font-medium transition-colors',
                 isActive ? 'text-ink-900' : 'text-ink-400'
               )
             }

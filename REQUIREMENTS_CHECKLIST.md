@@ -1508,3 +1508,15 @@ Confirmed the list was never actually sorted (it was just in the order originall
 - [x] 4 real man photos (public/images/people/m1–m4) used for male candidates (list, cards, profile)
 - [x] After admin approval + payment: Congratulations / Safety / Contact Policy never shown again; one-time "Profile is ready" welcome then Home (`approvalSeen`, `nextJourneyStep()`, route guards)
 - [ ] Female candidates still use cartoon avatars (no photos supplied)
+
+## Round: Translation doc + Figma-exact feedback (2026-11-11)
+- [x] Arabic copy from Statge_2_translation.docx applied verbatim (Congratulations, Safety, Policy, Profile Ready, Home, No-matches, Guidelines, Requests, Contact share, Intro complete, Chat dialogs, Feedback); gendered wording via useMe().g; emojis added.
+- [x] Varied Bible verses (src/constants/verses.ts, verseOfDay) on Home/Discover/No-matches; Colossians 3:14 kept on Introduction Complete per Figma.
+- [x] No "pending" state: users enter approved -> Congratulations -> Awaiting -> Safety -> Policy -> Profile Ready -> Home, with registered name.
+- [x] Theme toggle in header; language screen dark colours fixed; dark-mode token fixes.
+- [x] Home/Discover: Figma 2-column MatchCard grid (city, work • degree, denomination, timeline, View Profile), search + chips.
+- [x] Male candidate photos; chat dialogs with user names.
+- [ ] Known gaps: 14-day Proceed gate (prototype), female candidates still avatars (need photos), 5 tabs kept per user.
+- [x] Follow-up fixes: header re-centred (smaller wordmark/icons), bottom nav more compact, Arabic card text no longer truncated/garbled (bdi), verse banner visible in dark mode, review/payment dead statuses removed, names isolated in RTL (bdi). All main screens screenshot-checked in AR/EN, light/dark, male/female.
+- [x] Language + light/dark toggles now on EVERY screen (Splash, Welcome, Language, Registration, Payment, Chat via QuickToggles/header; others via TopBar/FigmaHeader).
+- [x] Arabic audit of all 43 routes: candidate names/cities/jobs/bios/church/values/height + privacy dates now Arabic when UI is Arabic (src/services/mock/candidates.ar.ts).

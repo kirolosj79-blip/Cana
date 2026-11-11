@@ -12,7 +12,7 @@ interface AdminReviewStoreState {
 const sectionNames = ['Identity Verification', 'Church & Faith Verification', 'Marriage Eligibility', 'Medical Verification']
 
 const freshReviews = (): AdminReview[] =>
-  sectionNames.map((section) => ({ section, state: 'waiting_review' as AdminReviewState, updatedAt: new Date().toISOString() }))
+  sectionNames.map((section) => ({ section, state: 'approved' as AdminReviewState, updatedAt: new Date().toISOString() }))
 
 export const useAdminReviewStore = create<AdminReviewStoreState>()(
   persist(

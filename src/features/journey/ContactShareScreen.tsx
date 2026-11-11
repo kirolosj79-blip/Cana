@@ -8,13 +8,13 @@ import { findCandidate } from '@/services/mock/candidates.mock'
 import { useAuthStore } from '@/store/auth.store'
 import { useRegistrationStore } from '@/store/registration.store'
 import { useJourneyStore } from '@/store/journey.store'
-import { useLanguage } from '@/core/hooks/useLanguage'
+import { useMe } from '@/core/hooks/useMe'
 import { cn } from '@/shared/utils/cn'
 
 /** Figma: "Contact Exchange Policy — Select which details you would like to share with Michael". */
 export function ContactShareScreen() {
   const { id = '' } = useParams()
-  const { t } = useLanguage()
+  const { t, g } = useMe()
   const navigate = useNavigate()
   const other = findCandidate(id)
   const phone = useAuthStore((s) => s.user?.phone) ?? ''
@@ -36,13 +36,13 @@ export function ContactShareScreen() {
     <div className="pb-10">
       <FigmaHeader />
       <div className="space-y-3 px-5 pt-3">
-        <h1 className="font-bold tracking-tight text-[26px] font-semibold text-ink-900">{t('Contact Exchange Policy', 'سياسة تبادل بيانات التواصل')}</h1>
-        <p className="text-sm text-ink-500">{t(`Select which details you would like to share with ${other?.personal.firstName ?? ''}.`, `اختار البيانات اللي عايز تشاركها مع ${other?.personal.firstName ?? ''}.`)}</p>
+        <h1 className="font-bold tracking-tight text-[26px] font-semibold text-ink-900">{t('Contact Exchange Policy', 'سياسة مشاركة بيانات التواصل')}</h1>
+        <p className="text-sm text-ink-500">{t(`Select which details you would like to share with ${other?.personal.firstName ?? ''}.`, g(`اختار بيانات التواصل اللي حابب تشاركها مع ${other?.personal.firstName ?? ''}`, `اختاري بيانات التواصل اللي حابة تشاركيها مع ${other?.personal.firstName ?? ''}`))}</p>
 
         <FCard className="flex items-center gap-3 !p-3">
           <img src={other?.personal.profilePhotoUrl} alt="" className="h-10 w-10 rounded-full bg-ink-100 object-cover" />
           <div className="min-w-0 flex-1">
-            <p className="flex items-center gap-1 text-sm font-bold text-ink-900">{other?.personal.firstName} {other?.personal.lastName?.[0]}. <BadgeCheck size={13} className="text-gold-700" /></p>
+            <p className="flex items-center gap-1 text-sm font-bold text-ink-900"><bdi>{other?.personal.firstName} {other?.personal.lastName?.[0]}.</bdi> <BadgeCheck size={13} className="text-gold-700" /></p>
             <p className="truncate text-[11px] text-ink-500">{other?.church.churchName}</p>
           </div>
           <Chip>{t('Simultaneous reveal', 'كشف متزامن')}</Chip>
@@ -109,10 +109,10 @@ export function ContactShareScreen() {
 
         <p className="flex items-center justify-center gap-1.5 pt-1 text-[11px] text-ink-500"><Lock size={11} /> {t(`Encrypted covenant • Only shared with ${other?.personal.firstName ?? ''}`, `عهد مشفّر • بيتشارك مع ${other?.personal.firstName ?? ''} بس`)}</p>
         <Button variant="gold" size="lg" className="!rounded-[14px] w-full" disabled={!anySelected} onClick={() => { complete(id); navigate(`/app/intro-complete/${id}`, { replace: true }) }}>
-          {t('Share Contact Details', 'شارك بيانات التواصل')}
+          {t('Share Contact Details', 'مشاركة بيانات التواصل')}
         </Button>
         <div className="flex justify-center gap-4 text-[11px] font-semibold text-gold-700">
-          <button onClick={() => navigate('/app/settings/privacy-policy')}>{t('Privacy Covenant', 'عهد الخصوصية')}</button>
+          <button onClick={() => navigate('/app/settings/privacy-policy')}>{t('Privacy Covenant', 'اتفاقية الخصوصية')}</button>
           <button onClick={() => navigate(`/app/chat/${id}`)} className="text-ink-500">{t('Cancel', 'إلغاء')}</button>
         </div>
       </div>

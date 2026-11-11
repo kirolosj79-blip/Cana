@@ -6,7 +6,7 @@ import { useJourneyStore } from '@/store/journey.store'
 import { useLanguage } from '@/core/hooks/useLanguage'
 import { cn } from '@/shared/utils/cn'
 
-export type ProfileStatusKind = 'suspended' | 'closed' | 'rejected' | 'approved' | 'info' | 'review' | 'payment' | 'paymentPending'
+export type ProfileStatusKind = 'suspended' | 'closed' | 'rejected' | 'approved' | 'info'
 
 const NAVY = 'bg-cta-bg text-cta-text'
 const SOFT_RED = 'bg-[#FBE9EA] text-[#C42B35]'
@@ -26,60 +26,42 @@ export function ProfileStatusCard({ kind }: { kind: ProfileStatusKind }) {
   }> = {
     suspended: {
       icon: ShieldAlert, tile: 'bg-[#FBE9EA] text-[#C42B35]',
-      title: t('Account Temporarily Suspended', 'الحساب موقوف مؤقتًا'),
-      body: t('Your CANA account has been temporarily suspended. Please check your notifications for more information or contact CANA Support if you need assistance.', 'حسابك في CANA موقوف مؤقتًا. راجع الإشعارات لمزيد من المعلومات أو تواصل مع دعم CANA لو محتاج مساعدة.'),
+      title: t('Account Temporarily Suspended', 'تم إيقاف حسابك مؤقتًا'),
+      body: t('Your CANA account has been temporarily suspended. Please check your notifications for more information or contact CANA Support if you need assistance.', 'تم إيقاف حسابك على CANA مؤقتًا. من فضلك راجع الإشعارات لمعرفة المزيد من التفاصيل، أو تواصل مع فريق دعم CANA لو محتاج أي مساعدة.'),
       buttons: [
-        { label: t('Contact CANA Support', 'تواصل مع دعم CANA'), cls: SOFT_RED, fn: () => navigate('/app/complaints/new') },
-        { label: t('Check Notifications', 'شوف الإشعارات'), cls: SOFT_BEIGE, fn: () => navigate('/app/notifications') },
+        { label: t('Contact CANA Support', 'التواصل مع دعم CANA'), cls: SOFT_RED, fn: () => navigate('/app/complaints/new') },
+        { label: t('Check Notifications', 'مراجعة الإشعارات'), cls: SOFT_BEIGE, fn: () => navigate('/app/notifications') },
       ],
     },
     closed: {
       icon: Sun, tile: 'bg-[#E9ECFB] text-[#4A5BD0]',
-      title: t('Profile Temporarily Closed', 'الملف مغلق مؤقتًا'),
-      body: t('Your CANA profile is temporarily closed, and you will not receive new introductions at this time. You’re welcome to return and reactivate your account in the future.', 'ملفك في CANA مغلق مؤقتًا ومش هتستقبل تعارفات جديدة دلوقتي. مرحّب بيك ترجع وتفعّل حسابك في أي وقت.'),
+      title: t('Profile Temporarily Closed', 'تم إيقاف ملفك الشخصي مؤقتًا'),
+      body: t('Your CANA profile is temporarily closed, and you will not receive new introductions at this time. You’re welcome to return and reactivate your account in the future.', 'ملفك الشخصي على CANA متوقف مؤقتًا، وبالتالي مش هتستقبل أي ترشيحات جديدة للتعارف في الوقت الحالي. تقدر ترجع في أي وقت في المستقبل وتعيد تفعيل حسابك.'),
       buttons: [
-        { label: t('Reactivate Profile', 'إعادة تفعيل الملف'), cls: NAVY, fn: () => (feedbackOwed ? navigate('/app/feedback') : reactivate()) },
+        { label: t('Reactivate Profile', 'إعادة تفعيل الملف الشخصي'), cls: NAVY, fn: () => (feedbackOwed ? navigate('/app/feedback') : reactivate()) },
         { label: t('Account Settings', 'إعدادات الحساب'), cls: SOFT_BLUE, fn: () => navigate('/app/settings') },
       ],
     },
     rejected: {
       icon: ShieldAlert, tile: 'bg-[#FBE9EA] text-[#C42B35]',
-      title: t('Application Not Approved', 'الطلب غير موافق عليه'),
-      body: t('Thank you for your interest in CANA. Unfortunately, your application has not been approved. Please check your notifications for more information.', 'شكرًا لاهتمامك بـ CANA. للأسف طلبك لم تتم الموافقة عليه. راجع الإشعارات لمزيد من المعلومات.'),
+      title: t('Application Not Approved', 'للأسف، لم تتم الموافقة على طلب التسجيل'),
+      body: t('Thank you for your interest in CANA. Unfortunately, your application has not been approved. Please check your notifications for more information.', 'شكرًا لاهتمامك بالانضمام إلى CANA. نأسف لإبلاغك إنه لم تتم الموافقة على طلب تسجيلك في الوقت الحالي. من فضلك راجع الإشعارات لمعرفة المزيد من التفاصيل.'),
       buttons: [
-        { label: t('Contact CANA Support', 'تواصل مع دعم CANA'), cls: SOFT_RED, fn: () => navigate('/app/complaints/new') },
-        { label: t('Check Notifications', 'شوف الإشعارات'), cls: SOFT_BEIGE, fn: () => navigate('/app/notifications') },
+        { label: t('Contact CANA Support', 'التواصل مع دعم CANA'), cls: SOFT_RED, fn: () => navigate('/app/complaints/new') },
+        { label: t('Check Notifications', 'مراجعة الإشعارات'), cls: SOFT_BEIGE, fn: () => navigate('/app/notifications') },
       ],
     },
     approved: {
       icon: ShieldCheck, tile: 'bg-[#E6F6EC] text-[#2E9E5B]',
-      title: t('Profile Approved', 'تمت الموافقة على الملف'),
-      body: t('Good news! Your CANA profile has been approved. We’ll now begin looking for suitable introductions based on your preferences. Finding the right introduction may take time, and we’ll notify you when a suitable introduction is available.', 'أخبار سارة! تمت الموافقة على ملفك في CANA. هنبدأ دلوقتي ندوّر على تعارفات مناسبة حسب تفضيلاتك. إيجاد التعارف المناسب ممكن ياخد وقت، وهنبلّغك أول ما يتوفر.'),
-      buttons: [{ label: t('View Matching Status', 'شوف حالة الترشيح'), cls: NAVY, fn: () => navigate('/app/home?nomatches=1') }],
-    },
-    review: {
-      icon: Clock, tile: 'bg-[#E9ECFB] text-[#4A5BD0]',
-      title: t('Profile Under Review', 'الملف قيد المراجعة'),
-      body: t('Your profile is with our team for review. Introductions unlock automatically once it is approved.', 'ملفك مع فريقنا للمراجعة. التعارفات هتتفتح تلقائي أول ما تتم الموافقة.'),
-      buttons: [{ label: t('View Review Status', 'شوف حالة المراجعة'), cls: NAVY, fn: () => navigate('/app/settings/verification') }],
-    },
-    payment: {
-      icon: CreditCard, tile: 'bg-[#FFF4DB] text-[#C9871A]',
-      title: t('Membership Required', 'مطلوب تفعيل العضوية'),
-      body: t('Your profile is approved. Complete your subscription payment to start receiving introductions.', 'تمت الموافقة على ملفك. كمّل دفع الاشتراك عشان تبدأ تستقبل التعارفات.'),
-      buttons: [{ label: t('Complete Payment', 'كمّل الدفع'), cls: NAVY, fn: () => navigate('/payment/subscription') }],
-    },
-    paymentPending: {
-      icon: Clock, tile: 'bg-[#FFF4DB] text-[#C9871A]',
-      title: t('Payment Pending', 'الدفع قيد المراجعة'),
-      body: t('Your payment proof is with our team for review. Full access unlocks automatically once approved.', 'إثبات الدفع بتاعك مع فريقنا للمراجعة. هيتفتح الوصول الكامل تلقائي أول ما يتوافق عليه.'),
-      buttons: [{ label: t('Track Payment Status', 'متابعة حالة الطلب'), cls: NAVY, fn: () => navigate('/payment/subscription') }],
+      title: t('Profile Approved', 'تمت الموافقة على ملفك الشخصي'),
+      body: t('Your CANA profile has been approved. We’ll now begin looking for suitable introductions based on your preferences. Finding the right introduction may take time, and we’ll notify you when a suitable introduction is available.', 'تمت الموافقة على ملفك الشخصي في CANA. هنبدأ دلوقتي ندور لك على ترشيحات مناسبة، بناءً على المواصفات والتفضيلات اللي اخترتها. العثور على الشخص المناسب ممكن ياخد بعض الوقت، وهنبعت لك إشعار أول ما يتوفر ترشيح مناسب ليك.'),
+      buttons: [{ label: t('View Matching Status', 'عرض حالة الترشيحات'), cls: NAVY, fn: () => navigate('/app/home?nomatches=1') }],
     },
     info: {
       icon: Info, tile: 'bg-[#FFF4DB] text-[#C9871A]',
-      title: t('Additional Information Required', 'مطلوب معلومات إضافية'),
-      body: t('We need a little more information to complete the review of your CANA application. Please check your notifications for details and update your application so we can continue the review.', 'محتاجين شوية معلومات إضافية لاستكمال مراجعة طلبك في CANA. راجع الإشعارات للتفاصيل وحدّث طلبك عشان نكمل المراجعة.'),
-      buttons: [{ label: t('Complete Application', 'استكمل الطلب'), cls: NAVY, fn: () => navigate('/app/settings/verification') }],
+      title: t('Additional Information Required', 'مطلوب استكمال بعض البيانات'),
+      body: t('We need a little more information to complete the review of your CANA application. Please check your notifications for details and update your application so we can continue the review.', 'محتاجين منك شوية معلومات إضافية علشان نقدر نكمل مراجعة طلبك في CANA. من فضلك راجع الإشعارات لمعرفة التفاصيل، وحدّث بيانات طلبك علشان نقدر نكمل المراجعة.'),
+      buttons: [{ label: t('Complete Application', 'استكمال بيانات الطلب'), cls: NAVY, fn: () => navigate('/app/settings/verification') }],
     },
   }
   const c = cfg[kind]
@@ -102,7 +84,7 @@ export function ProfileStatusCard({ kind }: { kind: ProfileStatusKind }) {
 /** Preview route for all five states: /app/status/:kind */
 export function ProfileStatusScreen() {
   const { kind } = useParams()
-  const ok = ['suspended', 'closed', 'rejected', 'approved', 'info', 'review', 'payment', 'paymentPending']
+  const ok = ['suspended', 'closed', 'rejected', 'approved', 'info']
   if (!kind || !ok.includes(kind)) return <Navigate to="/app/home" replace />
   return <div><FigmaHeader /><div className="px-5"><ProfileStatusCard kind={kind as ProfileStatusKind} /></div></div>
 }
