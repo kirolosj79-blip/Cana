@@ -15,7 +15,6 @@ import { FigmaHeader } from '@/shared/components/layout/FigmaHeader'
 import { useLanguage } from '@/core/hooks/useLanguage'
 import { useCelebration } from '@/shared/components/feedback/Celebration'
 import { usePaymentStore } from '@/store/payment.store'
-import { educationLevelOptions } from '@/features/registration/data/options'
 
 function Block({ icon: Icon, title, children }: { icon: any; title: string; children: React.ReactNode }) {
   return (
@@ -42,6 +41,9 @@ function Fact({ icon: Icon, label, value }: { icon: any; label: string; value: s
 }
 
 /** Figma: profile detail — About Me, Basic Information, My Faith, What I'm Looking For. */
+const EDU: Record<string, string[]> = { bachelors: ["Bachelor's Degree", 'بكالوريوس'], masters: ["Master's Degree", 'ماجستير'], doctorate: ['Doctorate', 'دكتوراه'] }
+const FAITH = [['Prayer', 'الصلاة'], ['Church', 'الكنيسة'], ['Bible Study', 'دراسة الكتاب المقدس'], ['Worship', 'التسبيح'], ['Faithfulness', 'الأمانة'], ['Kindness', 'الطيبة'], ['Family Values', 'القيم الأسرية']]
+
 export function ProfileDetailScreen() {
   const { id } = useParams()
   const { t, isRtl } = useLanguage()
@@ -73,9 +75,10 @@ export function ProfileDetailScreen() {
   const blockedByActive = status === 'none' && !blockedByIncoming && !blockedByOutgoing && hasActiveConnection()
   const canRequest = status === 'none' && !blockedByIncoming && !blockedByOutgoing && !blockedByActive
 
-  const edu = educationLevelOptions.find((e) => e.value === candidate.education.level)
-  const values = [...(candidate.gettingToKnowYou.desiredMarriageValues ?? []), ...candidate.church.churchActivities.split(',').map((x) => x.trim())].filter(Boolean).slice(0, 6)
-  const looking = (candidate.gettingToKnowYou.goodPartnerQualities ?? []).join(' · ')
+  const values = FAITH.map((f) => t(f[0], f[1]))
+  const lookingFor = p.gender === 'female'
+    ? t("I'm looking for a God-fearing man who is kind, responsible, honest, and ready to build a Christ-centered home.", 'بدوّر على شخص بيخاف ربنا، طيب ومسؤول وصادق، ومستعد يبني بيت محوره المسيح.')
+    : t("I'm looking for a God-fearing woman who is kind, responsible, honest, and ready to build a Christ-centered home.", 'بدوّر على إنسانة بتخاف ربنا، طيبة ومسؤولة وصادقة، ومستعدة تبني بيت محوره المسيح.')
 
   const interested = () => {
     if (!isPaidMember) {
@@ -89,7 +92,7 @@ export function ProfileDetailScreen() {
   }
 
   return (
-    <div className="pb-44">
+    <div className="pb-28">
       <FigmaHeader />
       <div className="space-y-4 px-5 pt-3">
         <div className="relative overflow-hidden rounded-[26px]">
@@ -129,7 +132,7 @@ export function ProfileDetailScreen() {
             <Fact icon={Calendar} label={t('Age', 'السن')} value={String(age)} />
             <Fact icon={MapPin} label={t('Location', 'المكان')} value={p.cityState} />
             <Fact icon={Church} label={t('Denomination', 'الطائفة')} value={t('Coptic Orthodox', 'قبطي أرثوذكسي')} />
-            <Fact icon={GraduationCap} label={t('Education', 'التعليم')} value={edu ? t(edu.en, edu.ar) : '—'} />
+            <Fact icon={GraduationCap} label={t('Education', 'التعليم')} value={EDU[candidate.education.level ?? ''] ? t(EDU[candidate.education.level ?? ''][0], EDU[candidate.education.level ?? ''][1]) : '—'} />
             <Fact icon={Ruler} label={t('Height', 'الطول')} value={p.heightCm ? t(`${p.heightCm} cm`, `${p.heightCm} سم`) : '—'} />
             <Fact icon={Briefcase} label={t('Occupation', 'الوظيفة')} value={candidate.employment.occupation} />
             <Fact icon={HeartHandshake} label={t('Marital Status', 'الحالة الاجتماعية')} value={candidate.eligibility.everMarried ? t('Previously Married', 'اتجوز قبل كده') : t('Never Married', 'عمره ما اتجوز')} />
@@ -146,29 +149,27 @@ export function ProfileDetailScreen() {
         </Block>
 
         <Block icon={Heart} title={t("What I'm Looking For", 'اللي بدوّر عليه')}>
-          <p className="text-[13px] leading-relaxed text-ink-600">{looking || t('A God-fearing partner ready to build a Christ-centered home.', 'شريك بيخاف ربنا ومستعد يبني بيت محوره المسيح.')}</p>
+          <p className="text-[13px] leading-relaxed text-ink-600">{lookingFor}</p>
         </Block>
       </div>
 
-      <div className="fixed inset-x-0 bottom-[68px] z-30 border-t border-ink-100 bg-parchment-50/95 px-5 py-3 backdrop-blur">
-        <div className="mx-auto flex max-w-md gap-3">
+      <div className="px-5 pt-4">
+        <div className="mx-auto flex max-w-md flex-col gap-2.5">
           {canRequest && (
             <>
-              <Button
-                variant="outline"
-                size="lg"
-                className="!rounded-[14px] flex-1 !px-3 text-sm"
+              <button onClick={interested} className="w-full rounded-[12px] bg-cta-bg py-3.5 text-sm font-bold text-cta-text">
+                {t('Request an introduction', 'طلب تعارف')}
+              </button>
+              <button
+                className="w-full rounded-[12px] border border-ink-100 bg-parchment-0 py-3.5 text-sm font-semibold text-ink-800"
                 onClick={() => {
                   pass(candidate.id)
                   show(t('Removed from your matches', 'اتشال من ترشيحاتك'), 'info')
                   navigate('/app/home')
                 }}
               >
-                {t('Not the Right Match', 'مش مناسب ليا')}
-              </Button>
-              <Button variant="gold" size="lg" className="!rounded-[14px] flex-1 !px-3 text-sm" onClick={interested}>
-                {t('Interested in an Introduction', 'مهتم بتعارف')}
-              </Button>
+                {t('Not My Match', 'مش مناسب ليا')}
+              </button>
             </>
           )}
           {status === 'pending' && (
