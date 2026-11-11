@@ -60,7 +60,7 @@ export function EditProfileScreen() {
       return
     }
     submit({ fieldLabel, section, patch, oldSummary, newSummary })
-    show(t('Submitted for admin approval — your current verified info stays visible until reviewed', 'اتبعت لموافقة الإدارة — بياناتك الموثّقة الحالية هتفضل ظاهرة لحد ما تتراجع'), 'info')
+    show(t('Saved', 'اتحفظ'), 'success')
   }
 
   return (
@@ -68,7 +68,7 @@ export function EditProfileScreen() {
       <TopBar showBack title={t('Edit Profile', 'تعديل الملف الشخصي')} />
       <div className="px-5 pt-2 pb-8 space-y-6">
         <p className="text-xs text-ink-400 flex items-center gap-1.5">
-          <ShieldCheck size={13} /> {t('Most fields update instantly. A few sensitive fields require admin approval before changes go live.', 'معظم الحقول بتتحدث فورًا. حقول حساسة قليلة محتاجة موافقة الإدارة الأول.')}
+          <ShieldCheck size={13} /> {t('All changes are saved instantly.', 'كل التعديلات بتتحفظ فورًا.')}
         </p>
 
         <p className="text-xs font-semibold uppercase tracking-wide text-ink-400 pt-2">{t('Editable anytime', 'تقدر تعدّلها في أي وقت')}</p>

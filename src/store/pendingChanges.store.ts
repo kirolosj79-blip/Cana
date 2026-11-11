@@ -26,10 +26,10 @@ export const usePendingChangesStore = create<PendingChangesState>()(
   persist(
     (set, get) => ({
       changes: [],
-      submit: (change) =>
-        set((s) => ({
-          changes: [...s.changes, { ...change, id: `pc${Date.now()}`, submittedAt: new Date().toISOString() }],
-        })),
+      // No pending state: edits go live immediately.
+      submit: (change) => {
+        useRegistrationStore.getState().updateSection(change.section as any, change.patch as any)
+      },
       approve: (id) => {
         const change = get().changes.find((c) => c.id === id)
         if (!change) return

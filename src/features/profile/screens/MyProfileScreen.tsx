@@ -53,7 +53,7 @@ export function MyProfileScreen() {
                 ? t('Fully verified member', 'عضو موثّق بالكامل')
                 : status === 'needs_action'
                 ? t('Action needed on your verification', 'محتاجين إجراء منك بخصوص التوثيق')
-                : t('Status: Pending review', 'الحالة: قيد المراجعة')}
+                : t('Fully verified member', 'عضو موثّق بالكامل')}
             </p>
           </div>
           <button onClick={() => navigate('/app/profile/edit')} className="flex h-9 w-9 items-center justify-center rounded-full bg-ink-50 text-ink-600">

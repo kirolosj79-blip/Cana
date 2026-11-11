@@ -97,8 +97,8 @@ export function PhotoUploadField({ label, optional, onUploaded }: PhotoUploadFie
             </span>
           )}
           {status === 'needs_manual_review' && (
-            <span className="absolute bottom-2 left-2 rounded-full bg-warning-500 px-2.5 py-1 text-[10px] font-medium text-white">
-              {t('Pending manual review', 'هيتم مراجعتها يدويًا')}
+            <span className="absolute bottom-2 left-2 flex items-center gap-1 rounded-full bg-success-500 px-2.5 py-1 text-[10px] font-medium text-white">
+              <CheckCircle2 size={11} /> {t('Photo uploaded', 'الصورة اترفعت')}
             </span>
           )}
         </div>

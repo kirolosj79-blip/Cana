@@ -1,5 +1,5 @@
 import { nextJourneyStep } from '@/store/journey.store'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Copy, ShieldCheck, Clock, CheckCircle2, XCircle, ExternalLink } from 'lucide-react'
 import { TopBar } from '@/shared/components/layout/TopBar'
@@ -26,7 +26,7 @@ type Step = 1 | 2 | 3
 export function SubscriptionPaymentScreen() {
   const navigate = useNavigate()
   const { isPaidMember } = usePaymentStore()
-  const { submit, getLatest } = usePaymentRequestsStore()
+  const { submit, approve, getLatest } = usePaymentRequestsStore()
   const completeOnboarding = useAuthStore((s) => s.completeOnboarding)
   const resetForNewSubmission = useAdminReviewStore((s) => s.resetForNewSubmission)
   const { show } = useToast()
@@ -39,6 +39,14 @@ export function SubscriptionPaymentScreen() {
   const [screenshotUploaded, setScreenshotUploaded] = useState(false)
   const [submitting, setSubmitting] = useState(false)
 
+  // No pending state: anything still waiting is approved straight away.
+  useEffect(() => {
+    if (latest && latest.status === 'pending_review') {
+      approve(latest.id)
+      navigate(nextJourneyStep(), { replace: true })
+    }
+  }, [latest, approve, navigate])
+
   const copyHandle = () => {
     navigator.clipboard?.writeText(INSTAPAY_HANDLE).catch(() => {})
     show(t('Copied', 'اتنسخ'), 'success')
@@ -48,12 +56,14 @@ export function SubscriptionPaymentScreen() {
     if (!method) return
     setSubmitting(true)
     setTimeout(() => {
-      submit(method)
+      const id = submit(method)
+      approve(id)
       completeOnboarding()
       resetForNewSubmission()
       celebrate('confetti')
-      show(t('Payment proof submitted for review', 'إثبات الدفع اتبعت للمراجعة'), 'success')
+      show(t('Payment received — your membership is active', 'تم استلام الدفع — عضويتك بقت فعّالة'), 'success')
       setSubmitting(false)
+      navigate(nextJourneyStep(), { replace: true })
     }, 700)
   }
 
@@ -68,32 +78,6 @@ export function SubscriptionPaymentScreen() {
             <CheckCircle2 size={20} className="text-success-500 shrink-0 mt-0.5" />
             <p className="text-sm text-success-500">{t('You already have an active subscription.', 'عندك اشتراك فعّال بالفعل.')}</p>
           </div>
-        </div>
-      </div>
-    )
-  }
-
-  if (latest && latest.status === 'pending_review') {
-    return (
-      <div>
-        <HeartsBackdrop />
-        <TopBar showBack title={t('Subscription', 'الاشتراك')} />
-        <div className="px-5 pt-2 pb-8 space-y-4">
-          <div className="flex flex-col items-center text-center gap-3 py-6">
-            <span className="flex h-16 w-16 items-center justify-center rounded-full bg-warning-100 text-warning-500">
-              <Clock size={28} />
-            </span>
-            <h1 className="font-display text-xl text-ink-900">{t('Payment Pending Review', 'الدفع قيد المراجعة')}</h1>
-            <p className="text-sm text-ink-500 max-w-xs">
-              {t('Our team is verifying your payment proof. This is usually quick.', 'فريقنا بيتأكد من إثبات الدفع بتاعك. غالبًا بياخد وقت قصير.')}
-            </p>
-            <Badge variant="warning">
-              {method === 'paypal' || latest.method === 'paypal' ? 'PayPal' : 'InstaPay'} · {t('Pending', 'قيد الانتظار')}
-            </Badge>
-          </div>
-          <Button variant="gold" size="lg" className="w-full" onClick={() => navigate(nextJourneyStep())}>
-            {t('Track Request Status — Continue to App', 'متابعة حالة الطلب — كمّل للتطبيق')}
-          </Button>
         </div>
       </div>
     )

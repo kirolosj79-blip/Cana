@@ -39,8 +39,8 @@ export const usePaymentRequestsStore = create<PaymentRequestsState>()(
         // to the member who submitted it.
         useNotificationsStore.getState().push({
           type: 'payment_update',
-          title: 'Payment submitted for review',
-          body: `Your ${method === 'paypal' ? 'PayPal' : 'InstaPay'} payment proof was submitted and is pending review.`,
+          title: 'Payment received',
+          body: `Your ${method === 'paypal' ? 'PayPal' : 'InstaPay'} payment was received.`,
           target: '/payment/subscription',
         })
         return id
