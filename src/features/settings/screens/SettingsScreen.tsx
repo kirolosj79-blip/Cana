@@ -12,7 +12,7 @@ import { cn } from '@/shared/utils/cn'
 
 function Row({ icon: Icon, label, right, onClick }: { icon: any; label: string; right?: React.ReactNode; onClick?: () => void }) {
   return (
-    <button onClick={onClick} className="w-full flex items-center gap-3 rounded-[var(--radius-md)] px-3 py-3.5 hover:bg-ink-50 text-left">
+    <button onClick={onClick} className="w-full flex items-center gap-3 rounded-[var(--r-md)] px-3 py-3.5 hover:bg-ink-50 text-left">
       <span className="flex h-9 w-9 items-center justify-center rounded-full bg-ink-50 text-ink-600">
         <Icon size={16} />
       </span>
@@ -42,7 +42,7 @@ export function SettingsScreen() {
       <div className="px-5 pt-2 pb-8 space-y-1">
         <p className="text-xs font-semibold uppercase tracking-wide text-ink-400 px-3 pt-3 pb-1">{t('Preferences', 'التفضيلات')}</p>
 
-        <div className="flex items-center gap-3 rounded-[var(--radius-md)] px-3 py-3.5">
+        <div className="flex items-center gap-3 rounded-[var(--r-md)] px-3 py-3.5">
           <span className="flex h-9 w-9 items-center justify-center rounded-full bg-ink-50 text-ink-600">
             <Moon size={16} />
           </span>

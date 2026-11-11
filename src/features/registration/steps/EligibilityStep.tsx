@@ -24,7 +24,7 @@ export function EligibilityStep() {
       />
 
       {e.everMarried && (
-        <div className="space-y-5 rounded-[var(--radius-md)] border border-ink-100 bg-parchment-0 p-4">
+        <div className="space-y-5 rounded-[var(--r-md)] border border-ink-100 bg-parchment-0 p-4">
           <Input
             label={t('Date of previous marriage', 'تاريخ الجواز السابق')}
             type="date"

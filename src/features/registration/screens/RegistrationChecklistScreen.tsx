@@ -49,7 +49,7 @@ export function RegistrationChecklistScreen() {
                 key={step.key}
                 onClick={() => openStep(index)}
                 className={cn(
-                  'w-full flex items-center gap-3 rounded-[var(--radius-md)] border px-4 py-3.5 text-left transition-colors',
+                  'w-full flex items-center gap-3 rounded-[var(--r-md)] border px-4 py-3.5 text-left transition-colors',
                   done ? 'border-success-500/30 bg-success-100' : 'border-ink-100 bg-parchment-0 hover:border-gold-300'
                 )}
               >

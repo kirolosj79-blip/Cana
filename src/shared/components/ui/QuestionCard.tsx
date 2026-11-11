@@ -15,7 +15,7 @@ interface QuestionCardProps {
  */
 export function QuestionCard({ question, children, labelExtra }: QuestionCardProps) {
   return (
-    <div className="rounded-[var(--radius-lg)] bg-parchment-0 border border-ink-100 px-4 pt-3.5 pb-4 shadow-[var(--shadow-soft-sm)] space-y-2 w-full min-w-0 overflow-hidden">
+    <div className="rounded-[var(--r-lg)] bg-parchment-0 border border-ink-100 px-4 pt-3.5 pb-4 shadow-[var(--shadow-soft-sm)] space-y-2 w-full min-w-0 overflow-hidden">
       <div className="flex items-center justify-between gap-2 min-w-0">
         <p className="text-sm font-bold on-photo-text min-w-0 break-words">{question}</p>
         {labelExtra}

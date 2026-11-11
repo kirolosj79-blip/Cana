@@ -31,7 +31,7 @@ export function RegistrationIntroScreen() {
           </p>
         </div>
 
-        <div className="w-full rounded-[var(--radius-md)] bg-parchment-0 border border-ink-100 px-5 py-4 space-y-2 text-center">
+        <div className="w-full rounded-[var(--r-md)] bg-parchment-0 border border-ink-100 px-5 py-4 space-y-2 text-center">
           <p className="text-sm text-ink-700 leading-relaxed">
             {t(
               'Registration takes about 15 to 20 minutes.',

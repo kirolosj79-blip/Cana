@@ -41,7 +41,7 @@ export function ComplaintFormScreen() {
       <TopBar showBack title={t('Report a Concern', 'الإبلاغ عن مشكلة')} />
       <div className="px-5 pt-2 pb-8 space-y-6">
         {reportedUser && (
-          <div className="flex items-center gap-3 rounded-[var(--radius-md)] border border-ink-100 px-4 py-3">
+          <div className="flex items-center gap-3 rounded-[var(--r-md)] border border-ink-100 px-4 py-3">
             <img src={reportedUser.personal.profilePhotoUrl} className="h-10 w-10 rounded-full object-cover bg-ink-100" />
             <div>
               <p className="text-xs text-ink-400">{t('Reporting', 'الإبلاغ عن')}</p>
@@ -50,7 +50,7 @@ export function ComplaintFormScreen() {
           </div>
         )}
 
-        <div className="flex items-start gap-2.5 rounded-[var(--radius-md)] bg-info-100 border border-info-500/20 px-4 py-3">
+        <div className="flex items-start gap-2.5 rounded-[var(--r-md)] bg-info-100 border border-info-500/20 px-4 py-3">
           <LayoutDashboard size={15} className="text-info-500 shrink-0 mt-0.5" />
           <p className="text-xs text-info-500">
             {t(

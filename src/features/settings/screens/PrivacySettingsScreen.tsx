@@ -22,7 +22,7 @@ export function PrivacySettingsScreen() {
       <div className="px-5 pt-2 pb-8 space-y-1">
         <p className="text-sm text-ink-500 px-1 pb-3">{t("Control what's shared, and when, with your matches.", 'تحكم في إيه اللي بيتشارك، وإمتى، مع ترشيحاتك.')}</p>
         {rows.map((r) => (
-          <div key={r.key} className="flex items-center justify-between rounded-[var(--radius-md)] px-3 py-3.5">
+          <div key={r.key} className="flex items-center justify-between rounded-[var(--r-md)] px-3 py-3.5">
             <span className="text-sm font-medium text-ink-800 pr-4">{t(r.en, r.ar)}</span>
             <Switch checked={state[r.key]} onChange={(v) => setState((s) => ({ ...s, [r.key]: v }))} />
           </div>

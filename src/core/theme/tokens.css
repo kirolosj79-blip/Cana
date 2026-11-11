@@ -86,10 +86,10 @@
   --font-arabic: 'Cairo', 'Noto Naskh Arabic', sans-serif;
 
   /* ---- Radius ---- */
-  --radius-sm: 8px;
-  --radius-md: 14px;
-  --radius-lg: 20px;
-  --radius-xl: 28px;
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+  --r-xl: 28px;
   --radius-full: 999px;
 
   /* ---- Shadow (soft, warm-tinted, not generic black) ---- */
@@ -358,3 +358,6 @@ input:-webkit-autofill:active {
 html.dark .verse-banner { background-color: #17305a; }
 
 html.dark { --tile-navy-bg: rgba(255,255,255,0.10); }
+
+.overflow-x-auto { scrollbar-width: none; }
+.overflow-x-auto::-webkit-scrollbar { display: none; }

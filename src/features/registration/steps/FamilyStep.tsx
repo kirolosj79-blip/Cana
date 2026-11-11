@@ -34,14 +34,14 @@ export function FamilyStep() {
 
   return (
     <div className="space-y-6">
-      <div className="space-y-3 rounded-[var(--radius-md)] border border-ink-100 bg-parchment-0 p-4">
+      <div className="space-y-3 rounded-[var(--r-md)] border border-ink-100 bg-parchment-0 p-4">
         <p className="text-sm font-medium text-ink-700">{t("Father's Information", 'بيانات الأب')}</p>
         <Input label={t("Father's name", 'اسم الأب')} value={f.fatherName ?? ''} onChange={(e) => set({ fatherName: e.target.value })} />
         <Input label={t("Father's occupation", 'وظيفة الأب')} value={f.fatherOccupation ?? ''} onChange={(e) => set({ fatherOccupation: e.target.value })} />
         <YesNoToggle label={t('Is your father living?', 'الوالد على قيد الحياة؟')} value={f.fatherLiving} onChange={(v) => set({ fatherLiving: v })} />
       </div>
 
-      <div className="space-y-3 rounded-[var(--radius-md)] border border-ink-100 bg-parchment-0 p-4">
+      <div className="space-y-3 rounded-[var(--r-md)] border border-ink-100 bg-parchment-0 p-4">
         <p className="text-sm font-medium text-ink-700">{t("Mother's Information", 'بيانات الأم')}</p>
         <Input label={t("Mother's name", 'اسم الأم')} value={f.motherName ?? ''} onChange={(e) => set({ motherName: e.target.value })} />
         <Input label={t("Mother's occupation", 'وظيفة الأم')} value={f.motherOccupation ?? ''} onChange={(e) => set({ motherOccupation: e.target.value })} />
@@ -61,7 +61,7 @@ export function FamilyStep() {
           ]}
         />
       ) : (exactlyOneDeceased || bothDeceased) ? (
-        <div className="rounded-[var(--radius-md)] border border-ink-100 bg-ink-50 px-4 py-3">
+        <div className="rounded-[var(--r-md)] border border-ink-100 bg-ink-50 px-4 py-3">
           <p className="text-xs text-ink-500">{t("Parents' marital status", 'الحالة الاجتماعية للوالدين')}</p>
           <p className="text-sm font-medium text-ink-800 mt-0.5">
             {exactlyOneDeceased ? t('One parent has passed away', 'ترمّل أحد الوالدين') : t('Both parents have passed away', 'توفي الوالدان')}

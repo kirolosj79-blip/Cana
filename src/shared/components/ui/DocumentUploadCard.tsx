@@ -33,7 +33,7 @@ export function DocumentUploadCard({ icon, title, subtitle, accept = 'image/*,.p
     <button
       type="button"
       onClick={() => inputRef.current?.click()}
-      className="w-full flex items-center gap-3 rounded-[var(--radius-lg)] bg-parchment-0 border border-ink-100 px-4 py-3.5 shadow-[var(--shadow-soft-sm)] text-left transition-colors hover:border-gold-300"
+      className="w-full flex items-center gap-3 rounded-[var(--r-lg)] bg-parchment-0 border border-ink-100 px-4 py-3.5 shadow-[var(--shadow-soft-sm)] text-left transition-colors hover:border-gold-300"
     >
       <input
         ref={inputRef}

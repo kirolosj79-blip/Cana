@@ -39,7 +39,7 @@ export function ProfileVisibilityScreen() {
             {fields.map((f) => {
               const visible = isVisible(f.key)
               return (
-                <div key={f.key} className="flex items-center justify-between rounded-[var(--radius-md)] px-3 py-3.5">
+                <div key={f.key} className="flex items-center justify-between rounded-[var(--r-md)] px-3 py-3.5">
                   <span className="flex items-center gap-2.5 text-sm font-medium text-ink-800">
                     {visible ? <Eye size={16} className="text-success-500" /> : <EyeOff size={16} className="text-ink-400" />}
                     {t(f.en, f.ar)}

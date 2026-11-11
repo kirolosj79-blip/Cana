@@ -53,7 +53,7 @@ export function WelcomeScreen() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.15 }}
           className={cn(
-            'w-full space-y-3.5 rounded-[var(--radius-lg)] bg-parchment-0 border border-ink-100 px-5 py-5 shadow-[var(--shadow-soft-sm)]',
+            'w-full space-y-3.5 rounded-[var(--r-lg)] bg-parchment-0 border border-ink-100 px-5 py-5 shadow-[var(--shadow-soft-sm)]',
             language === 'ar' ? 'text-right' : 'text-left'
           )}
           dir={language === 'ar' ? 'rtl' : 'ltr'}

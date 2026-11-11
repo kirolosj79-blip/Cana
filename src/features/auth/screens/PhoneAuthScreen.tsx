@@ -52,7 +52,7 @@ export function PhoneAuthScreen() {
     <PageContainer noPadding photoBackground hideHearts>
       <TopBar showBack hideNotifications title={isLoginMode ? t('Log In', 'تسجيل الدخول') : undefined} />
       <form onSubmit={handleSubmit} className="flex-1 flex flex-col px-5 pt-2">
-        <div className="rounded-[var(--radius-lg)] bg-parchment-0 border border-ink-100 shadow-[var(--shadow-soft-sm)] px-4 py-4 mb-6">
+        <div className="rounded-[var(--r-lg)] bg-parchment-0 border border-ink-100 shadow-[var(--shadow-soft-sm)] px-4 py-4 mb-6">
           <h1 className="font-display text-2xl font-medium text-ink-900 mb-1">
             {isLoginMode ? t('Welcome back — enter your number', 'أهلًا بيك تاني — دخّل رقمك') : t('Enter your phone number', 'دخّل رقم موبايلك')}
           </h1>

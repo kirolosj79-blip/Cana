@@ -97,7 +97,7 @@ export function ChurchStep() {
 
   return (
     <div className="space-y-4">
-      <div className="rounded-[var(--radius-lg)] bg-gold-50 border border-gold-200 px-4 py-3 text-xs text-gold-700">
+      <div className="rounded-[var(--r-lg)] bg-gold-50 border border-gold-200 px-4 py-3 text-xs text-gold-700">
         {t("This section is the most important — it's the basis for church-approved marriage.", 'القسم ده أهم حاجة — هو أساس موافقة الكنيسة على الجواز.')}
       </div>
 
@@ -166,7 +166,7 @@ export function ChurchStep() {
             )}
           </div>
           <Input placeholder={t('ZIP / Postal code', 'الرمز البريدي')} value={c.churchAddressZip ?? ''} onChange={(e) => set({ churchAddressZip: e.target.value })} />
-          <div className="h-12 w-full flex items-center rounded-[var(--radius-md)] border border-ink-100 bg-ink-50 px-4 text-[15px] text-ink-600">
+          <div className="h-12 w-full flex items-center rounded-[var(--r-md)] border border-ink-100 bg-ink-50 px-4 text-[15px] text-ink-600">
             {draft.personal.countryOfResidence === 'usa'
               ? t('United States', 'الولايات المتحدة')
               : draft.personal.countryOfResidence === 'canada'
@@ -231,10 +231,10 @@ export function ChurchStep() {
             'شارك النموذج ده مع أب اعترافك أو مكتب الكنيسة عشان يجهزوا الخطاب.'
           )}
         </p>
-        <pre className="whitespace-pre-wrap text-[11px] leading-relaxed text-ink-700 bg-ink-50 rounded-[var(--radius-md)] p-3 max-h-72 overflow-y-auto" dir="ltr">
+        <pre className="whitespace-pre-wrap text-[11px] leading-relaxed text-ink-700 bg-ink-50 rounded-[var(--r-md)] p-3 max-h-72 overflow-y-auto" dir="ltr">
           {TEMPLATE_EN}
         </pre>
-        <pre className="whitespace-pre-wrap text-[11px] leading-relaxed text-ink-700 bg-ink-50 rounded-[var(--radius-md)] p-3 max-h-72 overflow-y-auto mt-3" dir="rtl">
+        <pre className="whitespace-pre-wrap text-[11px] leading-relaxed text-ink-700 bg-ink-50 rounded-[var(--r-md)] p-3 max-h-72 overflow-y-auto mt-3" dir="rtl">
           {TEMPLATE_AR}
         </pre>
         <Button

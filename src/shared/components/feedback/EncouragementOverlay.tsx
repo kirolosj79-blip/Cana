@@ -81,7 +81,7 @@ export function EncouragementProvider({ children }: { children: ReactNode }) {
                   initial="initial"
                   animate="animate"
                   exit="exit"
-                  className="flex flex-col items-center gap-4 rounded-[var(--radius-lg)] bg-parchment-0 px-8 py-7 shadow-[var(--shadow-soft-lg)] text-center max-w-xs w-full"
+                  className="flex flex-col items-center gap-4 rounded-[var(--r-lg)] bg-parchment-0 px-8 py-7 shadow-[var(--shadow-soft-lg)] text-center max-w-xs w-full"
                 >
                   <motion.span
                     className="text-5xl"

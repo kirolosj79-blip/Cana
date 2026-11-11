@@ -1532,3 +1532,4 @@ Confirmed the list was never actually sorted (it was just in the order originall
 - [x] Block dialog: red icon.
 - [ ] Waiting for the Word file with every Figma screen to mark exact bold/regular per screen.
 - [x] Typography/radius pass against the Figma boards (Word file): body 11px / titles 11.5-12px, headings 23-27px semibold (Inter), bold weight 600 (inline bold 700), CTA buttons radius 12px (not pill), square icon tiles, Profile Ready "Verified & Active" green, Home card chips, default chips selected, Feedback underline selects.
+- [x] Radius fix: custom --radius-* tokens were overriding Tailwind's rounded-md/lg/xl (14/20/28px). Renamed to --r-*, utilities are standard again (6/8/12/16px). Match card photo 7:5 radius 9, chips radius 5, hidden horizontal scrollbar under chips.

@@ -54,7 +54,7 @@ export function ReviewStep() {
       </p>
 
       {remaining > 0 && (
-        <div className="flex items-center gap-2.5 rounded-[var(--radius-md)] bg-warning-100 border border-warning-500/20 px-4 py-3 text-xs text-warning-500">
+        <div className="flex items-center gap-2.5 rounded-[var(--r-md)] bg-warning-100 border border-warning-500/20 px-4 py-3 text-xs text-warning-500">
           <AlertCircle size={15} className="shrink-0" />
           {t(`${remaining} section${remaining > 1 ? 's' : ''} still need to be completed before you can continue.`, `لسه ${remaining} قسم محتاج يتكمل قبل ما تقدر تكمل.`)}
         </div>
@@ -68,7 +68,7 @@ export function ReviewStep() {
               key={r.title}
               onClick={() => jumpToStepForEdit(r.stepIndex)}
               className={cn(
-                'w-full flex items-center gap-3 rounded-[var(--radius-md)] border px-4 py-3.5 text-left transition-colors',
+                'w-full flex items-center gap-3 rounded-[var(--r-md)] border px-4 py-3.5 text-left transition-colors',
                 done ? 'border-success-500/30 bg-success-100' : 'border-ink-100 bg-parchment-0 hover:border-gold-300'
               )}
             >
@@ -89,7 +89,7 @@ export function ReviewStep() {
           )
         })}
       </div>
-      <div className="rounded-[var(--radius-md)] bg-wine-50 border border-wine-200 px-4 py-3 text-xs text-wine-700">
+      <div className="rounded-[var(--r-md)] bg-wine-50 border border-wine-200 px-4 py-3 text-xs text-wine-700">
         {t(
           "After you submit, our team will review your church recommendation letter and identity documents. This typically takes 1–3 business days.",
           'بعد ما تبعت، فريقنا هيراجع خطاب توصية الكنيسة ومستندات الهوية. غالبًا بتاخد من يوم لـ 3 أيام عمل.'

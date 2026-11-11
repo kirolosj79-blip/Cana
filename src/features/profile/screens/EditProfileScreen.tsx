@@ -20,7 +20,7 @@ import { useNavigate } from 'react-router-dom'
 
 function SectionCard({ title, children, hint }: { title: string; hint?: string; children: React.ReactNode }) {
   return (
-    <div className="rounded-[var(--radius-md)] border border-ink-100 p-4 space-y-4">
+    <div className="rounded-[var(--r-md)] border border-ink-100 p-4 space-y-4">
       <div>
         <p className="text-sm font-semibold text-ink-900">{title}</p>
         {hint && <p className="text-xs text-ink-400 mt-0.5">{hint}</p>}

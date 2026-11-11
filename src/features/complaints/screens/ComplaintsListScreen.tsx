@@ -28,7 +28,7 @@ export function ComplaintsListScreen() {
         ) : (
           <div className="space-y-3">
             {complaints.map((c) => (
-              <div key={c.id} className="rounded-[var(--radius-md)] border border-ink-100 p-4">
+              <div key={c.id} className="rounded-[var(--r-md)] border border-ink-100 p-4">
                 <div className="flex items-center justify-between">
                   <p className="text-sm font-medium text-ink-900">{language === 'ar' ? complaintCategoryLabels[c.category].ar : complaintCategoryLabels[c.category].en}</p>
                   <Badge variant={statusVariant[c.status]}>{language === 'ar' ? statusLabelsAr[c.status] : c.status.replace('_', ' ')}</Badge>

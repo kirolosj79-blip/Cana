@@ -46,7 +46,7 @@ export function PersonalInfoStep() {
       </QuestionCard>
 
       <QuestionCard question={t('Cellphone number', 'رقم الموبايل')}>
-        <div className="h-12 w-full min-w-0 flex items-center justify-between rounded-[var(--radius-md)] border border-ink-100 bg-parchment-0 px-4 text-[15px] text-ink-600">
+        <div className="h-12 w-full min-w-0 flex items-center justify-between rounded-[var(--r-md)] border border-ink-100 bg-parchment-0 px-4 text-[15px] text-ink-600">
           <span dir="ltr">{p.phone || authPhone}</span>
           <span className="flex items-center gap-1 text-xs font-normal text-success-500 shrink-0">
             <ShieldCheck size={12} /> {t('Verified', 'موثّق')}

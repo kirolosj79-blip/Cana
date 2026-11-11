@@ -18,7 +18,7 @@ export function HealthStep() {
 
   return (
     <div className="space-y-6">
-      <div className="rounded-[var(--radius-md)] bg-info-100 border border-info-500/20 px-4 py-3 text-xs text-info-500">
+      <div className="rounded-[var(--r-md)] bg-info-100 border border-info-500/20 px-4 py-3 text-xs text-info-500">
         {t(
           'This section is voluntary and treated with care — your privacy is respected and shared only according to your permission.',
           'القسم ده اختياري وبيتعامل معاه بحرص — خصوصيتك محترمة، ومش هيتشارك إلا بموافقتك.'

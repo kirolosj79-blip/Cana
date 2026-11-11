@@ -71,7 +71,7 @@ export function UploadField({ label, hint, optional, accept = 'image/*,.pdf', on
       />
 
       {hasFile ? (
-        <div className="flex items-center justify-between gap-3 rounded-[var(--radius-md)] border border-success-500/30 bg-success-100 px-4 py-3">
+        <div className="flex items-center justify-between gap-3 rounded-[var(--r-md)] border border-success-500/30 bg-success-100 px-4 py-3">
           <div className="flex items-center gap-2.5 min-w-0">
             {preview ? (
               <img src={preview} className="h-9 w-9 rounded-md object-cover shrink-0" />
@@ -91,7 +91,7 @@ export function UploadField({ label, hint, optional, accept = 'image/*,.pdf', on
         <button
           type="button"
           onClick={() => inputRef.current?.click()}
-          className="flex items-center justify-center gap-2.5 rounded-[var(--radius-md)] border-2 border-dashed border-ink-200 bg-parchment-0 px-4 py-4 text-sm field-hint transition-colors hover:border-gold-400 hover:bg-gold-50/50"
+          className="flex items-center justify-center gap-2.5 rounded-[var(--r-md)] border-2 border-dashed border-ink-200 bg-parchment-0 px-4 py-4 text-sm field-hint transition-colors hover:border-gold-400 hover:bg-gold-50/50"
         >
           <UploadCloud size={18} />
           {t('Tap to choose a file', 'اضغط تختار ملف')}

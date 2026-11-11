@@ -55,7 +55,7 @@ export function NotificationsScreen() {
                     if (n.target) navigate(n.target)
                     else if (n.relatedUserId) navigate(`/app/profile/${n.relatedUserId}`)
                   }}
-                  className={cn('w-full flex items-start gap-3 rounded-[var(--radius-md)] px-3 py-3 text-left', !n.read && 'bg-gold-50')}
+                  className={cn('w-full flex items-start gap-3 rounded-[var(--r-md)] px-3 py-3 text-left', !n.read && 'bg-gold-50')}
                 >
                   <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-ink-50 text-ink-600">
                     <Icon size={16} />

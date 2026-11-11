@@ -26,7 +26,7 @@ export function ChooseLanguageScreen() {
               key={opt.code}
               onClick={() => setLanguage(opt.code)}
               className={cn(
-                'w-full flex items-center justify-between rounded-[var(--radius-md)] border px-5 py-4 transition-colors',
+                'w-full flex items-center justify-between rounded-[var(--r-md)] border px-5 py-4 transition-colors',
                 language === opt.code ? 'border-gold-400 bg-parchment-100' : 'border-ink-200 bg-parchment-0'
               )}
             >

@@ -98,10 +98,10 @@ export function AdminReviewScreen() {
         <div
           className={
             status === 'approved'
-              ? 'rounded-[var(--radius-md)] bg-success-100 border border-success-500/20 px-4 py-3 text-sm text-success-500 font-medium'
+              ? 'rounded-[var(--r-md)] bg-success-100 border border-success-500/20 px-4 py-3 text-sm text-success-500 font-medium'
               : status === 'needs_action'
-              ? 'rounded-[var(--radius-md)] bg-warning-100 border border-warning-500/20 px-4 py-3 text-sm text-warning-500 font-medium'
-              : 'rounded-[var(--radius-md)] bg-info-100 border border-info-500/20 px-4 py-3 text-sm text-info-500 font-medium'
+              ? 'rounded-[var(--r-md)] bg-warning-100 border border-warning-500/20 px-4 py-3 text-sm text-warning-500 font-medium'
+              : 'rounded-[var(--r-md)] bg-info-100 border border-info-500/20 px-4 py-3 text-sm text-info-500 font-medium'
           }
         >
           {status === 'approved' && t("You're fully verified — welcome to the community.", 'إنت موثّق بالكامل — أهلًا بيك في المجتمع.')}
@@ -114,7 +114,7 @@ export function AdminReviewScreen() {
         {reviews.map((review) => {
           const meta = stateMeta[review.state]
           return (
-            <div key={review.section} className="rounded-[var(--radius-md)] border border-ink-100 p-4 space-y-3">
+            <div key={review.section} className="rounded-[var(--r-md)] border border-ink-100 p-4 space-y-3">
               <div className="flex items-center justify-between">
                 <p className="text-sm font-medium text-ink-900">{t(review.section, sectionLabels[review.section] ?? review.section)}</p>
                 <Badge variant={meta.color}>
@@ -168,7 +168,7 @@ export function AdminReviewScreen() {
           <div className="pt-4 space-y-3">
             <p className="text-xs font-semibold uppercase tracking-wide text-ink-400">{t('Pending Profile Changes', 'تعديلات مستنية موافقة')}</p>
             {changes.map((c) => (
-              <div key={c.id} className="rounded-[var(--radius-md)] border border-ink-100 p-4 space-y-2">
+              <div key={c.id} className="rounded-[var(--r-md)] border border-ink-100 p-4 space-y-2">
                 <div className="flex items-center justify-between">
                   <p className="text-sm font-medium text-ink-900">{t(c.fieldLabel, fieldLabels[c.fieldLabel] ?? c.fieldLabel)}</p>
                   <Badge variant="warning">

@@ -46,7 +46,7 @@ export function EmailField({ label, optional, value, onChange, labelExtra }: Ema
           value={local}
           onChange={(e) => setLocal(e.target.value.replace(/[^a-zA-Z0-9._%+-]/g, ''))}
           placeholder="name"
-          className="h-12 flex-1 min-w-0 rounded-[var(--radius-md)] border border-ink-200 bg-parchment-0 px-3 text-[16px] text-ink-900 text-left focus:border-gold-400 focus:outline-none focus:ring-2 focus:ring-gold-200"
+          className="h-12 flex-1 min-w-0 rounded-[var(--r-md)] border border-ink-200 bg-parchment-0 px-3 text-[16px] text-ink-900 text-left focus:border-gold-400 focus:outline-none focus:ring-2 focus:ring-gold-200"
         />
         <span className="flex items-center text-ink-400 text-sm shrink-0">@</span>
         <select
@@ -60,7 +60,7 @@ export function EmailField({ label, optional, value, onChange, labelExtra }: Ema
               setDomain(e.target.value)
             }
           }}
-          className="h-12 flex-1 min-w-0 rounded-[var(--radius-md)] border border-ink-200 bg-parchment-0 px-2 text-[15px] text-ink-900 focus:border-gold-400 focus:outline-none focus:ring-2 focus:ring-gold-200"
+          className="h-12 flex-1 min-w-0 rounded-[var(--r-md)] border border-ink-200 bg-parchment-0 px-2 text-[15px] text-ink-900 focus:border-gold-400 focus:outline-none focus:ring-2 focus:ring-gold-200"
         >
           <option value="">{t('Select', 'اختار')}</option>
           {emailDomainOptions.map((d) => (
@@ -78,7 +78,7 @@ export function EmailField({ label, optional, value, onChange, labelExtra }: Ema
           onChange={(e) => setDomain(e.target.value.replace(/[^a-zA-Z0-9.-]/g, ''))}
           placeholder={t('yourdomain.com', 'الدومين بتاعك.com')}
           dir="ltr"
-          className="h-12 w-full rounded-[var(--radius-md)] border border-ink-200 bg-parchment-0 px-3 text-[16px] text-ink-900 text-left focus:border-gold-400 focus:outline-none focus:ring-2 focus:ring-gold-200"
+          className="h-12 w-full rounded-[var(--r-md)] border border-ink-200 bg-parchment-0 px-3 text-[16px] text-ink-900 text-left focus:border-gold-400 focus:outline-none focus:ring-2 focus:ring-gold-200"
         />
       )}
     </div>

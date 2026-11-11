@@ -74,7 +74,7 @@ export function SubscriptionPaymentScreen() {
         <HeartsBackdrop />
         <TopBar showBack title={t('Subscription', 'الاشتراك')} />
         <div className="px-5 pt-2 pb-8">
-          <div className="rounded-[var(--radius-md)] bg-success-100 border border-success-500/20 px-4 py-4 flex items-start gap-3">
+          <div className="rounded-[var(--r-md)] bg-success-100 border border-success-500/20 px-4 py-4 flex items-start gap-3">
             <CheckCircle2 size={20} className="text-success-500 shrink-0 mt-0.5" />
             <p className="text-sm text-success-500">{t('You already have an active subscription.', 'عندك اشتراك فعّال بالفعل.')}</p>
           </div>
@@ -89,7 +89,7 @@ export function SubscriptionPaymentScreen() {
       <TopBar showBack title={t('Subscription', 'الاشتراك')} />
       <div className="px-5 pt-2 pb-8 space-y-5">
         {latest && latest.status === 'rejected' && (
-          <div className="rounded-[var(--radius-md)] bg-danger-100 border border-danger-500/20 px-4 py-3 flex items-start gap-2.5">
+          <div className="rounded-[var(--r-md)] bg-danger-100 border border-danger-500/20 px-4 py-3 flex items-start gap-2.5">
             <XCircle size={16} className="text-danger-500 shrink-0 mt-0.5" />
             <p className="text-xs text-danger-500">
               {latest.reviewNote || t("We couldn't verify your last payment — please try again.", 'ما قدرناش نتأكد من آخر عملية دفع — حاول تاني.')}
@@ -116,7 +116,7 @@ export function SubscriptionPaymentScreen() {
               <button
                 key={m}
                 onClick={() => setMethod(m)}
-                className={`w-full flex items-center justify-between rounded-[var(--radius-md)] border px-5 py-4 transition-colors ${
+                className={`w-full flex items-center justify-between rounded-[var(--r-md)] border px-5 py-4 transition-colors ${
                   method === m ? 'border-gold-400 bg-gold-50' : 'border-ink-200 bg-parchment-0'
                 }`}
               >

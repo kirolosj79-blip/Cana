@@ -33,11 +33,11 @@ export function ProfilePreviewScreen() {
     <div>
       <TopBar showBack title={t('Profile Preview', 'معاينة البروفايل')} />
       <div className="px-5 pt-2 pb-8 space-y-5">
-        <div className="rounded-[var(--radius-md)] bg-info-100 border border-info-500/20 px-4 py-3 text-xs text-info-500">
+        <div className="rounded-[var(--r-md)] bg-info-100 border border-info-500/20 px-4 py-3 text-xs text-info-500">
           {t('This is how other verified members see your profile.', 'كده هيبان بروفايلك لباقي الأعضاء الموثّقين.')}
         </div>
 
-        <div className="h-40 rounded-[var(--radius-lg)] bg-ink-100 flex items-center justify-center text-ink-400 text-sm">
+        <div className="h-40 rounded-[var(--r-lg)] bg-ink-100 flex items-center justify-center text-ink-400 text-sm">
           {draft.personal.profilePhotoUrl ? t('Photo uploaded', 'الصورة اترفعت') : t('No photo uploaded yet', 'لسه مفيش صورة')}
         </div>
 

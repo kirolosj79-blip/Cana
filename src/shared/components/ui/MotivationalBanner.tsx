@@ -31,7 +31,7 @@ export function MotivationalBanner({ intervalMs = 6000 }: { intervalMs?: number 
   if (dismissed) return null
 
   return (
-    <div className="relative overflow-hidden rounded-[var(--radius-md)] border border-gold-200 bg-gold-50 px-4 py-3">
+    <div className="relative overflow-hidden rounded-[var(--r-md)] border border-gold-200 bg-gold-50 px-4 py-3">
       <button
         onClick={() => setDismissed(true)}
         className="absolute top-2 right-2 rtl:right-auto rtl:left-2 text-gold-600/60 hover:text-gold-700"

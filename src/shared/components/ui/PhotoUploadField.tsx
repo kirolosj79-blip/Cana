@@ -76,7 +76,7 @@ export function PhotoUploadField({ label, optional, onUploaded }: PhotoUploadFie
 
       {preview ? (
         <div className="relative">
-          <img src={preview} className={cn('h-40 w-full rounded-[var(--radius-md)] object-cover', status === 'rejected_no_face' && 'opacity-50')} />
+          <img src={preview} className={cn('h-40 w-full rounded-[var(--r-md)] object-cover', status === 'rejected_no_face' && 'opacity-50')} />
           <button
             type="button"
             onClick={clear}
@@ -85,7 +85,7 @@ export function PhotoUploadField({ label, optional, onUploaded }: PhotoUploadFie
             <X size={14} />
           </button>
           {status === 'checking' && (
-            <div className="absolute inset-0 flex items-center justify-center rounded-[var(--radius-md)] bg-ink-950/40">
+            <div className="absolute inset-0 flex items-center justify-center rounded-[var(--r-md)] bg-ink-950/40">
               <span className="flex items-center gap-2 rounded-full bg-parchment-0 px-3 py-1.5 text-xs font-medium text-ink-700">
                 <Loader2 size={13} className="animate-spin" /> {t('Checking the photo…', 'بنتأكد من الصورة…')}
               </span>
@@ -106,7 +106,7 @@ export function PhotoUploadField({ label, optional, onUploaded }: PhotoUploadFie
         <button
           type="button"
           onClick={() => inputRef.current?.click()}
-          className="flex items-center justify-center gap-2.5 rounded-[var(--radius-md)] border-2 border-dashed border-ink-200 bg-parchment-0 px-4 py-6 text-sm field-hint transition-colors hover:border-gold-400 hover:bg-gold-50/50"
+          className="flex items-center justify-center gap-2.5 rounded-[var(--r-md)] border-2 border-dashed border-ink-200 bg-parchment-0 px-4 py-6 text-sm field-hint transition-colors hover:border-gold-400 hover:bg-gold-50/50"
         >
           <UploadCloud size={18} />
           {t('Tap to upload', 'اضغط لرفع الصورة')}

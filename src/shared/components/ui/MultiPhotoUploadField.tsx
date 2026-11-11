@@ -68,7 +68,7 @@ export function MultiPhotoUploadField({ label, hint, optional, max = 5, onChange
 
       <div className="grid grid-cols-3 gap-2">
         {photos.map((photo) => (
-          <div key={photo.id} className="relative aspect-square rounded-[var(--radius-md)] overflow-hidden border border-ink-100">
+          <div key={photo.id} className="relative aspect-square rounded-[var(--r-md)] overflow-hidden border border-ink-100">
             <img src={photo.url} className="w-full h-full object-cover" />
             <button
               type="button"
@@ -83,7 +83,7 @@ export function MultiPhotoUploadField({ label, hint, optional, max = 5, onChange
           <button
             type="button"
             onClick={() => inputRef.current?.click()}
-            className="aspect-square flex flex-col items-center justify-center gap-1 rounded-[var(--radius-md)] border-2 border-dashed border-ink-200 bg-parchment-0 field-hint transition-colors hover:border-gold-400 hover:bg-gold-50/50"
+            className="aspect-square flex flex-col items-center justify-center gap-1 rounded-[var(--r-md)] border-2 border-dashed border-ink-200 bg-parchment-0 field-hint transition-colors hover:border-gold-400 hover:bg-gold-50/50"
           >
             <Plus size={20} />
             <span className="text-[11px]">{t('Add', 'إضافة')}</span>

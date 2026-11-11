@@ -96,7 +96,7 @@ export function OtpVerificationScreen() {
     <PageContainer noPadding photoBackground hideHearts>
       <TopBar showBack hideNotifications />
       <div className="flex-1 flex flex-col px-5 pt-2">
-        <div className="rounded-[var(--radius-lg)] bg-parchment-0 border border-ink-100 shadow-[var(--shadow-soft-sm)] px-4 py-4 mb-6">
+        <div className="rounded-[var(--r-lg)] bg-parchment-0 border border-ink-100 shadow-[var(--shadow-soft-sm)] px-4 py-4 mb-6">
           <h1 className="font-display text-2xl font-medium text-ink-900 mb-1">{t('Verify your phone', 'وثّق رقمك')}</h1>
           <p className="text-sm text-ink-500 leading-relaxed">
             {t('Enter the 6-digit code we sent to', 'دخّل الكود المكون من 6 أرقام اللي بعتناهولك على')}{' '}
@@ -118,12 +118,12 @@ export function OtpVerificationScreen() {
               onKeyDown={(e) => handleKeyDown(i, e)}
               inputMode="numeric"
               maxLength={1}
-              className="h-14 w-12 rounded-[var(--radius-md)] border border-ink-200 bg-parchment-0 text-center text-xl font-semibold text-ink-900 focus:border-gold-400 focus:outline-none focus:ring-2 focus:ring-gold-200"
+              className="h-14 w-12 rounded-[var(--r-md)] border border-ink-200 bg-parchment-0 text-center text-xl font-semibold text-ink-900 focus:border-gold-400 focus:outline-none focus:ring-2 focus:ring-gold-200"
             />
           ))}
         </div>
 
-        <div className="mt-6 flex items-center justify-between rounded-[var(--radius-md)] bg-parchment-0 border border-ink-100 px-4 py-3">
+        <div className="mt-6 flex items-center justify-between rounded-[var(--r-md)] bg-parchment-0 border border-ink-100 px-4 py-3">
           <button
             disabled={secondsLeft > 0}
             className="text-sm font-bold text-emphasis-text hover:underline disabled:opacity-40 disabled:no-underline"

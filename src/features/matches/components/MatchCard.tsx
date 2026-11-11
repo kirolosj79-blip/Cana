@@ -17,9 +17,9 @@ export function MatchCard({ candidate }: { candidate: UserProfile }) {
   const tl = TIMELINE[candidate.gettingToKnowYou.marriageTimeline ?? 'within_1_year'] ?? TIMELINE.within_1_year
 
   return (
-    <div className="rounded-[18px] border border-ink-100 bg-parchment-0 p-2 shadow-[var(--shadow-soft-sm)]">
-      <button onClick={open} className="relative block w-full overflow-hidden rounded-xl">
-        <img src={candidate.personal.profilePhotoUrl} alt="" className="aspect-[4/3] w-full bg-ink-100 object-cover object-top" />
+    <div className="rounded-[14px] border border-ink-100 bg-parchment-0 p-2 shadow-[var(--shadow-soft-sm)]">
+      <button onClick={open} className="relative block w-full overflow-hidden rounded-[9px]">
+        <img src={candidate.personal.profilePhotoUrl} alt="" className="aspect-[7/5] w-full bg-ink-100 object-cover object-top" />
         {candidate.verification.church === 'verified' && (
           <span className="absolute bottom-1.5 end-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-[#0C1D3A] text-white">
             <BadgeCheck size={12} />
@@ -31,8 +31,8 @@ export function MatchCard({ candidate }: { candidate: UserProfile }) {
         <p className="flex items-center gap-1 truncate"><MapPin size={10} className="shrink-0 text-gold-700" /> {candidate.personal.cityState.replace(', ', ' • ')}</p>
         <p className="flex items-start gap-1 font-semibold leading-snug text-ink-800"><Briefcase size={10} className="mt-0.5 shrink-0 text-ink-400" /> <span><bdi>{candidate.employment.occupation}</bdi> • <bdi>{t(deg[0], deg[1])}</bdi></span></p>
         <div className="flex flex-col items-start gap-1">
-          <span className="inline-flex items-center gap-1 rounded-md border border-ink-100 bg-parchment-50 px-1.5 py-0.5 text-[9.5px] text-ink-600"><Church size={9} /> {t('Coptic Orthodox', 'قبطي أرثوذكسي')}</span>
-          <span className="inline-flex items-center gap-1 rounded-md border border-ink-100 bg-parchment-50 px-1.5 py-0.5 text-[9.5px] text-ink-600"><Clock size={9} /> {t(tl[0], tl[1])}</span>
+          <span className="inline-flex items-center gap-1 rounded-[5px] border border-ink-100 bg-parchment-50 px-1.5 py-0.5 text-[9.5px] text-ink-600"><Church size={9} /> {t('Coptic Orthodox', 'قبطي أرثوذكسي')}</span>
+          <span className="inline-flex items-center gap-1 rounded-[5px] border border-ink-100 bg-parchment-50 px-1.5 py-0.5 text-[9.5px] text-ink-600"><Clock size={9} /> {t(tl[0], tl[1])}</span>
         </div>
       </div>
       <button onClick={open} className="mt-2.5 flex w-full items-center justify-center gap-1.5 rounded-[9px] bg-cta-bg py-2 text-[11px] font-bold text-cta-text">

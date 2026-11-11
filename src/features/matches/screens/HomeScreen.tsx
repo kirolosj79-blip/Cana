@@ -46,7 +46,7 @@ export function MatchesGrid({ limit }: { limit?: number }) {
           className="min-w-0 flex-1 bg-transparent text-[12px] text-ink-900 outline-none placeholder:text-ink-400" style={{ fontSize: 16 }} />
         <button onClick={() => navigate('/app/discover')} className="rounded-lg bg-parchment-200 p-1.5 text-ink-600" aria-label="Filters"><SlidersHorizontal size={14} /></button>
       </div>
-      <div className="-mx-5 flex gap-2 overflow-x-auto px-5 pb-1">
+      <div className="-mx-5 flex gap-2 overflow-x-auto px-5 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {[
           { k: 'coptic', en: 'Coptic Orthodox', ar: 'قبطي أرثوذكسي', icon: Check },
           { k: 'church', en: 'Church Verified', ar: 'كنيسة موثّقة', icon: ShieldCheck },

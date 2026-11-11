@@ -47,7 +47,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             type={type}
             dir={isDigitField ? 'ltr' : undefined}
             className={cn(
-              'h-12 w-full min-w-0 rounded-[var(--radius-md)] border border-ink-200 bg-parchment-0 px-4 text-[16px] text-ink-900 placeholder:text-ink-400 transition-colors',
+              'h-12 w-full min-w-0 rounded-[var(--r-md)] border border-ink-200 bg-parchment-0 px-4 text-[16px] text-ink-900 placeholder:text-ink-400 transition-colors',
               'focus:border-gold-400 focus:outline-none focus:ring-2 focus:ring-gold-200',
               isDigitField && 'text-left',
               // Hides the native up/down spinner arrows — on a scrollable
@@ -80,7 +80,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         </div>
         {effectiveHint && !error && <span className="field-hint text-xs">{effectiveHint}</span>}
         {error && (
-          <span className="inline-flex w-fit items-center rounded-[var(--radius-sm)] bg-danger-100 px-2 py-1 text-xs font-bold text-danger-700">
+          <span className="inline-flex w-fit items-center rounded-[var(--r-sm)] bg-danger-100 px-2 py-1 text-xs font-bold text-danger-700">
             {error}
           </span>
         )}

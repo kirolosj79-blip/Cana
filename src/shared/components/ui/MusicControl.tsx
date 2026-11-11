@@ -28,7 +28,7 @@ export function MusicControl() {
         <Music size={16} />
       </button>
       {open && (
-        <div className="absolute right-0 top-11 z-30 w-56 rounded-[var(--radius-md)] border border-ink-100 bg-parchment-0 p-4 shadow-[var(--shadow-soft-md)]">
+        <div className="absolute right-0 top-11 z-30 w-56 rounded-[var(--r-md)] border border-ink-100 bg-parchment-0 p-4 shadow-[var(--shadow-soft-md)]">
           <div className="flex items-center justify-between mb-3">
             <span className="text-xs font-medium text-ink-700">{t('Background music', 'موسيقى الخلفية')}</span>
             <button onClick={() => setEnabled(!enabled)} className="flex h-7 w-7 items-center justify-center rounded-full bg-ink-50 text-ink-600">

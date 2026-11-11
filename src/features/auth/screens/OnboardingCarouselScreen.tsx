@@ -81,7 +81,7 @@ export function OnboardingCarouselScreen() {
             transition={{ duration: 0.35 }}
             className="flex flex-col items-center gap-8"
           >
-            <div className="w-full max-w-xs rounded-[var(--radius-lg)] overflow-hidden border border-gold-200 shadow-[var(--shadow-soft-md)]">
+            <div className="w-full max-w-xs rounded-[var(--r-lg)] overflow-hidden border border-gold-200 shadow-[var(--shadow-soft-md)]">
               <motion.img
                 src={slide.image}
                 alt=""

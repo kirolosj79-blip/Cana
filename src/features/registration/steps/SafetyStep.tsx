@@ -42,7 +42,7 @@ export function SafetyStep() {
 
       {/* Privacy Policy comes first — reading it fully is required before
           the declaration below can even be agreed to. */}
-      <div className={cn('rounded-[var(--radius-md)] border p-4', privacyAgreed ? 'border-success-500/40 bg-success-100' : 'border-ink-200 bg-parchment-0')}>
+      <div className={cn('rounded-[var(--r-md)] border p-4', privacyAgreed ? 'border-success-500/40 bg-success-100' : 'border-ink-200 bg-parchment-0')}>
         <div className="flex items-center gap-2.5">
           <span className={cn('flex h-9 w-9 shrink-0 items-center justify-center rounded-full', privacyAgreed ? 'bg-success-500/15 text-success-500' : 'bg-ink-100 text-ink-500')}>
             {privacyAgreed ? <ShieldCheck size={17} /> : <FileText size={17} />}
@@ -66,7 +66,7 @@ export function SafetyStep() {
         </div>
       </div>
 
-      <div className="rounded-[var(--radius-md)] border border-ink-200 bg-parchment-0 p-5">
+      <div className="rounded-[var(--r-md)] border border-ink-200 bg-parchment-0 p-5">
         <p className="text-sm leading-relaxed text-ink-700 declaration-text">
           {t(
             '"I confirm that all information provided is accurate and truthful. I understand that this platform is intended only for individuals sincerely seeking Orthodox Christian marriage and that false information may result in account removal."',
@@ -79,7 +79,7 @@ export function SafetyStep() {
         onClick={toggle}
         disabled={!privacyAgreed}
         className={cn(
-          'flex w-full items-center gap-3 rounded-[var(--radius-md)] border px-4 py-4 text-left transition-colors',
+          'flex w-full items-center gap-3 rounded-[var(--r-md)] border px-4 py-4 text-left transition-colors',
           agreed ? 'border-gold-400 bg-gold-50' : 'border-ink-200 bg-parchment-0',
           !privacyAgreed && 'opacity-50 cursor-not-allowed'
         )}

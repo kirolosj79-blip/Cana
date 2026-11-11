@@ -61,7 +61,7 @@ export function MyProfileScreen() {
           </button>
         </Card>
 
-        <div className="flex items-center justify-around rounded-[var(--radius-md)] bg-ink-50/70 py-4">
+        <div className="flex items-center justify-around rounded-[var(--r-md)] bg-ink-50/70 py-4">
           {reviews.map((r) => {
             const seal = sectionSeal[r.section]
             if (!seal) return null
@@ -71,7 +71,7 @@ export function MyProfileScreen() {
 
         <div className="space-y-1">
           {menuItems.map((item) => (
-            <button key={item.label} onClick={() => navigate(item.to)} className="w-full flex items-center gap-3 rounded-[var(--radius-md)] px-3 py-3.5 hover:bg-ink-50 text-left">
+            <button key={item.label} onClick={() => navigate(item.to)} className="w-full flex items-center gap-3 rounded-[var(--r-md)] px-3 py-3.5 hover:bg-ink-50 text-left">
               <span className="flex h-9 w-9 items-center justify-center rounded-full bg-ink-50 text-ink-600">
                 <item.icon size={16} />
               </span>
@@ -84,7 +84,7 @@ export function MyProfileScreen() {
               logout()
               navigate('/welcome')
             }}
-            className="w-full flex items-center gap-3 rounded-[var(--radius-md)] px-3 py-3.5 hover:bg-danger-100 text-left"
+            className="w-full flex items-center gap-3 rounded-[var(--r-md)] px-3 py-3.5 hover:bg-danger-100 text-left"
           >
             <span className="flex h-9 w-9 items-center justify-center rounded-full bg-danger-100 text-danger-500">
               <LogOut size={16} />

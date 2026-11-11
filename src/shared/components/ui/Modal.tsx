@@ -29,7 +29,7 @@ export function Modal({ open, onClose, title, children, footer }: ModalProps) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 40 }}
             transition={{ type: 'spring', damping: 28, stiffness: 320 }}
-            className="relative z-10 w-full max-w-md rounded-t-[var(--radius-xl)] sm:rounded-[var(--radius-xl)] bg-parchment-0 p-6 shadow-[var(--shadow-soft-lg)] max-h-[85vh] overflow-y-auto"
+            className="relative z-10 w-full max-w-md rounded-t-[var(--r-xl)] sm:rounded-[var(--r-xl)] bg-parchment-0 p-6 shadow-[var(--shadow-soft-lg)] max-h-[85vh] overflow-y-auto"
           >
             <div className="flex items-center justify-between mb-4">
               {title && <h3 className="font-display text-lg font-medium text-ink-900">{title}</h3>}

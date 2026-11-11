@@ -89,7 +89,7 @@ export function CandidateCard({ candidate, variant = 'row' }: { candidate: UserP
 export function VerificationRow({ candidate }: { candidate: UserProfile }) {
   const { t } = useLanguage()
   return (
-    <div className={cn('flex items-center justify-around rounded-[var(--radius-md)] bg-ink-50/60 py-3')}>
+    <div className={cn('flex items-center justify-around rounded-[var(--r-md)] bg-ink-50/60 py-3')}>
       <TrustSeal kind="identity" status={candidate.verification.identity} label={t('Identity', 'الهوية')} size="sm" />
       <TrustSeal kind="church" status={candidate.verification.church} label={t('Church', 'الكنيسة')} size="sm" />
       <TrustSeal kind="marriageEligibility" status={candidate.verification.marriageEligibility} label={t('Eligible', 'الأهلية')} size="sm" />

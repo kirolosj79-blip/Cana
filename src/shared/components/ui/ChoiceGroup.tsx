@@ -60,7 +60,7 @@ export function ChoiceGroup({ options, value, onChange, multi = false, maxSelect
                 onClick={() => handleClick(opt.value)}
                 style={isSelected ? { borderColor: 'var(--color-selected-border)', backgroundColor: 'var(--color-selected-bg)', color: 'var(--color-selected-text)' } : undefined}
                 className={cn(
-                  'flex items-center justify-center min-w-0 w-full rounded-[var(--radius-md)] border px-2 py-3 text-center text-sm font-medium leading-snug transition-all break-words',
+                  'flex items-center justify-center min-w-0 w-full rounded-[var(--r-md)] border px-2 py-3 text-center text-sm font-medium leading-snug transition-all break-words',
                   isSelected ? 'shadow-[var(--shadow-soft-sm)]' : 'border-ink-200 bg-parchment-0 text-ink-700 hover:border-ink-300 hover:bg-ink-50'
                 )}
               >
@@ -76,7 +76,7 @@ export function ChoiceGroup({ options, value, onChange, multi = false, maxSelect
               onClick={() => handleClick(opt.value)}
               style={isSelected ? { borderColor: 'var(--color-selected-border)', backgroundColor: 'var(--color-selected-bg)', color: 'var(--color-selected-text)' } : undefined}
               className={cn(
-                'flex items-center gap-3 min-w-0 rounded-[var(--radius-md)] border px-4 py-3 text-left text-sm transition-all',
+                'flex items-center gap-3 min-w-0 rounded-[var(--r-md)] border px-4 py-3 text-left text-sm transition-all',
                 isSelected ? 'shadow-[var(--shadow-soft-sm)]' : 'border-ink-200 bg-parchment-0 text-ink-700 hover:border-ink-300 hover:bg-ink-50'
               )}
             >

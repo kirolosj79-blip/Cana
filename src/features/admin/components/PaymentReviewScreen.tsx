@@ -79,7 +79,7 @@ export function PaymentReviewScreen() {
                     </span>
                   </div>
 
-                  <div className="rounded-[var(--radius-md)] border border-dashed border-ink-200 h-28 flex items-center justify-center text-xs text-ink-400">
+                  <div className="rounded-[var(--r-md)] border border-dashed border-ink-200 h-28 flex items-center justify-center text-xs text-ink-400">
                     {r.screenshotUploaded ? t('Payment screenshot on file', 'صورة إثبات الدفع مرفوعة') : t('No screenshot uploaded', 'مفيش صورة مرفوعة')}
                   </div>
 
