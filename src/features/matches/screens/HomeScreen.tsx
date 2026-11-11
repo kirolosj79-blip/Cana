@@ -20,7 +20,7 @@ export function VerseBanner({ salt = 0 }: { salt?: number }) {
       <BookOpen size={16} className="mt-0.5 shrink-0 text-gold-300" />
       <div>
         <p className="text-[10px] font-bold uppercase tracking-wider text-white/80">{t(v.refEn, v.refAr)}</p>
-        <p className="mt-0.5 text-[13px] italic leading-snug">{t(v.en, `«${v.ar}»`)}</p>
+        <p className="mt-0.5 text-[11.5px] italic leading-snug">{t(v.en, `«${v.ar}»`)}</p>
       </div>
     </div>
   )
@@ -31,7 +31,7 @@ export function MatchesGrid({ limit }: { limit?: number }) {
   const navigate = useNavigate()
   const { t } = useMe()
   const [query, setQuery] = useState('')
-  const [chips, setChips] = useState<string[]>([])
+  const [chips, setChips] = useState<string[]>(['coptic', 'church'])
   const blockedIds = useJourneyStore((s) => s.blocked)
   const list = getDiscoverList()
     .filter((c) => !blockedIds.includes(c.id))
@@ -43,7 +43,7 @@ export function MatchesGrid({ limit }: { limit?: number }) {
       <div className="flex items-center gap-2 rounded-2xl border border-ink-100 bg-parchment-0 px-3.5 py-2.5 shadow-[var(--shadow-soft-sm)]">
         <Search size={16} className="text-ink-400" />
         <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder={t('Search by city, vocation,…', 'دوّر بالمدينة أو الوظيفة…')}
-          className="min-w-0 flex-1 bg-transparent text-sm text-ink-900 outline-none placeholder:text-ink-400" style={{ fontSize: 16 }} />
+          className="min-w-0 flex-1 bg-transparent text-[12px] text-ink-900 outline-none placeholder:text-ink-400" style={{ fontSize: 16 }} />
         <button onClick={() => navigate('/app/discover')} className="rounded-lg bg-parchment-200 p-1.5 text-ink-600" aria-label="Filters"><SlidersHorizontal size={14} /></button>
       </div>
       <div className="-mx-5 flex gap-2 overflow-x-auto px-5 pb-1">
@@ -55,7 +55,7 @@ export function MatchesGrid({ limit }: { limit?: number }) {
           const on = chips.includes(c.k)
           return (
             <button key={c.k} onClick={() => setChips((x) => (on ? x.filter((i) => i !== c.k) : [...x, c.k]))}
-              className={cn('flex shrink-0 items-center gap-1.5 rounded-full border px-3.5 py-2 text-xs font-semibold transition-colors', on ? 'border-[#0C1D3A] bg-[#0C1D3A] text-white' : 'border-ink-100 bg-parchment-0 text-ink-600')}>
+              className={cn('flex shrink-0 items-center gap-1.5 rounded-full border px-3.5 py-2 text-[11px] font-semibold transition-colors', on ? 'border-[#0C1D3A] bg-[#0C1D3A] text-white' : 'border-ink-100 bg-parchment-0 text-ink-600')}>
               {on && c.icon && <c.icon size={12} />} {t(c.en, c.ar)}
             </button>
           )
@@ -63,7 +63,7 @@ export function MatchesGrid({ limit }: { limit?: number }) {
       </div>
       <div className="grid grid-cols-2 gap-3">
         {list.map((c) => <MatchCard key={c.id} candidate={c} />)}
-        {list.length === 0 && <p className="col-span-2 py-6 text-center text-xs text-ink-400">{t('No matches found.', 'مفيش ترشيحات.')}</p>}
+        {list.length === 0 && <p className="col-span-2 py-6 text-center text-[11px] text-ink-400">{t('No matches found.', 'مفيش ترشيحات.')}</p>}
       </div>
     </>
   )
@@ -102,15 +102,15 @@ export function HomeScreen() {
         <div className="space-y-4 px-5 pb-6 pt-2">
           <VerseBanner />
           <div>
-            <p className="text-xs text-ink-500">{t(`Good evening, ${name}`, `مساء الخير يا ${name} 🌙`)}</p>
+            <p className="text-[11px] text-ink-500">{t(`Good evening, ${name}`, `مساء الخير يا ${name} 🌙`)}</p>
             <h1 className="text-[22px] font-bold tracking-tight text-ink-900">{t('Your Perfect Match Takes Time', 'اختيار شريك حياتك المناسب محتاج وقت')}</h1>
           </div>
           {items.map((i) => (
             <FCard key={i.en} className="flex items-start gap-3">
               <IconTile icon={i.icon} tint="navy" size={34} />
               <div>
-                <p className="text-sm font-bold text-ink-900">{t(i.en, i.ar)}</p>
-                <p className="mt-0.5 text-xs leading-relaxed text-ink-500">{t(i.be, i.ba)}</p>
+                <p className="text-[12px] font-bold text-ink-900">{t(i.en, i.ar)}</p>
+                <p className="mt-0.5 text-[11px] leading-relaxed text-ink-500">{t(i.be, i.ba)}</p>
               </div>
             </FCard>
           ))}
@@ -125,9 +125,9 @@ export function HomeScreen() {
       <div className="space-y-4 px-5 pb-6 pt-2">
         <VerseBanner />
         <div>
-          <p className="text-xs text-ink-500">{t(`Good evening, ${name}`, `مساء الخير يا ${name} ${g('🌙', '🌷')}`)}</p>
+          <p className="text-[11px] text-ink-500">{t(`Good evening, ${name}`, `مساء الخير يا ${name} ${g('🌙', '🌷')}`)}</p>
           <h1 className="text-[22px] font-bold tracking-tight text-ink-900">{t(`You have ${count} matches`, `عندك ${count} ترشيحات مناسبة`)}</h1>
-          <p className="mt-1 text-xs leading-relaxed text-ink-500">
+          <p className="mt-1 text-[11px] leading-relaxed text-ink-500">
             {t(
               'Review prayerfully and choose one person to connect with. Take your time—the other matches stay reserved for your decision.',
               g('خد وقتك في مراجعة الملفات الشخصية، وصلي واطلب إرشاد ربنا قبل ما تختار شخص واحد لبدء التعارف معاه. مفيش داعي للاستعجال، الترشيحات دي هتفضل متاحة ليك لحد ما تاخد قرارك.', 'خدي وقتك في مراجعة الملفات الشخصية، وصلي واطلبي إرشاد ربنا قبل ما تختاري شخص واحد لبدء التعارف معاه. مفيش داعي للاستعجال، الترشيحات دي هتفضل متاحة ليكي لحد ما تاخدي قرارك.')

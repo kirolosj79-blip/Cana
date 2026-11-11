@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom'
-import { MapPin, BookOpen, HeartHandshake, Hourglass, Heart, ShieldCheck } from 'lucide-react'
+import { MapPin, BookOpen, HeartHandshake, Hourglass, Heart, ShieldCheck, Briefcase, Church, Clock } from 'lucide-react'
+import { useRegistrationStore } from '@/store/registration.store'
 import { FigmaHeader } from '@/shared/components/layout/FigmaHeader'
 import { FCard, IconTile } from '@/shared/components/ui/figma'
 import { EmptyState } from '@/shared/components/feedback/StateScreens'
@@ -12,21 +13,68 @@ import { useJourneyStore } from '@/store/journey.store'
 import { verseOfDay } from '@/constants/verses'
 import type { UserProfile } from '@/types/profile.types'
 
-const NAVY_BTN = 'w-full rounded-xl bg-cta-bg py-3.5 text-sm font-bold text-cta-text'
-const SOFT_BTN = 'w-full rounded-xl border border-ink-100 bg-parchment-0 py-3.5 text-sm font-bold text-ink-800'
+const NAVY_BTN = 'w-full rounded-xl bg-cta-bg py-3.5 text-[12px] font-bold text-cta-text'
+const SOFT_BTN = 'w-full rounded-xl border border-ink-100 bg-parchment-0 py-3.5 text-[12px] font-bold text-ink-800'
 
-function PersonCard({ c, onView, label }: { c: UserProfile; onView: () => void; label: string }) {
+const TL: Record<string, string[]> = { within_6_months: ['0–6 mos', '0–6 شهور'], within_1_year: ['6–12 mos', '6–12 شهر'], within_1_2_years: ['1–2 yrs', '1–2 سنة'] }
+
+/** Figma person card: photo with verified badge, name, place, work, chips; optional navy "View profile" button or footer line. */
+function PersonCard({ c, onView, label, footer }: { c: UserProfile; onView?: () => void; label?: string; footer?: string }) {
   const { t } = useMe()
   const age = new Date().getFullYear() - new Date(c.personal.dateOfBirth).getFullYear()
+  const tl = TL[c.gettingToKnowYou.marriageTimeline ?? 'within_1_year'] ?? TL.within_1_year
   return (
-    <FCard className="flex items-center gap-3">
-      <img src={c.personal.profilePhotoUrl} alt="" className="h-16 w-16 shrink-0 rounded-xl bg-ink-100 object-cover" />
-      <div className="min-w-0 flex-1">
-        <p className="text-sm font-bold text-ink-900">{c.personal.firstName}, {age}</p>
-        <p className="mt-0.5 flex items-center gap-1 text-[11px] text-ink-500"><MapPin size={11} /> {c.personal.cityState}</p>
-        <p className="text-[11px] text-ink-500">{t('Coptic Orthodox', 'قبطي أرثوذكسي')} · {c.employment.occupation}</p>
-        <button onClick={onView} className="mt-1.5 text-[11px] font-bold text-ink-900 underline underline-offset-2">{label}</button>
+    <FCard className="!p-3.5">
+      <div className="flex items-start gap-3">
+        <div className="relative shrink-0">
+          <img src={c.personal.profilePhotoUrl} alt="" className="h-[84px] w-[72px] rounded-xl bg-ink-100 object-cover object-top" />
+          <span className="absolute -start-1.5 -top-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-[#0C1D3A] text-white"><ShieldCheck size={11} /></span>
+        </div>
+        <div className="min-w-0 flex-1">
+          <p className="text-[15px] font-bold text-ink-900">{c.personal.firstName}, {age}</p>
+          <p className="mt-1 flex items-center gap-1 text-[11px] text-ink-500"><MapPin size={11} className="shrink-0" /> {c.personal.cityState.replace(', ', ' • ')}</p>
+          <p className="mt-0.5 flex items-center gap-1 text-[11px] font-semibold text-ink-700"><Briefcase size={11} className="shrink-0 text-ink-400" /> {c.employment.occupation}</p>
+          <div className="mt-2 flex flex-wrap gap-1.5">
+            <span className="inline-flex items-center gap-1 rounded-md border border-ink-100 bg-parchment-50 px-2 py-1 text-[10px] font-medium text-ink-700"><Church size={10} /> {t('Coptic Orthodox', 'قبطي أرثوذكسي')}</span>
+            <span className="inline-flex items-center gap-1 rounded-md border border-ink-100 bg-parchment-50 px-2 py-1 text-[10px] font-medium text-ink-700"><Clock size={10} /> {t(tl[0], tl[1])}</span>
+          </div>
+        </div>
       </div>
+      {onView && (
+        <button onClick={onView} className="mt-3 w-full rounded-[10px] bg-cta-bg py-2.5 text-[11px] font-bold text-cta-text">{label}</button>
+      )}
+      {footer && <p className="mt-3 border-t border-ink-100 pt-2.5 text-[11px] text-ink-400">{footer}</p>}
+    </FCard>
+  )
+}
+
+/** Accepted: "You" and the other person side by side with a link icon between. */
+function PairCard({ c, label, onView }: { c: UserProfile; label: string; onView: () => void }) {
+  const { t, firstName } = useMe()
+  const mine = useRegistrationStore((s) => s.draft.personal)
+  const myCity = (mine.cityState ?? '').split(',')[0]
+  const age = new Date().getFullYear() - new Date(c.personal.dateOfBirth).getFullYear()
+  return (
+    <FCard className="!p-4">
+      <div className="flex items-center justify-between gap-2">
+        <div className="flex-1 text-center">
+          {mine.profilePhotoUrl
+            ? <img src={mine.profilePhotoUrl} alt="" className="mx-auto h-16 w-16 rounded-full bg-ink-100 object-cover" />
+            : <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-parchment-200 text-xl font-bold text-ink-700">{(firstName || '?')[0]}</span>}
+          <p className="mt-1.5 text-[11.5px] font-bold text-ink-900">{firstName ? t(`You (${firstName})`, `إنت (${firstName})`) : t('You', 'إنت')}</p>
+          <p className="text-[11px] text-ink-500">{myCity}</p>
+        </div>
+        <div className="flex flex-col items-center gap-1">
+          <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#0C1D3A] text-white"><HeartHandshake size={16} /></span>
+          <Heart size={11} className="fill-[#0C1D3A] text-[#0C1D3A]" />
+        </div>
+        <div className="flex-1 text-center">
+          <img src={c.personal.profilePhotoUrl} alt="" className="mx-auto h-16 w-16 rounded-full bg-ink-100 object-cover object-top" />
+          <p className="mt-1.5 text-[11.5px] font-bold text-ink-900">{c.personal.firstName}, {age}</p>
+          <p className="text-[11px] text-ink-500">{c.employment.occupation}</p>
+        </div>
+      </div>
+      <button onClick={onView} className="sr-only">{label}</button>
     </FCard>
   )
 }
@@ -60,7 +108,7 @@ export function RequestsScreen() {
       <BookOpen size={16} className="mt-0.5 shrink-0 text-gold-300" />
       <div>
         <p className="text-[10px] font-bold uppercase tracking-wider text-white/80">{t(verse.refEn, verse.refAr)}</p>
-        <p className="mt-0.5 text-[13px] italic">{t(verse.en, `«${verse.ar}»`)}</p>
+        <p className="mt-0.5 text-[11.5px] italic">{t(verse.en, `«${verse.ar}»`)}</p>
       </div>
     </div>
   )
@@ -70,7 +118,7 @@ export function RequestsScreen() {
       <FigmaHeader />
       <div className="space-y-4 px-5 pb-8 pt-2">
         {Banner}
-        <p className="text-xs text-ink-500">{greet}</p>
+        <p className="text-[11px] text-ink-500">{greet}</p>
         {children}
       </div>
     </div>
@@ -94,28 +142,28 @@ export function RequestsScreen() {
     return (
       <Shell>
         <h1 className="text-[22px] font-bold leading-tight text-ink-900">{t('An Update on Your Introduction Request', 'تحديث بخصوص طلب التعارف')}</h1>
-        <p className="text-[13px] leading-relaxed text-ink-600">
+        <p className="text-[11.5px] leading-relaxed text-ink-600">
           {t(
             `${first} has decided not to continue with the introduction request at this time.`,
             `${first} ${o('قرر إنه مش هيكمل', 'قررت إنها مش هتكمل')} في طلب التعارف في الوقت الحالي.`
           )}
         </p>
-        <p className="text-[13px] leading-relaxed text-ink-600">
+        <p className="text-[11.5px] leading-relaxed text-ink-600">
           {t(
             'We understand this news may be disappointing, but please do not lose hope. Sometimes finding the right person takes a little time, and everything has its right time. ❤️',
             g('إحنا متفهمين إن الخبر ده ممكن يكون محبط بالنسبة لك، لكن من فضلك ما تفقدش الأمل. ❤️ أحيانًا الوصول للشخص المناسب بيحتاج شوية وقت، وكل حاجة ليها وقتها المناسب.', 'إحنا متفهمين إن الخبر ده ممكن يكون محبط بالنسبة لك، لكن من فضلك ما تفقديش الأمل. ❤️ أحيانًا الوصول للشخص المناسب بيحتاج شوية وقت، وكل حاجة ليها وقتها المناسب.')
           )}
         </p>
         <FCard tone="warm">
-          <p className="flex items-center gap-2 text-sm font-bold text-ink-900"><ShieldCheck size={15} /> {t('Our Commitment To You', 'التزام CANA تجاهك')}</p>
-          <p className="mt-1.5 text-xs leading-relaxed text-ink-600">
+          <p className="flex items-center gap-2 text-[12px] font-bold text-ink-900"><ShieldCheck size={15} /> {t('Our Commitment To You', 'التزام CANA تجاهك')}</p>
+          <p className="mt-1.5 text-[11px] leading-relaxed text-ink-600">
             {t(
               'CANA will continue helping you find someone who shares your values and principles and is looking for a serious relationship with Christ as its foundation.',
               'CANA هتفضل تساعدك في البحث عن شخص يشاركك نفس القيم والمبادئ، ويكون بيدور على علاقة جادة يكون المسيح هو أساسها.'
             )}
           </p>
         </FCard>
-        <p className="text-xs italic text-ink-500">{t('Your journey is still ongoing, and the right introduction may be closer than you think.', 'رحلتك لسه مستمرة، وممكن يكون الترشيح المناسب ليك أقرب مما تتخيل.')}</p>
+        <p className="text-[11px] italic text-ink-500">{t('Your journey is still ongoing, and the right introduction may be closer than you think.', 'رحلتك لسه مستمرة، وممكن يكون الترشيح المناسب ليك أقرب مما تتخيل.')}</p>
         <button onClick={() => navigate('/app/home')} className={NAVY_BTN}>{t('Continue Your Journey', 'كمّل رحلتك مع CANA')}</button>
       </Shell>
     )
@@ -140,13 +188,13 @@ export function RequestsScreen() {
     return (
       <Shell>
         <h1 className="text-[22px] font-bold leading-tight text-ink-900">{t('Great News! Your Introduction Request Was Accepted ❤️', 'خبر جميل! تم قبول طلب التعارف! ❤️')}</h1>
-        <p className="text-[13px] leading-relaxed text-ink-600">
+        <p className="text-[11.5px] leading-relaxed text-ink-600">
           {t(
             `${first} accepted the introduction request you sent! This is a lovely first step to start getting to know each other through CANA. We wish you a good start and a beautiful journey as you take the next step in the search for the right life partner.`,
             `${first} ${o('وافق', 'وافقت')} على طلب التعارف اللي اتبعت ${o('له', 'لها')}! دي خطوة أولى جميلة علشان تبدأوا تتعرفوا على بعض من خلال CANA. بنتمنالكم بداية موفقة ورحلة جميلة، وإنتوا بتاخدوا الخطوة الجاية في طريق البحث عن شريك الحياة المناسب.`
           )}
         </p>
-        <PersonCard c={c} onView={viewProfile} label={t(`View ${first}'s Profile`, `عرض الملف الشخصي لـ${first}`)} />
+        <PairCard c={c} onView={viewProfile} label={t(`View ${first}'s Profile`, `عرض الملف الشخصي لـ${first}`)} />
         <button onClick={() => navigate(guidelinesDone.includes(c.id) ? `/app/chat/${c.id}` : `/app/guidelines/${c.id}`)} className={NAVY_BTN}>
           {t(`Start Conversation with ${first}`, g(`ابدأ المحادثة مع ${first}`, `ابدئي المحادثة مع ${first}`))}
         </button>
@@ -160,7 +208,7 @@ export function RequestsScreen() {
     return (
       <Shell>
         <h1 className="text-[22px] font-bold leading-tight text-ink-900">{t('You Have a New Introduction Request! 💌', 'عندك طلب تعارف جديد! 💌')}</h1>
-        <p className="text-[13px] leading-relaxed text-ink-600">
+        <p className="text-[11.5px] leading-relaxed text-ink-600">
           {t(
             `${first} sent you an introduction request through CANA and would like the chance to get to know you better. You can review the request and view the profile, then choose to accept the introduction or politely decline. ${first} will be notified once you decide. We wish you both the best on your journey to find the right life partner.`,
             `${first} ${o('بعت', 'بعتت')} لك طلب تعارف من خلال CANA، و${o('حابّ ياخد', 'حابة تاخد')} فرصة ${o('إنه يتعرف', 'إنها تتعرف')} عليك بشكل أفضل. تقدر تراجع ${o('طلبه وتشوف ملفه', 'طلبها وتشوف ملفها')} الشخصي، وبعدها تختار إما الموافقة على التعارف أو الاعتذار. ${first} ${o('هيوصله', 'هيوصلها')} إشعار بمجرد ما تاخد قرارك. بنتمنالكم كل التوفيق في رحلتكم للبحث عن شريك الحياة المناسب.`
@@ -168,8 +216,8 @@ export function RequestsScreen() {
         </p>
         <PersonCard c={c} onView={viewProfile} label={t(`View ${first}'s Profile`, `عرض الملف الشخصي لـ${first}`)} />
         <FCard tone="gold">
-          <p className="flex items-center gap-2 text-sm font-bold text-ink-900"><Heart size={14} /> {t('Potential Marriage Match', 'ترشيح محتمل للزواج')}</p>
-          <p className="mt-1 text-xs leading-relaxed text-ink-600">
+          <p className="flex items-center gap-2 text-[12px] font-bold text-ink-900"><Heart size={14} /> {t('Potential Marriage Match', 'ترشيح محتمل للزواج')}</p>
+          <p className="mt-1 text-[11px] leading-relaxed text-ink-600">
             {t(
               `${first} viewed your information card and saw shared values and principles, and would like to start the introduction steps through CANA, within the principles and rules our community is built on.`,
               `${first} ${o('اطّلع', 'اطّلعت')} على بطاقة معلوماتك، و${o('شاف', 'شافت')} إن فيه قيم ومبادئ مشتركة بينكم، و${o('عنده', 'عندها')} رغبة تبدأوا خطوات التعارف من خلال CANA، وفي إطار المبادئ والقواعد اللي المجتمع قائم عليها.`
@@ -188,26 +236,26 @@ export function RequestsScreen() {
   return (
     <Shell>
       <h1 className="text-[22px] font-bold leading-tight text-ink-900">{t('Your Introduction Request Has Been Sent! 💌', 'تم إرسال طلب التعارف بنجاح! 💌')}</h1>
-      <p className="text-[13px] leading-relaxed text-ink-600">
+      <p className="text-[11.5px] leading-relaxed text-ink-600">
         {t(
           `Your introduction request to ${first} has been sent successfully! We'll notify you as soon as ${first} accepts or declines. Thank you for your trust in CANA, and we're glad you took this step with us.`,
           `طلب التعارف اللي ${g('بعتّه', 'بعتّيه')} ل${first} تم إرساله بنجاح! هنبعت لك إشعار أول ما ${first} ${o('يوافق أو يعتذر', 'توافق أو تعتذر')} عن قبول طلب التعارف. شكرًا لثقتك في CANA، وسعيدين إنك ${g('أخدت', 'أخدتي')} الخطوة دي معانا.`
         )}
       </p>
-      <PersonCard c={c} onView={viewProfile} label={t(`View ${first}'s Profile`, `عرض الملف الشخصي لـ${first}`)} />
+      <PersonCard c={c} footer={t(`Sent today at ${new Date(current.createdAt).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}`, `اتبعت النهارده الساعة ${new Date(current.createdAt).toLocaleTimeString('ar-EG', { hour: 'numeric', minute: '2-digit' })}`)} />
       <FCard>
-        <p className="flex items-center gap-2 text-sm font-bold text-ink-900"><Hourglass size={14} /> {t('One Introduction at a Time', 'تعارف مع شخص واحد في كل مرة')}</p>
+        <p className="flex items-center gap-2 text-[12px] font-bold text-ink-900"><Hourglass size={14} /> {t('One Introduction at a Time', 'تعارف مع شخص واحد في كل مرة')}</p>
         <div className="mt-2 flex gap-2.5">
           <IconTile icon={Hourglass} tint="gold" size={28} />
           <div>
-            <p className="text-xs font-bold text-ink-900">{t('The other 3 introductions are temporarily paused', 'تم إيقاف الـ 3 ترشيحات التانية مؤقتًا')}</p>
-            <p className="mt-0.5 text-xs leading-relaxed text-ink-500">{t(`Until ${first} responds to your request, the other three introductions will remain paused.`, `لحد ما ${first} ${o('يرد', 'ترد')} على طلبك، الترشيحات التلاتة التانية هتكون متوقفة مؤقتًا.`)}</p>
+            <p className="text-[11px] font-bold text-ink-900">{t('The other 3 introductions are temporarily paused', 'تم إيقاف الـ 3 ترشيحات التانية مؤقتًا')}</p>
+            <p className="mt-0.5 text-[11px] leading-relaxed text-ink-500">{t(`Until ${first} responds to your request, the other three introductions will remain paused.`, `لحد ما ${first} ${o('يرد', 'ترد')} على طلبك، الترشيحات التلاتة التانية هتكون متوقفة مؤقتًا.`)}</p>
           </div>
         </div>
-        <p className="mt-3 text-xs leading-relaxed text-ink-500">
+        <p className="mt-3 text-[11px] leading-relaxed text-ink-500">
           <b className="text-ink-900">{t(`If ${first} accepts:`, `لو ${first} ${o('وافق', 'وافقت')}:`)}</b> {t('you will be able to start a private and secure conversation through the app.', 'هتقدروا تبدأوا محادثة خاصة وآمنة من خلال التطبيق.')}
         </p>
-        <p className="mt-1.5 text-xs leading-relaxed text-ink-500">
+        <p className="mt-1.5 text-[11px] leading-relaxed text-ink-500">
           <b className="text-ink-900">{t(`If ${first} declines:`, `لو ${first} ${o('اعتذر', 'اعتذرت')}:`)}</b> {t('the other three introductions will become available to you again immediately.', g('الترشيحات التلاتة التانية هترجع متاحة ليك فورًا.', 'الترشيحات التلاتة التانية هترجع متاحة ليكي فورًا.'))}
         </p>
       </FCard>

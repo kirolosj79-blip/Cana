@@ -47,7 +47,7 @@ export function SafetyFirstScreen() {
         <div className="space-y-3 px-5">
           <FCard className="flex gap-3">
             <IconTile icon={TriangleAlert} tint="gold" size={34} />
-            <p className="text-[13px] leading-relaxed text-ink-700">
+            <p className="text-[11.5px] leading-relaxed text-ink-700">
               {t(
                 'Your safety and privacy are important to us. Please use caution when communicating with anyone you meet through CANA, especially during the early stages of getting to know each other.',
                 g('سلامتك وخصوصيتك من أهم أولوياتنا في CANA. بننصحك تكون حريص في التعامل مع أي شخص تتعرف عليه من خلال التطبيق، خصوصًا في المراحل الأولى من التعارف.', 'سلامتك وخصوصيتك من أهم أولوياتنا في CANA. بننصحك تكوني حريصة في التعامل مع أي شخص تتعرفي عليه من خلال التطبيق، خصوصًا في المراحل الأولى من التعارف.')
@@ -60,7 +60,7 @@ export function SafetyFirstScreen() {
           {rules.map((r) => (
             <FCard key={r.en[0]} tone={r.danger ? 'danger' : 'default'} className="flex gap-3">
               <IconTile icon={r.icon} tint={r.tint} size={34} />
-              <p className="text-[13px] leading-relaxed text-ink-500">
+              <p className="text-[11.5px] leading-relaxed text-ink-500">
                 <b className={r.danger ? 'text-danger-700' : 'text-ink-900'}>{t(r.en[0], r.ar[0])}</b>
                 {t(r.en[1], r.ar[1])}
               </p>
@@ -75,7 +75,7 @@ export function SafetyFirstScreen() {
           <Button
             variant="gold"
             size="lg"
-            className="!rounded-[14px] w-full"
+            className="!rounded-[12px] w-full"
             disabled={!agreed}
             onClick={() => {
               accept()

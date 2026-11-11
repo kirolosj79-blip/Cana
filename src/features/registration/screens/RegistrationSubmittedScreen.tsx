@@ -82,19 +82,19 @@ export function RegistrationSubmittedScreen() {
         <div className="space-y-3 px-5 pt-4">
           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
             <FCard className="py-5 text-center">
-              <h1 className="text-[22px] font-bold leading-tight tracking-tight text-ink-900">
+              <h1 className="text-[27px] font-bold leading-tight tracking-tight text-ink-900">
                 {t(`Congratulations ${name}!`, `مبروك يا ${name}! 🎉`)}
               </h1>
-              <p className="mt-1 text-sm italic text-ink-500">{t('Your Marriage Profile Is Ready', 'بروفايل الزواج بتاعك بقى جاهز')}</p>
+              <p className="mt-1.5 text-[15px] italic text-ink-500">{t('Your Marriage Profile Is Ready', 'بروفايل الزواج بتاعك بقى جاهز')}</p>
             </FCard>
           </motion.div>
 
           <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
             <FCard className="px-4 py-5">
-              <h2 className="text-center text-[17px] font-bold leading-snug text-ink-900">
+              <h2 className="text-center text-[19px] font-bold leading-snug text-ink-900">
                 {t('Thank you for completing your CANA profile.', 'شكرًا لاستكمال بروفايل CANA الخاص بيك!')}
               </h2>
-              <p className="mt-2 text-center text-xs leading-relaxed text-ink-500">
+              <p className="mt-2 text-center text-[11px] leading-relaxed text-ink-500">
                 {t('Your information has been received and will be reviewed within 24 hours.', 'تم استلام بياناتك بنجاح، وهتتم مراجعتها خلال 24 ساعة.')}
               </p>
               <div className="mt-4 space-y-4 border-t border-ink-100 pt-4">
@@ -102,13 +102,13 @@ export function RegistrationSubmittedScreen() {
                   <div key={it.title} className="flex items-start gap-3">
                     <IconTile icon={it.icon} tint="navy" size={30} />
                     <div className="min-w-0">
-                      <p className="text-[13px] font-bold text-ink-900">{it.title}</p>
-                      <p className="mt-0.5 text-xs leading-relaxed text-ink-500">{it.body}</p>
+                      <p className="text-[11.5px] font-bold text-ink-900">{it.title}</p>
+                      <p className="mt-0.5 text-[11px] leading-relaxed text-ink-500">{it.body}</p>
                     </div>
                   </div>
                 ))}
               </div>
-              <button onClick={() => setOpen(true)} className="mt-5 w-full rounded-xl bg-cta-bg py-3.5 text-sm font-bold text-cta-text">
+              <button onClick={() => setOpen(true)} className="mt-5 w-full rounded-xl bg-cta-bg py-3.5 text-[12px] font-bold text-cta-text">
                 {t('Submit For Verification', 'إرسال للتحقق')}
               </button>
               <p className="mt-3 text-center text-[11px] text-ink-500">{t('Estimated review turnaround: within 24 hours', 'الوقت المتوقع للمراجعة: خلال 24 ساعة.')}</p>
@@ -123,7 +123,7 @@ export function RegistrationSubmittedScreen() {
         onClose={() => setOpen(false)}
         title={t('Awaiting Verification', 'في انتظار التحقق من البيانات')}
         actions={
-          <button onClick={done} className="w-full rounded-xl bg-cta-bg py-3.5 text-sm font-bold text-cta-text">
+          <button onClick={done} className="w-full rounded-xl bg-cta-bg py-3.5 text-[12px] font-bold text-cta-text">
             {t('Got it', 'تمام، فهمت.')}
           </button>
         }

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { TriangleAlert, LogOut, Lock, ShieldCheck, RotateCcw } from 'lucide-react'
 import { FigmaHeader } from '@/shared/components/layout/FigmaHeader'
 import { Button } from '@/shared/components/ui/Button'
-import { FCard, IconTile, PageHeading, Eyebrow, CheckRow } from '@/shared/components/ui/figma'
+import { FCard, IconTile, PageHeading, Eyebrow, CheckRow, Rich } from '@/shared/components/ui/figma'
 import { useMe } from '@/core/hooks/useMe'
 import { useJourneyStore } from '@/store/journey.store'
 
@@ -26,8 +26,8 @@ export function ContactPolicyScreen() {
       en: ['Future Communication Is Your Responsibility', 'After you move your communication outside CANA, all conversations, meetings, decisions, and any relationship that develops will be your responsibility and that of the other person. CANA will no longer manage or facilitate your communication.'],
       ar: ['3. التواصل بعد كده مسؤوليتكم', 'بعد ما تنتقلوا للتواصل خارج CANA، بتكون مسؤولية كل المحادثات والمقابلات والقرارات وأي علاقة ممكن تتطور بينكم مسؤوليتكم إنتوا الاتنين. ومش هيكون لـ CANA أي دور في إدارة أو متابعة أو تسهيل التواصل بينكم.'] },
     { icon: RotateCcw, tint: 'purple' as const,
-      en: ['Returning to CANA', 'If you decide to return after your current introduction has ended, your previous profile will not be automatically restored. To reactivate your account, you must complete the Previous Introduction Feedback form and pay 50% of the standard registration fee.'],
-      ar: ['4. الرجوع لاستخدام CANA مرة تانية', 'لو قررت ترجع تستخدم CANA بعد انتهاء التعارف الحالي، ملفك الشخصي القديم مش هيتفعّل تلقائيًا. علشان تقدر تفعّل حسابك من جديد، لازم: تملأ نموذج تقييم تجربة التعارف السابقة. تدفع 50% من رسوم التسجيل الأساسية.'] },
+      en: ['Returning to CANA', 'If you decide to return after your current introduction has ended, your previous profile will not be automatically restored. To reactivate your account, you must complete the **Previous Introduction Feedback** form and pay **50% of the standard registration fee.**'],
+      ar: ['4. الرجوع لاستخدام CANA مرة تانية', 'لو قررت ترجع تستخدم CANA بعد انتهاء التعارف الحالي، ملفك الشخصي القديم مش هيتفعّل تلقائيًا. علشان تقدر تفعّل حسابك من جديد، لازم: **تملأ نموذج تقييم تجربة التعارف السابقة.** **تدفع 50% من رسوم التسجيل الأساسية.**'] },
   ]
 
   return (
@@ -41,7 +41,7 @@ export function ContactPolicyScreen() {
         <div className="space-y-3 px-5">
           <FCard className="flex gap-3">
             <IconTile icon={TriangleAlert} tint="gold" size={34} />
-            <p className="text-[13px] leading-relaxed text-ink-700">
+            <p className="text-[11.5px] leading-relaxed text-ink-700">
               {t(
                 'Once you and your match decide to exchange personal contact information by sharing your phone number, email address, WhatsApp information, or any other personal contact information, you acknowledge and agree that:',
                 g('لما تتفق إنت والشخص اللي تم ترشيحه ليك على تبادل بيانات التواصل الشخصية، زي رقم التليفون، البريد الإلكتروني، بيانات الواتساب، أو أي وسيلة تواصل شخصية تانية، فده معناه إنك موافق وفاهم الشروط التالية:', 'لما تتفقي إنتي والشخص اللي تم ترشيحه ليكي على تبادل بيانات التواصل الشخصية، زي رقم التليفون، البريد الإلكتروني، بيانات الواتساب، أو أي وسيلة تواصل شخصية تانية، فده معناه إنك موافقة وفاهمة الشروط التالية:')
@@ -54,8 +54,8 @@ export function ContactPolicyScreen() {
             <FCard key={x.en[0]} className="flex gap-3">
               <IconTile icon={x.icon} tint={x.tint} size={34} />
               <div>
-                <p className="text-sm font-bold text-ink-900">{t(x.en[0], x.ar[0])}</p>
-                <p className="mt-1 text-[13px] leading-relaxed text-ink-500">{t(x.en[1], x.ar[1])}</p>
+                <p className="text-[12px] font-bold text-ink-900">{t(x.en[0], x.ar[0])}</p>
+                <p className="mt-1 text-[11.5px] leading-relaxed text-ink-500"><Rich>{t(x.en[1], x.ar[1])}</Rich></p>
               </div>
             </FCard>
           ))}
@@ -66,7 +66,7 @@ export function ContactPolicyScreen() {
           <Button
             variant="gold"
             size="lg"
-            className="!rounded-[14px] w-full"
+            className="!rounded-[12px] w-full"
             disabled={!agreed}
             onClick={() => {
               accept()

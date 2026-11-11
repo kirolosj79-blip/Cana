@@ -29,8 +29,8 @@ export function MessagesScreen() {
             <FCard className="flex items-center gap-3">
               <img src={other.personal.profilePhotoUrl} alt="" className="h-12 w-12 rounded-full bg-ink-100 object-cover" />
               <div className="min-w-0 flex-1">
-                <p className="text-sm font-bold text-ink-900">{other.personal.displayName}</p>
-                <p className="truncate text-xs text-ink-500">{last?.text ?? t('Start the conversation', 'ابدأ المحادثة')}</p>
+                <p className="text-[12px] font-bold text-ink-900">{other.personal.displayName}</p>
+                <p className="truncate text-[11px] text-ink-500">{last?.text ?? t('Start the conversation', 'ابدأ المحادثة')}</p>
               </div>
               <span className="h-2 w-2 rounded-full bg-success-500" />
             </FCard>

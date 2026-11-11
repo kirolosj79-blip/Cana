@@ -178,7 +178,7 @@ export function ProfileDetailScreen() {
             </Button>
           )}
           {status === 'accepted' && (
-            <Button variant="gold" size="lg" className="!rounded-[14px] flex-1" onClick={() => navigate(guidelinesDone.includes(candidate.id) ? `/app/chat/${candidate.id}` : `/app/guidelines/${candidate.id}`)}>
+            <Button variant="gold" size="lg" className="!rounded-[12px] flex-1" onClick={() => navigate(guidelinesDone.includes(candidate.id) ? `/app/chat/${candidate.id}` : `/app/guidelines/${candidate.id}`)}>
               {t('Start Chatting', 'ابدأ المحادثة')}
             </Button>
           )}

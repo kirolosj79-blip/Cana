@@ -110,7 +110,7 @@ export function ChatScreen() {
         <button onClick={() => navigate('/app/messages')} className="text-ink-700" aria-label="Back"><Back size={20} /></button>
         <img src={other.personal.profilePhotoUrl} alt="" className="h-10 w-10 rounded-full bg-ink-100 object-cover" />
         <div className="min-w-0 flex-1">
-          <p className="truncate text-sm font-bold text-ink-900">{other.personal.displayName}</p>
+          <p className="truncate text-[12px] font-bold text-ink-900">{other.personal.displayName}</p>
           <p className="flex items-center gap-1 text-[11px] text-success-500"><span className="h-1.5 w-1.5 rounded-full bg-success-500" /> {t('Intentional Discernment', 'تمييز مقصود')}</p>
         </div>
         <ChatToggles />
@@ -128,7 +128,7 @@ export function ChatScreen() {
                   <button key={m.en[0]} onClick={() => { setMenu(false); m.fn() }} className="flex w-full items-center gap-3 border-b border-ink-100 px-4 py-3 text-start last:border-0">
                     <span className={cn('flex h-8 w-8 items-center justify-center rounded-full', m.red ? 'bg-danger-100 text-danger-700' : 'bg-parchment-200 text-ink-700')}><m.icon size={14} /></span>
                     <span>
-                      <span className={cn('block text-[13px] font-bold', m.red ? 'text-danger-700' : 'text-ink-900')}>{t(m.en[0], m.ar[0])}</span>
+                      <span className={cn('block text-[11.5px] font-bold', m.red ? 'text-danger-700' : 'text-ink-900')}>{t(m.en[0], m.ar[0])}</span>
                       <span className="block text-[11px] text-ink-500">{t(m.en[1], m.ar[1])}</span>
                     </span>
                   </button>
@@ -141,7 +141,7 @@ export function ChatScreen() {
 
       {waiting && (
         <div className="space-y-2 border-b border-ink-100 bg-gold-50 px-4 py-3">
-          <p className="flex items-center gap-2 text-xs font-semibold text-ink-900">
+          <p className="flex items-center gap-2 text-[11px] font-semibold text-ink-900">
             <Hourglass size={14} className="text-gold-700" /> {t(`Waiting for ${name} to respond…`, `في انتظار رد ${name}…`)}
           </p>
           <p className="text-[11px] text-ink-500">{t('Prototype: choose how they respond', 'نسخة تجريبية: اختار رد الطرف التاني')}</p>
@@ -156,9 +156,9 @@ export function ChatScreen() {
         <Handshake size={16} className="text-gold-700" />
         <div className="min-w-0 flex-1">
           <p className="text-[9px] font-bold uppercase tracking-wider text-gold-700">{t('Sacred Milestone', 'محطة مقدسة')}</p>
-          <p className="truncate text-xs font-semibold text-ink-900">{t('Ready to Exchange Contact Information?', 'جاهزين تتبادلوا بيانات التواصل؟')}</p>
+          <p className="truncate text-[11px] font-semibold text-ink-900">{t('Ready to Exchange Contact Information?', 'جاهزين تتبادلوا بيانات التواصل؟')}</p>
         </div>
-        <button onClick={() => setDlg('confirm')} className="flex items-center gap-1 rounded-lg bg-[#0C1D3A] px-3 py-1.5 text-xs font-semibold text-white">
+        <button onClick={() => setDlg('confirm')} className="flex items-center gap-1 rounded-lg bg-[#0C1D3A] px-3 py-1.5 text-[11px] font-semibold text-white">
           {t('Proceed', 'تابع')} <Arrow size={11} />
         </button>
       </div>
@@ -166,7 +166,7 @@ export function ChatScreen() {
       <div className="flex-1 space-y-3 overflow-y-auto px-4 py-4">
         <p className="text-center text-[11px] text-ink-400">{t('Today', 'النهارده')}</p>
         {msgs.length === 0 && (
-          <div className="mx-auto max-w-[260px] rounded-2xl border border-dashed border-ink-200 p-4 text-center text-xs leading-relaxed text-ink-500">
+          <div className="mx-auto max-w-[260px] rounded-2xl border border-dashed border-ink-200 p-4 text-center text-[11px] leading-relaxed text-ink-500">
             <ShieldCheck size={16} className="mx-auto mb-1 text-gold-700" />
             {t(`Say hello to ${name}. Be kind, take your time, and keep contact details private for now.`, `سلّم على ${name}. كون لطيف وخد وقتك وخلّي بيانات التواصل خاصة دلوقتي.`)}
           </div>
@@ -186,7 +186,7 @@ export function ChatScreen() {
         <button onClick={() => setDlg('confirm')} className="flex w-full items-center gap-3 rounded-2xl bg-[#0C1D3A] px-4 py-3 text-start text-white">
           <span className="min-w-0 flex-1">
             <span className="block text-[10px] text-gold-300">♥ {t('Sacred Milestone', 'محطة مقدسة')}</span>
-            <span className="block text-sm font-bold">{t('Ready to Exchange Contact Information?', 'جاهزين تتبادلوا بيانات التواصل؟')}</span>
+            <span className="block text-[12px] font-bold">{t('Ready to Exchange Contact Information?', 'جاهزين تتبادلوا بيانات التواصل؟')}</span>
           </span>
           <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/10"><Arrow size={14} /></span>
         </button>
@@ -209,11 +209,11 @@ export function ChatScreen() {
       {/* Report a Concern */}
       <CenterDialog open={dlg === 'report'} onClose={() => setDlg(null)} icon={<ShieldCheck size={24} />} title={t('Report a Concern', 'الإبلاغ عن مشكلة')} pill={t('Confidential Pastoral Review', 'مراجعة رعوية سرّية')}
         actions={<>
-          <button disabled={reason.length === 0} className="w-full rounded-xl bg-cta-bg py-3.5 text-sm font-bold text-cta-text disabled:opacity-50" onClick={() => { j.report(id, reason.join(','), note); setDlg(null); setReason([]); setNote(''); setProof([]); show(t('Report sent confidentially', 'تم إرسال البلاغ بسرية'), 'success') }}>{t('Submit Report', 'إرسال البلاغ')}</button>
+          <button disabled={reason.length === 0} className="w-full rounded-xl bg-cta-bg py-3.5 text-[12px] font-bold text-cta-text disabled:opacity-50" onClick={() => { j.report(id, reason.join(','), note); setDlg(null); setReason([]); setNote(''); setProof([]); show(t('Report sent confidentially', 'تم إرسال البلاغ بسرية'), 'success') }}>{t('Submit Report', 'إرسال البلاغ')}</button>
           <SoftButton onClick={() => setDlg(null)}>{t('Cancel', 'إلغاء')}</SoftButton>
         </>}>
         <p>{t('Help us keep CANA safe, respectful, and faithful to our values. Please select the reason for reporting this member.', 'ساعدنا في الحفاظ على أمان CANA، وعلى الاحترام والالتزام بالقيم والمبادئ اللي بنؤمن بيها. من فضلك اختار سبب الإبلاغ عن العضو ده.')}</p>
-        <div className="mt-3 flex items-start gap-2 rounded-xl bg-parchment-100 px-3 py-2.5 text-start text-xs">
+        <div className="mt-3 flex items-start gap-2 rounded-xl bg-parchment-100 px-3 py-2.5 text-start text-[11px]">
           <ShieldCheck size={14} className="mt-0.5 shrink-0 text-ink-500" />
           <span>{t('Your report will be handled confidentially and reviewed by the CANA team.', 'هيتم التعامل مع بلاغك بسرية تامة، وهيقوم فريق CANA بمراجعته.')}</span>
         </div>
@@ -234,13 +234,13 @@ export function ChatScreen() {
         <p className="mt-3 text-start text-[10px] font-bold uppercase tracking-wider text-gold-700">{t('Attach proof / screenshot (optional)', 'إرفاق دليل')}</p>
         <div className="mt-2 space-y-2 text-start">
           {proof.map((f, i) => (
-            <div key={i} className="flex items-center gap-2 rounded-xl border border-ink-100 bg-parchment-0 px-3 py-2 text-xs">
+            <div key={i} className="flex items-center gap-2 rounded-xl border border-ink-100 bg-parchment-0 px-3 py-2 text-[11px]">
               <Paperclip size={13} className="text-ink-400" />
               <span className="min-w-0 flex-1 truncate font-semibold text-ink-900">{f.name}<span className="block text-[10px] font-normal text-success-500">✓ {t('Attached', 'تم إرفاق الملف')} • {(f.size / 1048576).toFixed(1)} MB</span></span>
               <button onClick={() => setProof((p) => p.filter((_, k) => k !== i))} aria-label="Remove"><XIcon size={13} className="text-ink-400" /></button>
             </div>
           ))}
-          <label className="flex cursor-pointer items-center justify-center gap-1.5 rounded-xl border border-dashed border-ink-200 px-3 py-2.5 text-xs text-ink-500">
+          <label className="flex cursor-pointer items-center justify-center gap-1.5 rounded-xl border border-dashed border-ink-200 px-3 py-2.5 text-[11px] text-ink-500">
             <Plus size={13} /> {t('Add another screenshot or chat log', 'إضافة لقطة شاشة أو سجل محادثة آخر')}
             <input type="file" accept="image/*,.txt,.pdf" className="hidden" onChange={(e) => { const f = e.target.files?.[0]; if (f) setProof((p) => [...p, f]); e.target.value = '' }} />
           </label>
@@ -248,14 +248,14 @@ export function ChatScreen() {
       </CenterDialog>
 
       {/* Block This Member */}
-      <CenterDialog open={dlg === 'block'} onClose={() => setDlg(null)} icon={<Ban size={24} className="text-danger-700" />} title={t('Block This Member', 'حظر هذا العضو')} pill={t('Boundary Protection', 'حماية خصوصيتك ووضع حدود واضحة')}
+      <CenterDialog open={dlg === 'block'} onClose={() => setDlg(null)} iconTone="red" icon={<Ban size={24} />} title={t('Block This Member', 'حظر هذا العضو')} pill={t('Boundary Protection', 'حماية خصوصيتك ووضع حدود واضحة')}
         actions={<>
           <SoftButton tone="red" onClick={doBlock}>{t(`Block ${name}`, `تأكيد حظر ${name}`)}</SoftButton>
           <SoftButton onClick={() => setDlg(null)}>{t('Cancel', 'إلغاء')}</SoftButton>
         </>}>
         <p className="font-semibold text-ink-900">{t(`Are you sure you want to block ${name}?`, g(`هل أنت متأكد إنك عايز تحظر ${name}؟`, `هل أنتِ متأكدة إنك عايزة تحظري ${name}؟`))}</p>
         <p className="mt-2">{t('You will no longer be able to message each other or view each other’s profiles on CANA.', 'بعد الحظر، مش هيكون متاح ليكم تبعتوا رسائل لبعض أو تشوفوا الملفات الشخصية لبعض على CANA.')}</p>
-        <div className="mt-3 flex items-start gap-2 rounded-xl bg-parchment-100 px-3 py-2.5 text-start text-xs">
+        <div className="mt-3 flex items-start gap-2 rounded-xl bg-parchment-100 px-3 py-2.5 text-start text-[11px]">
           <ShieldCheck size={14} className="mt-0.5 shrink-0 text-ink-500" />
           <span>{t(`Blocking ${name} will end your current introduction and notify the CANA pastoral review team so they can address any privacy or safety concerns.`, `حظر ${name} هيؤدي إلى إنهاء التعارف الحالي بينكم، وكمان هيتم إخطار فريق المراجعة الرعوية في CANA علشان يقدر يتعامل مع أي مخاوف متعلقة بالخصوصية أو السلامة والأمان.`)}</span>
         </div>
@@ -264,7 +264,7 @@ export function ChatScreen() {
       {/* Ready for the next step? (sender) */}
       <CenterDialog open={dlg === 'confirm'} onClose={() => setDlg(null)} icon={<Handshake size={24} />} title={t(`${myName}, ready for the next step?`, g(`${myName}، جاهز للخطوة الجاية؟`, `${myName}، جاهزة للخطوة الجاية؟`))}
         actions={<>
-          <button className="w-full rounded-xl bg-cta-bg py-3.5 text-sm font-bold text-cta-text" onClick={() => setDlg('safety')}>{t('Yes, I agree', g('أيوه، موافق', 'أيوه، موافقة'))}</button>
+          <button className="w-full rounded-xl bg-cta-bg py-3.5 text-[12px] font-bold text-cta-text" onClick={() => setDlg('safety')}>{t('Yes, I agree', g('أيوه، موافق', 'أيوه، موافقة'))}</button>
           <SoftButton onClick={() => setDlg(null)}>{t('Not Yet', 'مش دلوقتي')}</SoftButton>
         </>}>
         <div className="space-y-3 text-start">
@@ -278,7 +278,7 @@ export function ChatScreen() {
 
       {/* Safety reminder */}
       <CenterDialog open={dlg === 'safety'} icon={<ShieldCheck size={24} />} title={t('Safety Reminder', 'تنبيه للحفاظ على سلامتك')}
-        actions={<button disabled={!agree} className="w-full rounded-xl bg-cta-bg py-3.5 text-sm font-bold text-cta-text disabled:opacity-50" onClick={() => {
+        actions={<button disabled={!agree} className="w-full rounded-xl bg-cta-bg py-3.5 text-[12px] font-bold text-cta-text disabled:opacity-50" onClick={() => {
           setDlg(null)
           j.markReadyOutside(id)
         }}>{t('I’ve Read & Understood', 'قرأتُ وفهمتُ وأوافق.')}</button>}>
@@ -292,7 +292,7 @@ export function ChatScreen() {
       {/* If the other person said "Not Yet" — shown to the sender */}
       <CenterDialog open={dlg === 'takeTime'} icon={<Hourglass size={24} />} title={t(`It’s Okay to Take Your Time, ${myName}`, g(`مش لازم تستعجل يا ${myName}`, `مش لازم تستعجلي يا ${myName}`))}
         actions={<>
-          <button className="w-full rounded-xl bg-cta-bg py-3.5 text-sm font-bold text-cta-text" onClick={() => { j.unmarkReadyOutside(id); setDlg(null) }}>{t('Back to chat', 'الرجوع للمحادثة')}</button>
+          <button className="w-full rounded-xl bg-cta-bg py-3.5 text-[12px] font-bold text-cta-text" onClick={() => { j.unmarkReadyOutside(id); setDlg(null) }}>{t('Back to chat', 'الرجوع للمحادثة')}</button>
           <SoftButton onClick={() => { j.unmarkReadyOutside(id); setDlg(null) }}>{t('Cancel', 'إلغاء')}</SoftButton>
         </>}>
         <div className="space-y-3 text-start">
@@ -306,14 +306,14 @@ export function ChatScreen() {
 
       {/* Other person ended the introduction */}
       <CenterDialog open={dlg === 'ended'} icon={<Ban size={24} />} title={t('Introduction ended', 'التعارف انتهى')}
-        actions={<Button variant="gold" size="lg" className="!rounded-[14px] w-full" onClick={() => { setDlg(null); endIntro() }}>{t('Continue', 'كمّل')}</Button>}>
+        actions={<Button variant="gold" size="lg" className="!rounded-[12px] w-full" onClick={() => { setDlg(null); endIntro() }}>{t('Continue', 'كمّل')}</Button>}>
         <p>{t(`${name} has chosen to end this introduction. The chat is now closed. You can look for a new introduction after sharing a short feedback.`, `${name} اختار ينهي التعارف ده. المحادثة اتقفلت. تقدر تدوّر على تعارف جديد بعد ما تشاركنا ملاحظات سريعة.`)}</p>
       </CenterDialog>
 
       {/* What the recipient sees */}
       <CenterDialog open={dlg === 'partner'} icon={<Handshake size={24} />} title={t(`${name} wants to take the next step!`, `${name} ${o('حابب', 'حابة')} ${o('ياخد', 'تاخد')} الخطوة الجاية!`)}
         actions={<>
-          <button className="w-full rounded-xl bg-cta-bg py-3.5 text-sm font-bold text-cta-text" onClick={goOutside}>{t('Yes, I agree', g('أيوه، موافق', 'أيوه، موافقة'))}</button>
+          <button className="w-full rounded-xl bg-cta-bg py-3.5 text-[12px] font-bold text-cta-text" onClick={goOutside}>{t('Yes, I agree', g('أيوه، موافق', 'أيوه، موافقة'))}</button>
           <SoftButton onClick={() => setDlg(null)}>{t('Not Yet', 'مش دلوقتي')}</SoftButton>
         </>}>
         <div className="space-y-3 text-start">

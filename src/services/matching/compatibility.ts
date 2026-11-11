@@ -13,11 +13,11 @@ const age = calculateAge
  * gender (opposite only), age range, country, church-recommendation
  * approval, and profile verification / membership standing.
  */
-export function passesMandatoryFilters(candidate: UserProfile): boolean {
+export function passesMandatoryFilters(candidate: UserProfile, strict = true): boolean {
   const draft = useRegistrationStore.getState().draft
   const myGender = draft.gender
-  if (!myGender) return false
-  if (candidate.personal.gender === myGender) return false
+  // No gender chosen yet (fresh prototype session): behave like the Figma example (a woman viewing men) so there are always matches.
+  if (candidate.personal.gender === (myGender ?? 'female')) return false
 
   // Never resurface someone the member passed on or blocked.
   if (useMatchesStore.getState().passedIds.includes(candidate.id)) return false
@@ -27,6 +27,10 @@ export function passesMandatoryFilters(candidate: UserProfile): boolean {
   // before a member becomes visible to others.
   if (candidate.verification.identity !== 'verified') return false
   if (candidate.verification.church !== 'verified') return false
+
+  if (!strict) return true
+
+  if (!strict) return true
 
   const prefs = draft.compatibilityPreferences
   const candidateAge = age(candidate.personal.dateOfBirth)
@@ -100,8 +104,11 @@ export function computeCompatibilityScore(candidate: UserProfile): number {
 }
 
 export function getRankedMatches(list: UserProfile[]): UserProfile[] {
-  return list
-    .filter(passesMandatoryFilters)
+  // Prototype default: there should always be matches to look at. If the member's age/country
+  // preferences exclude everyone, fall back to the verified opposite-gender profiles.
+  const strictList = list.filter((c) => passesMandatoryFilters(c))
+  const pool = strictList.length ? strictList : list.filter((c) => passesMandatoryFilters(c, false))
+  return pool
     .map((c) => ({ ...c, compatibilityScore: computeCompatibilityScore(c) }))
     .sort((a, b) => (b.compatibilityScore ?? 0) - (a.compatibilityScore ?? 0))
 }

@@ -24,8 +24,8 @@ export function GuidelinesScreen() {
     <div className="flex gap-3">
       <span className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[10px] font-bold ${dark ? 'bg-white/15 text-white' : 'bg-parchment-200 text-ink-800'}`}>{n}</span>
       <div>
-        <p className={`text-sm font-bold ${dark ? 'text-white' : 'text-ink-900'}`}>{title}</p>
-        <p className={`mt-0.5 text-[13px] leading-relaxed ${dark ? 'text-white/70' : 'text-ink-500'}`}>{body}</p>
+        <p className={`text-[12px] font-bold ${dark ? 'text-white' : 'text-ink-900'}`}>{title}</p>
+        <p className={`mt-0.5 text-[11.5px] leading-relaxed ${dark ? 'text-white/70' : 'text-ink-500'}`}>{body}</p>
       </div>
     </div>
   )
@@ -44,7 +44,7 @@ export function GuidelinesScreen() {
             </span>
           </div>
           <h1 className="mt-4 font-bold tracking-tight text-[28px] font-semibold leading-tight text-ink-900">{t('Before You Start Chatting', 'قبل ما تبدأوا المحادثة')}</h1>
-          <p className="mx-auto mt-2 max-w-xs text-[13px] leading-relaxed text-ink-500">
+          <p className="mx-auto mt-2 max-w-xs text-[11.5px] leading-relaxed text-ink-500">
             {t(
               'You have both accepted this introduction. CANA provides a protected sanctuary to discern marriage in purity, reverence, and spiritual peace.',
               'كلاكما وافق على بدء التعارف. CANA بتوفر لكم بيئة آمنة ومحترمة تساعدكم على التعارف بهدف الزواج، في إطار من الصدق والاحترام والراحة الروحية، وبما يتوافق مع المبادئ المسيحية.'
@@ -69,7 +69,7 @@ export function GuidelinesScreen() {
         </FCard>
 
         <div className="rounded-[22px] bg-[#0C1D3A] p-4 text-white shadow-[var(--shadow-soft-sm)]">
-          <span className="inline-flex rounded-md bg-gold-100 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-gold-700">{t('Critical', 'مهم جدًا')}</span>
+          <span className="block w-full rounded-[6px] bg-[#F6DDB0] py-1 text-center text-[10px] font-bold uppercase tracking-wider text-[#6B4A0F]">{t('Critical', 'مهم جدًا')}</span>
           <div className="mt-3 flex items-center gap-3">
             <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/10"><ShieldCheck size={18} /></span>
             <div>
@@ -103,7 +103,7 @@ export function GuidelinesScreen() {
           <p className="mt-2 font-normal text-lg italic leading-snug text-ink-900">
             {t('“May this introduction be a meaningful step toward the future God has prepared for you.”', '«بنصلي إن بداية التعارف دي تكون خطوة لها معنى في طريق المستقبل اللي ربنا محضّره ليكم.»')}
           </p>
-          <p className="mt-2 text-xs text-ink-500">{t('Take your time, be genuine, and treat each other with reverence. What happens next is between the two of you and God.', 'خُدوا وقتكم، وكونوا صادقين مع بعض، وتعاملوا باحترام وتقدير متبادل. الخطوة الجاية في رحلتكم هي مسؤوليتكم أنتم الاتنين أمام ربنا.')}</p>
+          <p className="mt-2 text-[11px] text-ink-500">{t('Take your time, be genuine, and treat each other with reverence. What happens next is between the two of you and God.', 'خُدوا وقتكم، وكونوا صادقين مع بعض، وتعاملوا باحترام وتقدير متبادل. الخطوة الجاية في رحلتكم هي مسؤوليتكم أنتم الاتنين أمام ربنا.')}</p>
         </FCard>
 
         <CheckRow checked={agreed} onChange={setAgreed}>
@@ -114,7 +114,7 @@ export function GuidelinesScreen() {
         <Button
           variant="gold"
           size="lg"
-          className="!rounded-[14px] w-full"
+          className="!rounded-[12px] w-full"
           disabled={!agreed}
           onClick={() => {
             accept(id)

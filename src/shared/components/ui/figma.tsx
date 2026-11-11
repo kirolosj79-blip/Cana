@@ -13,20 +13,20 @@ export function FCard({ children, className, tone = 'default' }: { children: Rea
     gold: 'bg-gold-50 border-gold-300/50',
     navy: 'bg-[#0C1D3A] border-[#0C1D3A] text-white',
   }
-  return <div className={cn('rounded-[22px] border p-4 shadow-[var(--shadow-soft-sm)]', tones[tone], className)}>{children}</div>
+  return <div className={cn('rounded-[20px] border border-opacity-60 p-4 shadow-[var(--shadow-soft-sm)]', tones[tone], className)}>{children}</div>
 }
 
 /** Small rounded icon tile, optionally tinted. */
 export function IconTile({ icon: Icon, tint = 'gold', size = 36 }: { icon: ElementType; tint?: 'gold' | 'navy' | 'red' | 'green' | 'purple'; size?: number }) {
   const tints = {
     gold: 'bg-gold-100 text-gold-700',
-    navy: 'bg-ink-100 text-ink-800',
+    navy: 'bg-[var(--tile-navy-bg)] text-ink-800',
     red: 'bg-danger-100 text-danger-700',
     green: 'bg-success-100 text-success-500',
     purple: 'bg-[#F1E8FB] text-[#7A3FD1]',
   }
   return (
-    <span className={cn('flex shrink-0 items-center justify-center rounded-xl', tints[tint])} style={{ width: size, height: size }}>
+    <span className={cn('flex shrink-0 items-center justify-center rounded-[9px]', tints[tint])} style={{ width: size, height: size }}>
       <Icon size={size * 0.5} />
     </span>
   )
@@ -35,8 +35,8 @@ export function IconTile({ icon: Icon, tint = 'gold', size = 36 }: { icon: Eleme
 export function PageHeading({ title, subtitle }: { title: string; subtitle?: string }) {
   return (
     <div className="px-5 pt-5 pb-3">
-      <h1 className="font-display text-[26px] leading-tight font-semibold text-ink-900">{title}</h1>
-      {subtitle && <p className="mt-1.5 text-sm text-ink-500 leading-relaxed">{subtitle}</p>}
+      <h1 className="text-[23px] leading-tight font-semibold tracking-tight text-ink-900">{title}</h1>
+      {subtitle && <p className="mt-1.5 text-[11.5px] text-ink-500 leading-relaxed">{subtitle}</p>}
     </div>
   )
 }
@@ -55,6 +55,7 @@ export function CenterDialog({
   children,
   actions,
   closable = false,
+  iconTone = 'gold',
 }: {
   open: boolean
   onClose?: () => void
@@ -64,6 +65,7 @@ export function CenterDialog({
   children?: ReactNode
   actions?: ReactNode
   closable?: boolean
+  iconTone?: 'gold' | 'red'
 }) {
   return createPortal(
     <AnimatePresence>
@@ -82,7 +84,7 @@ export function CenterDialog({
                 <X size={15} />
               </button>
             )}
-            {icon && <div className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-full bg-gold-100 text-gold-700 ring-4 ring-gold-50">{icon}</div>}
+            {icon && <div className={cn('mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-full ring-4', iconTone === 'red' ? 'bg-[#FBE0E0] text-[#C0262D] ring-[#FDF0F0]' : 'bg-gold-100 text-gold-700 ring-gold-50')}>{icon}</div>}
             <h3 className="text-xl font-bold tracking-tight text-ink-900 leading-snug">{title}</h3>
             {pill && (
               <span className="mt-2 inline-flex rounded-full bg-gold-100 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-gold-700">{pill}</span>
@@ -125,7 +127,16 @@ export function CheckRow({ checked, onChange, children }: { checked: boolean; on
           </svg>
         )}
       </span>
-      <span className="text-[13px] leading-snug text-ink-600">{children}</span>
+      <span className="text-[11.5px] leading-snug text-ink-600">{children}</span>
     </button>
+  )
+}
+
+/** Renders **bold** markup inside a translated string (words stay exactly as translated). */
+export function Rich({ children }: { children: string }) {
+  return (
+    <>
+      {children.split('**').map((part, i) => (i % 2 ? <b key={i} className="text-ink-900" style={{ fontWeight: 700 }}>{part}</b> : <span key={i}>{part}</span>))}
+    </>
   )
 }

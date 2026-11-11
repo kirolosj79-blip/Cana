@@ -27,13 +27,15 @@ export function MatchCard({ candidate }: { candidate: UserProfile }) {
         )}
       </button>
       <p className="mt-2 truncate px-0.5 text-[13px] font-bold text-ink-900">{candidate.personal.firstName}, {age}</p>
-      <div className="mt-1 space-y-1 px-0.5 text-[10.5px] text-ink-500">
-        <p className="flex items-center gap-1 truncate"><MapPin size={10} className="shrink-0" /> {candidate.personal.cityState}</p>
+      <div className="mt-1.5 space-y-1.5 px-0.5 text-[10.5px] text-ink-500">
+        <p className="flex items-center gap-1 truncate"><MapPin size={10} className="shrink-0 text-gold-700" /> {candidate.personal.cityState.replace(', ', ' • ')}</p>
         <p className="flex items-start gap-1 font-semibold leading-snug text-ink-800"><Briefcase size={10} className="mt-0.5 shrink-0 text-ink-400" /> <span><bdi>{candidate.employment.occupation}</bdi> • <bdi>{t(deg[0], deg[1])}</bdi></span></p>
-        <p className="flex items-center gap-1 truncate"><Church size={10} className="shrink-0" /> {t('Coptic Orthodox', 'قبطي أرثوذكسي')}</p>
-        <p className="flex items-center gap-1 truncate"><Clock size={10} className="shrink-0" /> {t(tl[0], tl[1])}</p>
+        <div className="flex flex-col items-start gap-1">
+          <span className="inline-flex items-center gap-1 rounded-md border border-ink-100 bg-parchment-50 px-1.5 py-0.5 text-[9.5px] text-ink-600"><Church size={9} /> {t('Coptic Orthodox', 'قبطي أرثوذكسي')}</span>
+          <span className="inline-flex items-center gap-1 rounded-md border border-ink-100 bg-parchment-50 px-1.5 py-0.5 text-[9.5px] text-ink-600"><Clock size={9} /> {t(tl[0], tl[1])}</span>
+        </div>
       </div>
-      <button onClick={open} className="mt-2 flex w-full items-center justify-center gap-1.5 rounded-lg bg-cta-bg py-2 text-[11px] font-bold text-cta-text">
+      <button onClick={open} className="mt-2.5 flex w-full items-center justify-center gap-1.5 rounded-[9px] bg-cta-bg py-2 text-[11px] font-bold text-cta-text">
         {t('View Profile', 'عرض الملف الشخصي')} <Arrow size={11} />
       </button>
     </div>

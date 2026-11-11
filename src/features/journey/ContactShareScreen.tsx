@@ -37,12 +37,12 @@ export function ContactShareScreen() {
       <FigmaHeader />
       <div className="space-y-3 px-5 pt-3">
         <h1 className="font-bold tracking-tight text-[26px] font-semibold text-ink-900">{t('Contact Exchange Policy', 'سياسة مشاركة بيانات التواصل')}</h1>
-        <p className="text-sm text-ink-500">{t(`Select which details you would like to share with ${other?.personal.firstName ?? ''}.`, g(`اختار بيانات التواصل اللي حابب تشاركها مع ${other?.personal.firstName ?? ''}`, `اختاري بيانات التواصل اللي حابة تشاركيها مع ${other?.personal.firstName ?? ''}`))}</p>
+        <p className="text-[12px] text-ink-500">{t(`Select which details you would like to share with ${other?.personal.firstName ?? ''}.`, g(`اختار بيانات التواصل اللي حابب تشاركها مع ${other?.personal.firstName ?? ''}`, `اختاري بيانات التواصل اللي حابة تشاركيها مع ${other?.personal.firstName ?? ''}`))}</p>
 
         <FCard className="flex items-center gap-3 !p-3">
           <img src={other?.personal.profilePhotoUrl} alt="" className="h-10 w-10 rounded-full bg-ink-100 object-cover" />
           <div className="min-w-0 flex-1">
-            <p className="flex items-center gap-1 text-sm font-bold text-ink-900"><bdi>{other?.personal.firstName} {other?.personal.lastName?.[0]}.</bdi> <BadgeCheck size={13} className="text-gold-700" /></p>
+            <p className="flex items-center gap-1 text-[12px] font-bold text-ink-900"><bdi>{other?.personal.firstName} {other?.personal.lastName?.[0]}.</bdi> <BadgeCheck size={13} className="text-gold-700" /></p>
             <p className="truncate text-[11px] text-ink-500">{other?.church.churchName}</p>
           </div>
           <Chip>{t('Simultaneous reveal', 'كشف متزامن')}</Chip>
@@ -55,12 +55,12 @@ export function ContactShareScreen() {
             <div className="flex items-center gap-3">
               <IconTile icon={MessageSquare} tint="green" size={34} />
               <div className="flex-1">
-                <p className="text-sm font-bold text-ink-900">WhatsApp <Chip tone="green">{t('Recommended', 'مُوصى به')}</Chip></p>
+                <p className="text-[12px] font-bold text-ink-900">WhatsApp <Chip tone="green">{t('Recommended', 'مُوصى به')}</Chip></p>
                 <p className="text-[11px] text-ink-500">{t('Private courtship & voice notes', 'تعارف خاص ورسائل صوتية')}</p>
               </div>
               <Check_ on={sel.whatsapp} />
             </div>
-            <div className="flex items-center justify-between rounded-xl bg-parchment-100 px-3 py-2 text-xs text-ink-700"><span dir="ltr">{phone || '—'}</span><Chip tone="green">{t('Verified', 'موثّق')}</Chip></div>
+            <div className="flex items-center justify-between rounded-xl bg-parchment-100 px-3 py-2 text-[11px] text-ink-700"><span dir="ltr">{phone || '—'}</span><Chip tone="green">{t('Verified', 'موثّق')}</Chip></div>
           </FCard>
         </button>
 
@@ -69,12 +69,12 @@ export function ContactShareScreen() {
             <div className="flex items-center gap-3">
               <IconTile icon={Phone} tint="navy" size={34} />
               <div className="flex-1">
-                <p className="text-sm font-bold text-ink-900">{t('Direct Phone Call', 'مكالمة تليفون مباشرة')}</p>
+                <p className="text-[12px] font-bold text-ink-900">{t('Direct Phone Call', 'مكالمة تليفون مباشرة')}</p>
                 <p className="text-[11px] text-ink-500">{t('Direct audio conversations', 'محادثات صوتية مباشرة')}</p>
               </div>
               <Check_ on={sel.call} />
             </div>
-            <div className="flex items-center justify-between rounded-xl bg-parchment-100 px-3 py-2 text-xs text-ink-700"><span dir="ltr"><Hash size={11} className="me-1 inline" />{phone || '—'}</span><Chip>{t('Default line', 'الخط الأساسي')}</Chip></div>
+            <div className="flex items-center justify-between rounded-xl bg-parchment-100 px-3 py-2 text-[11px] text-ink-700"><span dir="ltr"><Hash size={11} className="me-1 inline" />{phone || '—'}</span><Chip>{t('Default line', 'الخط الأساسي')}</Chip></div>
           </FCard>
         </button>
 
@@ -83,12 +83,12 @@ export function ContactShareScreen() {
             <div className="flex items-center gap-3">
               <IconTile icon={Mail} tint="navy" size={34} />
               <div className="flex-1">
-                <p className="text-sm font-bold text-ink-900">{t('Email Address', 'البريد الإلكتروني')}</p>
+                <p className="text-[12px] font-bold text-ink-900">{t('Email Address', 'البريد الإلكتروني')}</p>
                 <p className="text-[11px] text-ink-500">{t('Letters, reflections & schedules', 'رسائل وتأملات ومواعيد')}</p>
               </div>
               <Check_ on={sel.email} />
             </div>
-            <div className="flex items-center justify-between rounded-xl bg-parchment-100 px-3 py-2 text-xs text-ink-700"><span dir="ltr" className="truncate">{email || '—'}</span><Chip>{t('Primary', 'أساسي')}</Chip></div>
+            <div className="flex items-center justify-between rounded-xl bg-parchment-100 px-3 py-2 text-[11px] text-ink-700"><span dir="ltr" className="truncate">{email || '—'}</span><Chip>{t('Primary', 'أساسي')}</Chip></div>
           </FCard>
         </button>
 
@@ -96,7 +96,7 @@ export function ContactShareScreen() {
           <button onClick={() => toggle('extra')} className="flex w-full items-center gap-3 text-start">
             <IconTile icon={AtSign} tint="navy" size={34} />
             <div className="flex-1">
-              <p className="text-sm font-bold text-ink-900">{t('Additional Channel', 'قناة إضافية')}</p>
+              <p className="text-[12px] font-bold text-ink-900">{t('Additional Channel', 'قناة إضافية')}</p>
               <p className="text-[11px] text-ink-500">{t('Instagram, Telegram, or meeting link', 'إنستجرام أو تيليجرام أو لينك اجتماع')}</p>
             </div>
             <Check_ on={sel.extra} />
@@ -108,7 +108,7 @@ export function ContactShareScreen() {
         </FCard>
 
         <p className="flex items-center justify-center gap-1.5 pt-1 text-[11px] text-ink-500"><Lock size={11} /> {t(`Encrypted covenant • Only shared with ${other?.personal.firstName ?? ''}`, `عهد مشفّر • بيتشارك مع ${other?.personal.firstName ?? ''} بس`)}</p>
-        <Button variant="gold" size="lg" className="!rounded-[14px] w-full" disabled={!anySelected} onClick={() => { complete(id); navigate(`/app/intro-complete/${id}`, { replace: true }) }}>
+        <Button variant="gold" size="lg" className="!rounded-[12px] w-full" disabled={!anySelected} onClick={() => { complete(id); navigate(`/app/intro-complete/${id}`, { replace: true }) }}>
           {t('Share Contact Details', 'مشاركة بيانات التواصل')}
         </Button>
         <div className="flex justify-center gap-4 text-[11px] font-semibold text-gold-700">

@@ -52,7 +52,7 @@ export function WelcomeBackGate() {
         title={t('Welcome back', 'أهلًا بيك تاني')}
         actions={
           <>
-            <Button variant="gold" size="lg" className="!rounded-[14px] w-full" onClick={() => setStep('q2')}>{t('Yes', 'أيوه')}</Button>
+            <Button variant="gold" size="lg" className="!rounded-[12px] w-full" onClick={() => setStep('q2')}>{t('Yes', 'أيوه')}</Button>
             <SoftButton onClick={welcome}>{t('No', 'لأ')}</SoftButton>
           </>
         }
@@ -66,7 +66,7 @@ export function WelcomeBackGate() {
         title={t('One more question', 'سؤال كمان')}
         actions={
           <>
-            <Button variant="gold" size="lg" className="!rounded-[14px] w-full" onClick={toFeedback}>{t('Yes, through CANA', 'أيوه، من خلال CANA')}</Button>
+            <Button variant="gold" size="lg" className="!rounded-[12px] w-full" onClick={toFeedback}>{t('Yes, through CANA', 'أيوه، من خلال CANA')}</Button>
             <SoftButton onClick={() => setStep('q3')}>{t('No, not through CANA', 'لأ، مش من خلال CANA')}</SoftButton>
           </>
         }
@@ -80,7 +80,7 @@ export function WelcomeBackGate() {
         title={t('Your feedback', 'ملاحظاتك')}
         actions={
           <>
-            <Button variant="gold" size="lg" className="!rounded-[14px] w-full" onClick={toFeedback}>{t('Yes, I’ll share', 'أيوه، هشارك')}</Button>
+            <Button variant="gold" size="lg" className="!rounded-[12px] w-full" onClick={toFeedback}>{t('Yes, I’ll share', 'أيوه، هشارك')}</Button>
             <SoftButton onClick={welcome}>{t('No, continue', 'لأ، كمّل')}</SoftButton>
           </>
         }

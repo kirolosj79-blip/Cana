@@ -1523,3 +1523,12 @@ Confirmed the list was never actually sorted (it was just in the order originall
 - [x] No "pending" anywhere for the user: payment is approved on submit (no Payment Pending Review screen; any old pending request auto-approves and continues the flow), profile edits apply instantly, photo upload shows "Photo uploaded", profile status never says pending. (Intro-request "waiting for reply" and admin screens kept.)
 - [x] Profile detail per Figma: full Education label, My Faith chips (Prayer/Church/Bible Study/Worship/Faithfulness/Kindness/Family Values), gendered "What I'm Looking For" sentence, inline stacked "Request an introduction" (navy) + "Not My Match" buttons.
 - [x] Checkboxes are square (CheckRow radius fix) as in Figma.
+
+## Round: Figma-exact fixes (2026-11-11 night)
+- [x] Default: matches always shown (no gender yet -> everyone; strict prefs empty -> fallback). Discover/Home never empty by default.
+- [x] Font: Inter first (as Figma), Cairo only for Arabic.
+- [x] CRITICAL tag = full-width centered beige bar; bold in "Returning to CANA" (Previous Introduction Feedback / 50%...) and Profile Ready ("Find My Future Spouse", "four suitable introductions") via **bold** markup, Arabic equivalents bold.
+- [x] Requests: person card with badge, place, work, chips + navy View Profile button (received), "Sent today at ..." footer (sent), You + Mina round photos pair card (accepted).
+- [x] Block dialog: red icon.
+- [ ] Waiting for the Word file with every Figma screen to mark exact bold/regular per screen.
+- [x] Typography/radius pass against the Figma boards (Word file): body 11px / titles 11.5-12px, headings 23-27px semibold (Inter), bold weight 600 (inline bold 700), CTA buttons radius 12px (not pill), square icon tiles, Profile Ready "Verified & Active" green, Home card chips, default chips selected, Feedback underline selects.

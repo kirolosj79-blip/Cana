@@ -97,7 +97,7 @@ export function FeedbackScreen() {
       <FigmaHeader />
       <div className="space-y-3 px-5 pt-4">
         <h1 className="text-[22px] font-bold leading-tight text-ink-900">{t('Previous Introduction Feedback', 'تقييم تجربة التعارف السابقة')}</h1>
-        <p className="-mt-1 text-xs text-ink-500">{t('Help us cultivate thoughtful, grace-centered pairings.', 'ساعدنا في توفير فرص تعارف مناسبة، مبنية على الاحترام والمحبة والقيم المسيحية.')}</p>
+        <p className="-mt-1 text-[11px] text-ink-500">{t('Help us cultivate thoughtful, grace-centered pairings.', 'ساعدنا في توفير فرص تعارف مناسبة، مبنية على الاحترام والمحبة والقيم المسيحية.')}</p>
 
         <FCard className="flex gap-3 !p-3.5">
           <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gold-100 text-gold-700"><Lock size={14} /></span>
@@ -110,7 +110,7 @@ export function FeedbackScreen() {
 
         {qs.map((q) => (
           <FCard key={q.id} className="!p-4">
-            <p className="text-[13px] font-bold leading-snug text-ink-900">{t(q.en, q.ar)}</p>
+            <p className="text-[11.5px] font-bold leading-snug text-ink-900">{t(q.en, q.ar)}</p>
             {q.hintEn && <p className="mt-1 text-[11px] text-ink-500">{t(q.hintEn, q.hintAr ?? '')}</p>}
             {q.text ? (
               <textarea value={otherTxt[q.id] ?? ''} onChange={(e) => setOtherTxt((x) => ({ ...x, [q.id]: e.target.value }))} rows={4}
@@ -118,7 +118,7 @@ export function FeedbackScreen() {
                 className="mt-3 w-full rounded-xl border border-ink-200 bg-parchment-100 p-3 text-ink-900 outline-none placeholder:text-ink-400" style={{ fontSize: 16 }} />
             ) : q.layout === 'select' ? (
               <div className="mt-3">
-                <button onClick={() => setOpenQ(openQ === q.id ? null : q.id)} className="flex w-full items-center justify-between rounded-xl border border-ink-100 bg-parchment-100 px-3 py-3 text-start text-[13px] text-ink-800">
+                <button onClick={() => setOpenQ(openQ === q.id ? null : q.id)} className="flex w-full items-center justify-between rounded-none border-b-2 border-[#C9D3EA] bg-transparent px-1 py-2.5 text-start text-[11.5px] text-ink-800">
                   <span>{t(q.opts.find((o) => o.k === (a[q.id] ?? q.opts[0].k))!.en, q.opts.find((o) => o.k === (a[q.id] ?? q.opts[0].k))!.ar)}</span>
                   <ChevronDown size={15} className={cn('shrink-0 text-ink-500 transition-transform', openQ === q.id && 'rotate-180')} />
                 </button>
@@ -126,7 +126,7 @@ export function FeedbackScreen() {
                   <div className="mt-1 overflow-hidden rounded-xl border border-ink-100 bg-parchment-0 shadow-[var(--shadow-soft-sm)]">
                     {q.opts.map((o) => (
                       <button key={o.k} onClick={() => { setA((x) => ({ ...x, [q.id]: o.k })); setOpenQ(null) }}
-                        className={cn('block w-full border-b border-ink-100 px-3 py-3 text-start text-[13px] last:border-0', (a[q.id] ?? q.opts[0].k) === o.k ? 'bg-parchment-100 font-semibold text-ink-900' : 'text-ink-700')}>
+                        className={cn('block w-full border-b border-ink-100 px-3 py-3 text-start text-[11.5px] last:border-0', (a[q.id] ?? q.opts[0].k) === o.k ? 'bg-parchment-100 font-semibold text-ink-900' : 'text-ink-700')}>
                         {t(o.en, o.ar)}
                       </button>
                     ))}
@@ -143,7 +143,7 @@ export function FeedbackScreen() {
                   const on = a[q.id] === o.k
                   return (
                     <button key={o.k} onClick={() => setA((x) => ({ ...x, [q.id]: o.k }))}
-                      className={cn('flex w-full items-center gap-2 rounded-xl border px-3 py-3 text-start text-[13px] transition-colors',
+                      className={cn('flex w-full items-center gap-2 rounded-xl border px-3 py-3 text-start text-[11.5px] transition-colors',
                         on ? 'border-[#0C1D3A] bg-ink-50 font-semibold text-ink-900' : 'border-ink-100 bg-parchment-0 text-ink-700')}>
                       {q.layout === 'list' && <Radio on={on} />} <span>{t(o.en, o.ar)}</span>
                     </button>
@@ -156,14 +156,14 @@ export function FeedbackScreen() {
 
         {part === 1 ? (
           <>
-            <button disabled={!ok} className="flex w-full items-center justify-center gap-2 rounded-xl bg-cta-bg py-3.5 text-sm font-bold text-cta-text disabled:opacity-50" onClick={() => { setPart(2); window.scrollTo(0, 0) }}>
+            <button disabled={!ok} className="flex w-full items-center justify-center gap-2 rounded-xl bg-cta-bg py-3.5 text-[12px] font-bold text-cta-text disabled:opacity-50" onClick={() => { setPart(2); window.scrollTo(0, 0) }}>
               {t('Continue to Part 2', 'متابعة إلى الجزء التاني')} <Next size={15} />
             </button>
             <p className="text-center text-[11px] text-ink-400">{t('Part 2 covers remaining safety verification & final notes', 'الجزء التاني بيشمل استكمال مراجعة إجراءات الأمان والتحقق، بالإضافة إلى أي ملاحظات أخيرة.')}</p>
           </>
         ) : (
           <>
-            <button disabled={!ok} className="flex w-full items-center justify-center gap-2 rounded-xl bg-cta-bg py-3.5 text-sm font-bold text-cta-text disabled:opacity-50" onClick={finish}>
+            <button disabled={!ok} className="flex w-full items-center justify-center gap-2 rounded-xl bg-cta-bg py-3.5 text-[12px] font-bold text-cta-text disabled:opacity-50" onClick={finish}>
               {t('Submit & Complete', 'إرسال التقييم وإنهاء الخطوات')} <Check size={15} />
             </button>
             <button onClick={() => { setPart(1); window.scrollTo(0, 0) }} className="mx-auto flex items-center gap-1 text-[11px] text-ink-500"><Back size={12} /> {t('Back to Part 1', 'الرجوع للجزء الأول')}</button>

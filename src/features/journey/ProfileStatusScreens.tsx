@@ -73,7 +73,7 @@ export function ProfileStatusCard({ kind }: { kind: ProfileStatusKind }) {
         <p className="mt-2 text-[12px] leading-relaxed text-ink-500">{c.body}</p>
         <div className="mt-4 space-y-2">
           {c.buttons.map((b) => (
-            <button key={b.label} onClick={b.fn} className={cn('w-full rounded-xl py-3 text-[13px] font-bold transition active:scale-[0.98]', b.cls)}>{b.label}</button>
+            <button key={b.label} onClick={b.fn} className={cn('w-full rounded-xl py-3 text-[11.5px] font-bold transition active:scale-[0.98]', b.cls)}>{b.label}</button>
           ))}
         </div>
       </div>
