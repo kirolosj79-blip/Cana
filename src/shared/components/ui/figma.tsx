@@ -118,7 +118,7 @@ export function CheckRow({ checked, onChange, children }: { checked: boolean; on
       onClick={() => onChange(!checked)}
       className="flex w-full items-center gap-3 rounded-2xl border border-ink-100 bg-parchment-0 px-4 py-3.5 text-start shadow-[var(--shadow-soft-sm)]"
     >
-      <span className={cn('flex h-5 w-5 shrink-0 items-center justify-center rounded-md border-2', checked ? 'border-ink-900 bg-ink-900 text-parchment-0' : 'border-ink-300')}>
+      <span className={cn('flex h-5 w-5 shrink-0 items-center justify-center rounded-[5px] border-2', checked ? 'border-ink-900 bg-ink-900 text-parchment-0' : 'border-ink-300')}>
         {checked && (
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">
             <path d="M5 12l5 5L20 7" />
