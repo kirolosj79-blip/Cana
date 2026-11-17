@@ -3,7 +3,7 @@ import { TopBar } from '@/shared/components/layout/TopBar'
 import { Badge } from '@/shared/components/ui/Badge'
 import { useRegistrationStore } from '@/store/registration.store'
 import { useFieldVisibilityStore } from '@/store/fieldVisibility.store'
-import { denominationOptions, educationLevelOptions } from '@/features/registration/data/options'
+import { denominationOptions, educationLevelOptions, isOtherDenomination } from '@/features/registration/data/options'
 import { useLanguage } from '@/core/hooks/useLanguage'
 
 function HiddenNote({ label }: { label: string }) {
@@ -65,7 +65,7 @@ export function ProfilePreviewScreen() {
             <p className="text-sm font-semibold">{t('Denomination', 'الطائفة')}</p>
           </div>
           {isVisible('church.denomination') ? (
-            <p className="text-sm text-ink-700">{denomination ? (language === 'ar' ? denomination.ar : denomination.en) : t('Not set', 'لسه ماتحددتش')}</p>
+            <p className="text-sm text-ink-700">{denomination ? (isOtherDenomination(denomination.value) && draft.church.denominationOther ? draft.church.denominationOther : language === 'ar' ? denomination.ar : denomination.en) : t('Not set', 'لسه ماتحددتش')}</p>
           ) : (
             <HiddenNote label={t('Denomination hidden', 'الطائفة مخفية')} />
           )}

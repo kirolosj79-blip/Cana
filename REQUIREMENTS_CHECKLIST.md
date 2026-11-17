@@ -1533,3 +1533,16 @@ Confirmed the list was never actually sorted (it was just in the order originall
 - [ ] Waiting for the Word file with every Figma screen to mark exact bold/regular per screen.
 - [x] Typography/radius pass against the Figma boards (Word file): body 11px / titles 11.5-12px, headings 23-27px semibold (Inter), bold weight 600 (inline bold 700), CTA buttons radius 12px (not pill), square icon tiles, Profile Ready "Verified & Active" green, Home card chips, default chips selected, Feedback underline selects.
 - [x] Radius fix: custom --radius-* tokens were overriding Tailwind's rounded-md/lg/xl (14/20/28px). Renamed to --r-*, utilities are standard again (6/8/12/16px). Match card photo 7:5 radius 9, chips radius 5, hidden horizontal scrollbar under chips.
+
+## Round: Bold illustrated look (Contact Policy / Profile Ready / Safety)
+- New shared components `src/shared/components/ui/bold.tsx` (BoldHero, BoldNote, BoldPill, BoldRow, BoldCTA) + `.bp-*` styles in tokens.css.
+- Light: navy hero banner, white bold cards, big blue gradient icon tiles (right side in Arabic), navy pill titles, big gold CTA.
+- Dark: premium gold-on-navy (gold-bordered glass cards, glowing gold icon tiles, gold pill + CTA); danger rows glow red.
+- Checkbox agreement rows still functional; numbered steps on Profile Ready.
+- Follow-up: bold screens scaled down to match app sizes; light mode now uses app cream background (parchment), navy hero/CTA, gold-50 note, same card border/shadow tokens. Dark stays gold premium.
+- Follow-up 2: light background of the 3 bold screens back to soft blue gradient (user request).
+- Follow-up 3: whole app light mode uses soft blue background (parchment tokens recoloured to #EEF3FD/#E6EDFB/#DBE4F6).
+- Follow-up 4: line icons replaced by colourful glossy SVG illustrations (src/shared/components/ui/illus.tsx) on Safety / Contact Policy / Profile Ready.
+- Follow-up 5: removed chevrons + CTA check on bold screens, fonts reduced; denomination list in 3 groups (Orthodox/Catholic/Protestant) with 'other' free-text (DenominationPicker) in registration, edit profile, partner preference.
+- Follow-up 6: illustrated icons reverted to the line icons in tiles (everything else kept).
+- Follow-up 7: removed step numbers on Profile Ready (not in Figma).

@@ -6,7 +6,8 @@ import { Select } from '@/shared/components/ui/Select'
 import { ChoiceGroup } from '@/shared/components/ui/ChoiceGroup'
 import { Modal } from '@/shared/components/ui/Modal'
 import { Button } from '@/shared/components/ui/Button'
-import { denominationOptions } from '@/features/registration/data/options'
+import { isOtherDenomination } from '@/features/registration/data/options'
+import { DenominationPicker } from '@/shared/components/ui/DenominationPicker'
 import { egyptDioceseOptions, usaDioceseOptions, canadaDioceseOptions } from '@/features/registration/data/dioceses'
 import { usStateOptions, canadaProvinceOptions, egyptGovernorateOptions } from '@/features/registration/data/options'
 import { sortBilingual } from '@/shared/utils/sortBilingual'
@@ -102,10 +103,11 @@ export function ChurchStep() {
       </div>
 
       <QuestionCard question={t('What is your Christian denomination?', 'إيه طائفتك المسيحية؟')} labelExtra={<FieldVisibilityToggle fieldKey="church.denomination" />}>
-        <ChoiceGroup
+        <DenominationPicker
           value={c.denomination ?? ''}
-          onChange={(v) => set({ denomination: v })}
-          options={denominationOptions.map((d) => ({ value: d.value, label: language === 'ar' ? d.ar : d.en }))}
+          other={c.denominationOther}
+          onChange={(v) => set({ denomination: v, ...(isOtherDenomination(v) ? {} : { denominationOther: '' }) })}
+          onOtherChange={(v) => set({ denominationOther: v })}
         />
       </QuestionCard>
 

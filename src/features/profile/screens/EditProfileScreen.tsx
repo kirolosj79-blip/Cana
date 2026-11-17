@@ -13,7 +13,7 @@ import { useRegistrationStore } from '@/store/registration.store'
 import { usePendingChangesStore } from '@/store/pendingChanges.store'
 import { useFieldVisibilityStore, VISIBILITY_CONTROLLED_FIELDS } from '@/store/fieldVisibility.store'
 import { useToast } from '@/shared/components/feedback/Toast'
-import { denominationOptions } from '@/features/registration/data/options'
+import { DenominationPicker } from '@/shared/components/ui/DenominationPicker'
 import { useLanguage } from '@/core/hooks/useLanguage'
 import { Lock, Clock, ShieldCheck, Eye } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
@@ -242,10 +242,11 @@ export function EditProfileScreen() {
 
         <SectionCard title={t('Church & Diocese', 'الكنيسة والإيبارشية')}>
           {(pendingFor('Church') || pendingFor('Diocese')) && <PendingBadge t={t} />}
-          <ChoiceGroup
+          <DenominationPicker
             value={draft.church.denomination ?? ''}
+            other={draft.church.denominationOther}
             onChange={(v) => updateSection('church', { denomination: v })}
-            options={denominationOptions.map((d) => ({ value: d.value, label: language === 'ar' ? d.ar : d.en }))}
+            onOtherChange={(v) => updateSection('church', { denominationOther: v })}
           />
           <Input label={t('Church / parish name', 'اسم الكنيسة')} value={churchName} onChange={(e) => setChurchName(e.target.value)} />
           <Input label={t('Diocese', 'الإيبارشية')} value={diocese} onChange={(e) => setDiocese(e.target.value)} />

@@ -1,10 +1,10 @@
 import { BottomNav } from '@/shared/components/layout/BottomNav'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { TriangleAlert, LogOut, Lock, ShieldCheck, RotateCcw } from 'lucide-react'
+import { Handshake, TriangleAlert, LogOut, Lock, ShieldCheck, RotateCcw } from 'lucide-react'
 import { FigmaHeader } from '@/shared/components/layout/FigmaHeader'
-import { Button } from '@/shared/components/ui/Button'
-import { FCard, IconTile, PageHeading, Eyebrow, CheckRow, Rich } from '@/shared/components/ui/figma'
+import { BoldHero, BoldNote, BoldPill, BoldRow, BoldCTA } from '@/shared/components/ui/bold'
+import { Rich } from '@/shared/components/ui/figma'
 import { useMe } from '@/core/hooks/useMe'
 import { useJourneyStore } from '@/store/journey.store'
 
@@ -31,42 +31,34 @@ export function ContactPolicyScreen() {
   ]
 
   return (
-    <div className="min-h-screen bg-parchment-50">
+    <div className="bp-page min-h-screen">
       <div className="mx-auto max-w-md pb-28">
         <FigmaHeader />
-        <PageHeading
-          title={t('Contact Exchange Policy', 'سياسة تبادل بيانات التواصل')}
-          subtitle={t('Protect Your Privacy and Stay Safe During the Early Stages of Getting to Know Someone', g('حافظ على خصوصيتك وخليك حريص في المراحل الأولى من التعارف.', 'حافظي على خصوصيتك وخليكي حريصة في المراحل الأولى من التعارف.'))}
-        />
-        <div className="space-y-3 px-5">
-          <FCard className="flex gap-3">
-            <IconTile icon={TriangleAlert} tint="gold" size={34} />
-            <p className="text-[11.5px] leading-relaxed text-ink-700">
-              {t(
-                'Once you and your match decide to exchange personal contact information by sharing your phone number, email address, WhatsApp information, or any other personal contact information, you acknowledge and agree that:',
-                g('لما تتفق إنت والشخص اللي تم ترشيحه ليك على تبادل بيانات التواصل الشخصية، زي رقم التليفون، البريد الإلكتروني، بيانات الواتساب، أو أي وسيلة تواصل شخصية تانية، فده معناه إنك موافق وفاهم الشروط التالية:', 'لما تتفقي إنتي والشخص اللي تم ترشيحه ليكي على تبادل بيانات التواصل الشخصية، زي رقم التليفون، البريد الإلكتروني، بيانات الواتساب، أو أي وسيلة تواصل شخصية تانية، فده معناه إنك موافقة وفاهمة الشروط التالية:')
-              )}
-            </p>
-          </FCard>
+        <div className="space-y-3 px-4 pt-3">
+          <BoldHero
+            icon={Handshake}
+            title={t('Contact Exchange Policy', 'سياسة تبادل بيانات التواصل')}
+            subtitle={t('Protect Your Privacy and Stay Safe During the Early Stages of Getting to Know Someone', g('حافظ على خصوصيتك وخليك حريص في المراحل الأولى من التعارف.', 'حافظي على خصوصيتك وخليكي حريصة في المراحل الأولى من التعارف.'))}
+          />
+          <BoldNote icon={TriangleAlert}>
+            {t(
+              'Once you and your match decide to exchange personal contact information by sharing your phone number, email address, WhatsApp information, or any other personal contact information, you acknowledge and agree that:',
+              g('لما تتفق إنت والشخص اللي تم ترشيحه ليك على تبادل بيانات التواصل الشخصية، زي رقم التليفون، البريد الإلكتروني، بيانات الواتساب، أو أي وسيلة تواصل شخصية تانية، فده معناه إنك موافق وفاهم الشروط التالية:', 'لما تتفقي إنتي والشخص اللي تم ترشيحه ليكي على تبادل بيانات التواصل الشخصية، زي رقم التليفون، البريد الإلكتروني، بيانات الواتساب، أو أي وسيلة تواصل شخصية تانية، فده معناه إنك موافقة وفاهمة الشروط التالية:')
+            )}
+          </BoldNote>
 
-          <Eyebrow className="pt-3">{t('Terms of Contact Exchange', 'شروط تبادل بيانات التواصل :')}</Eyebrow>
+          <BoldPill>{t('Terms of Contact Exchange', 'شروط تبادل بيانات التواصل :')}</BoldPill>
           {terms.map((x) => (
-            <FCard key={x.en[0]} className="flex gap-3">
-              <IconTile icon={x.icon} tint={x.tint} size={34} />
-              <div>
-                <p className="text-[12px] font-bold text-ink-900">{t(x.en[0], x.ar[0])}</p>
-                <p className="mt-1 text-[11.5px] leading-relaxed text-ink-500"><Rich>{t(x.en[1], x.ar[1])}</Rich></p>
-              </div>
-            </FCard>
+            <BoldRow key={x.en[0]} icon={x.icon} danger={x.tint === 'red'}>
+              <p className="bp-row-title text-[11px]">{t(x.en[0], x.ar[0])}</p>
+              <p className="mt-1"><Rich>{t(x.en[1], x.ar[1])}</Rich></p>
+            </BoldRow>
           ))}
 
-          <CheckRow checked={agreed} onChange={setAgreed}>
-            {t("I agree to uphold CANA's community safety principles and report suspicious behavior.", 'أوافق على الالتزام بمبادئ CANA للحفاظ على أمان جميع الأعضاء، وأتعهد بالإبلاغ عن أي تصرف مريب أو غير مناسب.')}
-          </CheckRow>
-          <Button
-            variant="gold"
-            size="lg"
-            className="!rounded-[12px] w-full"
+          <BoldRow icon={ShieldCheck} checked={agreed} onToggle={setAgreed}>
+            <b className="bp-row-title">{t("I agree to uphold CANA's community safety principles and report suspicious behavior.", 'أوافق على الالتزام بمبادئ CANA للحفاظ على أمان جميع الأعضاء، وأتعهد بالإبلاغ عن أي تصرف مريب أو غير مناسب.')}</b>
+          </BoldRow>
+          <BoldCTA
             disabled={!agreed}
             onClick={() => {
               accept()
@@ -74,7 +66,7 @@ export function ContactPolicyScreen() {
             }}
           >
             {t("I've Read & Understood", 'قرأتُ وفهمتُ وأوافق.')}
-          </Button>
+          </BoldCTA>
         </div>
       </div>
       <BottomNav disabled />

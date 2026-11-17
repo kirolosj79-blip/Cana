@@ -2,7 +2,8 @@ import { useRegistrationStore } from '@/store/registration.store'
 import { toOptionalNumber } from '@/shared/utils/number'
 import { Input } from '@/shared/components/ui/Input'
 import { ChoiceGroup } from '@/shared/components/ui/ChoiceGroup'
-import { denominationOptions, residenceCountryOptions } from '@/features/registration/data/options'
+import { DenominationMultiPicker } from '@/shared/components/ui/DenominationPicker'
+import { residenceCountryOptions } from '@/features/registration/data/options'
 import { sortBilingual } from '@/shared/utils/sortBilingual'
 import { useLanguage } from '@/core/hooks/useLanguage'
 import { FieldVisibilityToggle } from '@/shared/components/ui/FieldVisibilityToggle'
@@ -113,14 +114,10 @@ export function CompatibilityStep() {
         ]}
       />
 
-      <ChoiceGroup
-        label={t("Which church/denomination would you like your partner to belong to?", `${tHb} ${partner} يكون من أي طائفة؟`)}
-        multi
-        columns={2}
-        value={c.churchPreference ?? []}
-        onChange={(v) => set({ churchPreference: v })}
-        options={denominationOptions.map((d) => ({ value: d.value, label: language === 'ar' ? d.ar : d.en }))}
-      />
+      <div className="space-y-2">
+        <span className="text-sm font-bold on-photo-text">{t("Which church/denomination would you like your partner to belong to?", `${tHb} ${partner} يكون من أي طائفة؟`)}</span>
+        <DenominationMultiPicker value={c.churchPreference ?? []} onChange={(v) => set({ churchPreference: v })} />
+      </div>
 
       <ChoiceGroup
         label={t("What's your partner's view on having children?", `رأي ${partner} في الأطفال ${tHbh} يكون إيه؟`)}

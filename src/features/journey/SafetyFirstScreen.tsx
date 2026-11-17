@@ -3,8 +3,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ShieldCheck, ImageOff, BanknoteX, Landmark, Clock, TriangleAlert } from 'lucide-react'
 import { FigmaHeader } from '@/shared/components/layout/FigmaHeader'
-import { Button } from '@/shared/components/ui/Button'
-import { FCard, IconTile, PageHeading, Eyebrow, CheckRow } from '@/shared/components/ui/figma'
+import { BoldHero, BoldNote, BoldPill, BoldRow, BoldCTA } from '@/shared/components/ui/bold'
 import { useMe } from '@/core/hooks/useMe'
 import { useJourneyStore } from '@/store/journey.store'
 
@@ -34,48 +33,38 @@ export function SafetyFirstScreen() {
   ]
 
   return (
-    <div className="min-h-screen bg-parchment-50">
+    <div className="bp-page min-h-screen">
       <div className="mx-auto max-w-md pb-28">
         <FigmaHeader />
-        <PageHeading
-          title={t(`${name}, your Safety Comes First`, `${name}، سلامتك وأمانك يهمونا ❤️`)}
-          subtitle={t(
-            'Protect Your Privacy and Stay Safe During the Early Stages of Getting to Know Someone',
-            g('حافظ على خصوصيتك وخليك حريص وإنت بتتعرف على شخص جديد في بداية التواصل.', 'حافظي على خصوصيتك وخليكي حريصة وإنتي بتتعرفي على شخص جديد في بداية التواصل.')
-          )}
-        />
-        <div className="space-y-3 px-5">
-          <FCard className="flex gap-3">
-            <IconTile icon={TriangleAlert} tint="gold" size={34} />
-            <p className="text-[11.5px] leading-relaxed text-ink-700">
-              {t(
-                'Your safety and privacy are important to us. Please use caution when communicating with anyone you meet through CANA, especially during the early stages of getting to know each other.',
-                g('سلامتك وخصوصيتك من أهم أولوياتنا في CANA. بننصحك تكون حريص في التعامل مع أي شخص تتعرف عليه من خلال التطبيق، خصوصًا في المراحل الأولى من التعارف.', 'سلامتك وخصوصيتك من أهم أولوياتنا في CANA. بننصحك تكوني حريصة في التعامل مع أي شخص تتعرفي عليه من خلال التطبيق، خصوصًا في المراحل الأولى من التعارف.')
-              )}
-            </p>
-          </FCard>
+        <div className="space-y-3 px-4 pt-3">
+          <BoldHero
+            icon={ShieldCheck}
+            title={t(`${name}, your Safety Comes First`, `${name}، سلامتك وأمانك يهمونا ❤️`)}
+            subtitle={t(
+              'Protect Your Privacy and Stay Safe During the Early Stages of Getting to Know Someone',
+              g('حافظ على خصوصيتك وخليك حريص وإنت بتتعرف على شخص جديد في بداية التواصل.', 'حافظي على خصوصيتك وخليكي حريصة وإنتي بتتعرفي على شخص جديد في بداية التواصل.')
+            )}
+          />
+          <BoldNote icon={TriangleAlert}>
+            {t(
+              'Your safety and privacy are important to us. Please use caution when communicating with anyone you meet through CANA, especially during the early stages of getting to know each other.',
+              g('سلامتك وخصوصيتك من أهم أولوياتنا في CANA. بننصحك تكون حريص في التعامل مع أي شخص تتعرف عليه من خلال التطبيق، خصوصًا في المراحل الأولى من التعارف.', 'سلامتك وخصوصيتك من أهم أولوياتنا في CANA. بننصحك تكوني حريصة في التعامل مع أي شخص تتعرفي عليه من خلال التطبيق، خصوصًا في المراحل الأولى من التعارف.')
+            )}
+          </BoldNote>
 
-          <Eyebrow className="pt-3">{t('Essential Safety Rules', 'قواعد أساسية للحفاظ على سلامتك')}</Eyebrow>
+          <BoldPill>{t('Essential Safety Rules', 'قواعد أساسية للحفاظ على سلامتك')}</BoldPill>
 
           {rules.map((r) => (
-            <FCard key={r.en[0]} tone={r.danger ? 'danger' : 'default'} className="flex gap-3">
-              <IconTile icon={r.icon} tint={r.tint} size={34} />
-              <p className="text-[11.5px] leading-relaxed text-ink-500">
-                <b className={r.danger ? 'text-danger-700' : 'text-ink-900'}>{t(r.en[0], r.ar[0])}</b>
-                {t(r.en[1], r.ar[1])}
-              </p>
-            </FCard>
+            <BoldRow key={r.en[0]} icon={r.icon} danger={r.danger}>
+              <b className="bp-row-title">{t(r.en[0], r.ar[0])}</b>
+              {t(r.en[1], r.ar[1])}
+            </BoldRow>
           ))}
 
-          <div className="pt-1">
-            <CheckRow checked={agreed} onChange={setAgreed}>
-              {t("I agree to uphold CANA's community safety principles and report suspicious behavior.", 'أوافق على الالتزام بقواعد CANA للحفاظ على أمان جميع الأعضاء، وهبلغ عن أي تصرف مريب أو غير مناسب.')}
-            </CheckRow>
-          </div>
-          <Button
-            variant="gold"
-            size="lg"
-            className="!rounded-[12px] w-full"
+          <BoldRow icon={ShieldCheck} checked={agreed} onToggle={setAgreed}>
+            <b className="bp-row-title">{t("I agree to uphold CANA's community safety principles and report suspicious behavior.", 'أوافق على الالتزام بقواعد CANA للحفاظ على أمان جميع الأعضاء، وهبلغ عن أي تصرف مريب أو غير مناسب.')}</b>
+          </BoldRow>
+          <BoldCTA
             disabled={!agreed}
             onClick={() => {
               accept()
@@ -83,7 +72,7 @@ export function SafetyFirstScreen() {
             }}
           >
             {t("I've Read & Understood", 'قرأتُ وفهمتُ وأوافق.')}
-          </Button>
+          </BoldCTA>
         </div>
       </div>
       <BottomNav disabled />

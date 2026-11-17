@@ -4,12 +4,7 @@
 
 export type Gender = 'male' | 'female'
 
-export type Denomination =
-  | 'coptic_orthodox'
-  | 'greek_orthodox'
-  | 'armenian_orthodox'
-  | 'syriac_orthodox'
-  | 'ethiopian_orthodox'
+export type Denomination = string
 
 export type Country = 'egypt' | 'usa' | 'canada' | 'other'
 
@@ -71,6 +66,7 @@ export interface PersonalInfo {
 // ---- Section 2: Church & Faith Verification ----
 export interface ChurchInfo {
   denomination: Denomination
+  denominationOther?: string
   churchName: string
   diocese: string
   churchAddress: string

@@ -1,10 +1,54 @@
-export const denominationOptions = [
-  { value: 'coptic_orthodox', en: 'Coptic Orthodox', ar: 'الأرثوذكسية القبطية' },
-  { value: 'greek_orthodox', en: 'Greek Orthodox', ar: 'الأرثوذكسية اليونانية' },
-  { value: 'armenian_orthodox', en: 'Armenian Orthodox', ar: 'الأرثوذكسية الأرمنية' },
-  { value: 'syriac_orthodox', en: 'Syriac Orthodox', ar: 'الأرثوذكسية السريانية' },
-  { value: 'ethiopian_orthodox', en: 'Ethiopian Orthodox', ar: 'الأرثوذكسية الإثيوبية' },
+export const denominationGroups = [
+  {
+    key: 'orthodox',
+    en: 'Coptic Orthodox Church',
+    ar: 'الكنيسة القبطية الأرثوذكسية',
+    options: [
+      { value: 'coptic_orthodox', en: 'Coptic Orthodox', ar: 'القبطية الأرثوذكسية' },
+      { value: 'greek_orthodox', en: 'Greek Orthodox', ar: 'الروم الأرثوذكس' },
+      { value: 'armenian_orthodox', en: 'Armenian Apostolic', ar: 'الأرمن الأرثوذكس' },
+      { value: 'syriac_orthodox', en: 'Syriac Orthodox', ar: 'السريان الأرثوذكس' },
+      { value: 'other_orthodox', en: 'Other denomination not listed here', ar: 'طائفة أخرى غير موجودة هنا' },
+    ],
+  },
+  {
+    key: 'catholic',
+    en: 'Catholic Churches',
+    ar: 'الكنائس الكاثوليكية',
+    options: [
+      { value: 'coptic_catholic', en: 'Coptic Catholic', ar: 'الأقباط الكاثوليك' },
+      { value: 'melkite_catholic', en: 'Melkite Greek Catholic', ar: 'الروم الكاثوليك' },
+      { value: 'maronite', en: 'Maronite', ar: 'الموارنة' },
+      { value: 'armenian_catholic', en: 'Armenian Catholic', ar: 'الأرمن الكاثوليك' },
+      { value: 'syriac_catholic', en: 'Syriac Catholic', ar: 'السريان الكاثوليك' },
+      { value: 'chaldean_catholic', en: 'Chaldean Catholic', ar: 'الكلدان الكاثوليك' },
+      { value: 'latin_catholic', en: 'Latin Catholic', ar: 'اللاتين أو الروم الكاثوليك اللاتين' },
+      { value: 'other_catholic', en: 'Other denomination not listed here', ar: 'طائفة أخرى غير موجودة هنا' },
+    ],
+  },
+  {
+    key: 'protestant',
+    en: 'Protestant Family',
+    ar: 'العائلة البروتستانتية',
+    options: [
+      { value: 'presbyterian', en: 'Presbyterian', ar: 'الكنيسة الإنجيلية المشيخية' },
+      { value: 'baptist', en: 'Baptist', ar: 'الكنائس المعمدانية' },
+      { value: 'brethren', en: 'Brethren', ar: 'كنائس الإخوة' },
+      { value: 'apostolic', en: 'Apostolic', ar: 'الكنائس الرسولية' },
+      { value: 'pentecostal', en: 'Pentecostal', ar: 'كنائس الخمسينية' },
+      { value: 'holiness', en: 'Holiness', ar: 'كنائس نهضة القداسة' },
+      { value: 'assemblies_of_god', en: 'Assemblies of God', ar: 'كنائس جمعيات الله' },
+      { value: 'adventist', en: 'Seventh-day Adventist', ar: 'كنيسة السبتيين' },
+      { value: 'anglican', en: 'Anglican / Episcopal', ar: 'الكنيسة الأسقفية' },
+      { value: 'other_protestant', en: 'Other denomination not listed here', ar: 'طائفة أخرى غير موجودة هنا' },
+    ],
+  },
 ] as const
+
+export interface DenominationOption { value: string; en: string; ar: string }
+export const denominationOptions: DenominationOption[] = denominationGroups.flatMap((g) => [...g.options] as DenominationOption[])
+
+export const isOtherDenomination = (v?: string) => !!v && v.startsWith('other_')
 
 export const countryOptions = [
   { value: 'egypt', en: 'Egypt', ar: 'مصر' },

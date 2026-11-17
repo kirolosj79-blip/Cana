@@ -45,6 +45,7 @@ export function isStepValid(stepKey: string, draft: RegistrationDraft): boolean 
       const addressOk = filled(c.churchAddressStreet) && filled(c.churchAddressCity) && filled(c.churchAddressState) && filled(c.churchAddressZip)
       return (
         filled(c.denomination) &&
+        (!(c.denomination ?? '').startsWith('other_') || filled(c.denominationOther)) &&
         filled(c.churchName) &&
         addressOk &&
         filled(c.yearsAttending) &&
