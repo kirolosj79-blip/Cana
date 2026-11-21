@@ -9,6 +9,7 @@ import { Button } from '@/shared/components/ui/Button'
 import { PageContainer } from '@/shared/components/layout/PageContainer'
 import { TopBar } from '@/shared/components/layout/TopBar'
 import { useLanguage } from '@/core/hooks/useLanguage'
+import { useAuthStore } from '@/store/auth.store'
 import { countryDialCode, isValidPhoneForCountry } from '@/shared/utils/phone'
 
 const countries = [
@@ -23,6 +24,7 @@ export function PhoneAuthScreen() {
   const location = useLocation()
   const { t } = useLanguage()
   const isLoginMode = (location.state as { mode?: string } | null)?.mode === 'login'
+  const { markPhoneVerified, loginWithPhone, isKnownPhone } = useAuthStore()
   const [country, setCountry] = useState('egypt')
   const [phone, setPhone] = useState('')
   const [loading, setLoading] = useState(false)
@@ -34,17 +36,30 @@ export function PhoneAuthScreen() {
     if (!valid) return
     const full = `${dialCode}${phone.replace(/\D/g, '')}`
     setLoading(true)
-    // Real OTP when Supabase is configured; otherwise the prototype's mock flow.
+    // No OTP step: the number is taken as entered. With Supabase on, we open an
+    // anonymous session (Authentication -> Anonymous sign-ins must be enabled) so
+    // the registration can still be saved to the member's profile row.
+    let authId: string | undefined
     if (supabase) {
-      const { error } = await supabase.auth.signInWithOtp({ phone: full })
-      if (error) {
-        console.error('[Supabase OTP]', error)
-        setLoading(false)
-        show(`${t('Could not send the code.', 'مقدرناش نبعت الكود.')} (${error.message})`, 'error')
-        return
+      const { data: s } = await supabase.auth.getSession()
+      authId = s.session?.user.id
+      if (!authId) {
+        const { data, error } = await supabase.auth.signInAnonymously()
+        if (error || !data.user) {
+          console.error('[Supabase anonymous sign-in]', error)
+          setLoading(false)
+          show(`${t('Could not start your session. Please try again.', 'مقدرناش نبدأ الجلسة. جرّب تاني.')} (${error?.message ?? ''})`, 'error')
+          return
+        }
+        authId = data.user.id
       }
+      const { error: upErr } = await supabase.from('profiles').update({ phone: full }).eq('id', authId)
+      if (upErr && upErr.code !== '23505') console.error('[Supabase phone save]', upErr)
     }
-    navigate('/otp-verification', { state: { phone: full } })
+    const known = isKnownPhone(full)
+    markPhoneVerified(full)
+    loginWithPhone(full, { authId, isOnboarded: known })
+    navigate(known ? '/app/home' : '/registration-intro')
     setLoading(false)
   }
 
@@ -58,8 +73,8 @@ export function PhoneAuthScreen() {
           </h1>
           <p className="text-sm text-ink-500 leading-relaxed">
             {isLoginMode
-              ? t("Enter the same number you registered with — we'll send you a code and log you straight in.", 'دخّل نفس الرقم اللي سجّلت بيه — هنبعتلك كود وندخّلك على طول.')
-              : t("We'll send you a verification code by WhatsApp or SMS.", 'هنبعتلك كود تحقق على واتساب أو رسالة نصية.')}
+              ? t("Enter the same number you registered with — we'll log you straight in.", 'دخّل نفس الرقم اللي سجّلت بيه — وهندخّلك على طول.')
+              : t('Enter your phone number to start your registration.', 'دخّل رقم موبايلك وابدأ التسجيل.')}
           </p>
         </div>
 
@@ -105,7 +120,7 @@ export function PhoneAuthScreen() {
 
         <div className="mt-auto pt-8 pb-6">
           <Button type="submit" variant="gold" size="lg" className="w-full" loading={loading} disabled={!valid}>
-            {t('Send Code', 'ابعت الكود')}
+            {t('Continue', 'كمّل')}
           </Button>
         </div>
       </form>

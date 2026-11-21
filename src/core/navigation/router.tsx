@@ -6,7 +6,6 @@ import { OnboardingCarouselScreen } from '@/features/auth/screens/OnboardingCaro
 import { WelcomeScreen } from '@/features/auth/screens/WelcomeScreen'
 import { ChooseLanguageScreen } from '@/features/auth/screens/ChooseLanguageScreen'
 import { PhoneAuthScreen } from '@/features/auth/screens/PhoneAuthScreen'
-import { OtpVerificationScreen } from '@/features/auth/screens/OtpVerificationScreen'
 
 import { RegistrationIntroScreen } from '@/features/registration/screens/RegistrationIntroScreen'
 import { RegistrationChecklistScreen } from '@/features/registration/screens/RegistrationChecklistScreen'
@@ -64,7 +63,6 @@ export const router = createBrowserRouter([
   { path: '/welcome', element: <WelcomeScreen /> },
   { path: '/language', element: <ChooseLanguageScreen /> },
   { path: '/phone-auth', element: <PhoneAuthScreen /> },
-  { path: '/otp-verification', element: <OtpVerificationScreen /> },
 
   {
     element: <RequireAuth />,

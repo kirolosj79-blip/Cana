@@ -1546,3 +1546,5 @@ Confirmed the list was never actually sorted (it was just in the order originall
 - Follow-up 5: removed chevrons + CTA check on bold screens, fonts reduced; denomination list in 3 groups (Orthodox/Catholic/Protestant) with 'other' free-text (DenominationPicker) in registration, edit profile, partner preference.
 - Follow-up 6: illustrated icons reverted to the line icons in tiles (everything else kept).
 - Follow-up 7: removed step numbers on Profile Ready (not in Figma).
+- Follow-up 8: OTP step removed from registration (PhoneAuthScreen -> registration-intro directly; Supabase anonymous session; supabase/no_otp.sql added).
+- Follow-up 9: security hardening (supabase/security_hardening.sql tested on Postgres 16), vercel.json security headers + CSP, npm audit fix (0 vulnerabilities).

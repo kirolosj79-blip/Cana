@@ -6,11 +6,12 @@ import { supabase } from '@/services/supabase'
 export function RequireAuth() {
   const isAuthenticated = useAuthStore((s) => s.isAuthenticated)
   const logout = useAuthStore((s) => s.logout)
+  const authId = useAuthStore((s) => s.user?.authId)
 
   // With Supabase on, the real session is the source of truth: if it has
   // expired or been revoked, drop the local "signed in" flag too.
   useEffect(() => {
-    if (!supabase) return
+    if (!supabase || !authId) return
     supabase.auth.getSession().then(({ data }) => {
       if (!data.session) logout()
     })
@@ -18,7 +19,7 @@ export function RequireAuth() {
       if (event === 'SIGNED_OUT') logout()
     })
     return () => sub.subscription.unsubscribe()
-  }, [logout])
+  }, [logout, authId])
 
   if (!isAuthenticated) return <Navigate to="/welcome" replace />
   return <Outlet />
